@@ -186,4 +186,6 @@ Item {
             fillMode:                   Image.PreserveAspectFit
         }
     }
+
+    
 }
