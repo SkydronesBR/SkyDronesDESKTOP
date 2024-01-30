@@ -75,10 +75,10 @@ Item {
 
     FlyViewToolBar {
         id:         toolbar
-        visible:    !QGroundControl.videoManager.fullScreen
+        visible:    false //!QGroundControl.videoManager.fullScreen
     }
 
-    Item {
+    /* Item {
         id:                 mapHolder
         anchors.top:        toolbar.bottom
         anchors.bottom:     parent.bottom
@@ -107,7 +107,7 @@ Item {
         }
 
         // Development tool for visualizing the insets for a paticular layer, enable if needed
-        /*
+        
         FlyViewInsetViewer {
             id:                     widgetLayerInsetViewer
             anchors.top:            parent.top
@@ -118,7 +118,7 @@ Item {
             z:                      widgetLayer.z + 1
 
             insetsToView:           customOverlay.totalToolInsets
-        }*/
+        }
 
         GuidedActionsController {
             id:                 guidedActionsController
@@ -175,6 +175,15 @@ Item {
             pipZOrder:              _pipItemZorder
             show:                   !QGroundControl.videoManager.fullScreen &&
                                         (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
+        }
+    } */
+    Item {
+        id:         viewFly
+        
+        Image{
+            id:                         logoSD
+            source:                     "/res/QGCLogoWhite"
+            fillMode:                   Image.PreserveAspectFit
         }
     }
 }
