@@ -33,6 +33,7 @@ Item {
     // These should only be used by MainRootWindow
     property var planController:    _planController
     property var guidedController:  _guidedController
+    
 
     PlanMasterController {
         id:                     _planController
@@ -75,117 +76,101 @@ Item {
 
     FlyViewToolBar {
         id:         toolbar
-        visible:    false //!QGroundControl.videoManager.fullScreen
+        visible:    !QGroundControl.videoManager.fullScreen
     }
 
-    /* Item {
+   /*  Item {
         id:                 mapHolder
         anchors.top:        toolbar.bottom
         anchors.bottom:     parent.bottom
         anchors.left:       parent.left
         anchors.right:      parent.right
 
-        FlyViewWidgetLayer {
-            id:                     widgetLayer
-            anchors.top:            parent.top
-            anchors.bottom:         parent.bottom
-            anchors.left:           parent.left
-            anchors.right:          guidedValueSlider.visible ? guidedValueSlider.left : parent.right
-            z:                      _fullItemZorder + 1
-            parentToolInsets:       _toolInsets
-            mapControl:             _mapControl
-            visible:                !QGroundControl.videoManager.fullScreen
-        }
-
-        FlyViewCustomLayer {
-            id:                 customOverlay
-            anchors.fill:       widgetLayer
-            z:                  _fullItemZorder + 2
-            parentToolInsets:   widgetLayer.totalToolInsets
-            mapControl:         _mapControl
-            visible:            !QGroundControl.videoManager.fullScreen
-        }
-
-        // Development tool for visualizing the insets for a paticular layer, enable if needed
         
-        FlyViewInsetViewer {
-            id:                     widgetLayerInsetViewer
-            anchors.top:            parent.top
-            anchors.bottom:         parent.bottom
-            anchors.left:           parent.left
-            anchors.right:          guidedValueSlider.visible ? guidedValueSlider.left : parent.right
-
-            z:                      widgetLayer.z + 1
-
-            insetsToView:           customOverlay.totalToolInsets
-        }
-
-        GuidedActionsController {
-            id:                 guidedActionsController
-            missionController:  _missionController
-            actionList:         _guidedActionList
-            guidedValueSlider:     _guidedValueSlider
-        }
-
-        GuidedActionList {
-            id:                         guidedActionList
-            anchors.margins:            _margins
-            anchors.bottom:             parent.bottom
-            anchors.horizontalCenter:   parent.horizontalCenter
-            z:                          QGroundControl.zOrderTopMost
-            guidedController:           _guidedController
-        }
-
-        //-- Guided value slider (e.g. altitude)
-        GuidedValueSlider {
-            id:                 guidedValueSlider
-            anchors.margins:    _toolsMargin
-            anchors.right:      parent.right
-            anchors.top:        parent.top
-            anchors.bottom:     parent.bottom
-            z:                  QGroundControl.zOrderTopMost
-            radius:             ScreenTools.defaultFontPixelWidth / 2
-            width:              ScreenTools.defaultFontPixelWidth * 10
-            color:              qgcPal.window
-            visible:            false
-        }
-
-        FlyViewMap {
-            id:                     mapControl
-            planMasterController:   _planController
-            rightPanelWidth:        ScreenTools.defaultFontPixelHeight * 9
-            pipMode:                !_mainWindowIsMap
-            toolInsets:             customOverlay.totalToolInsets
-            mapName:                "FlightDisplayView"
-        }
-
-        FlyViewVideo {
-            id: videoControl
-        }
-
-        QGCPipOverlay {
-            id:                     _pipOverlay
-            anchors.left:           parent.left
-            anchors.bottom:         parent.bottom
-            anchors.margins:        _toolsMargin
-            item1IsFullSettingsKey: "MainFlyWindowIsMap"
-            item1:                  mapControl
-            item2:                  QGroundControl.videoManager.hasVideo ? videoControl : null
-            fullZOrder:             _fullItemZorder
-            pipZOrder:              _pipItemZorder
-            show:                   !QGroundControl.videoManager.fullScreen &&
-                                        (videoControl.pipState.state === videoControl.pipState.pipState || mapControl.pipState.state === mapControl.pipState.pipState)
-        }
+        
     } */
+
+
+    
     Item {
-        id:         viewFly
+        id: viewFly
+        width:  parent.width    * 0.75
+        height: parent.height   * 0.75
+        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
         
-        Image{
-            id:                         logoSD
-            source:                     "/res/QGCLogoWhite"
-            fillMode:                   Image.PreserveAspectFit
+        Image {
+            id:                     viewImage
+            source:                 "/res/QGCLogoWhite"
+            anchors.fill:           parent
+            //fillMode: Image.PreserveAspectCrop
         }
     }
 
-    
+    Column {
+        id: buttonFirm
+        spacing:            35
+        anchors.leftMargin: 50
+        anchors.topMargin: 70
+        anchors.top: toolbar.bottom
+        anchors.bottom: parent.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        width: parent.width * 0.5
+        height: parent.height * 0.1
+
+        Image {
+            id: styleButton
+            source: "/res/buttonLeft"
+            fillMode: Image.PreserveAspectFill
+            width: parent.width * 0.5  
+            height: parent.height * 0.1  
+            visible: true
+        }
+        Image {
+            id: styleButton2
+            source: "/res/buttonLeft"
+            fillMode: Image.PreserveAspectFill
+            width: parent.width * 0.5  
+            height: parent.height * 0.1  
+            visible: true
+        }
+        Image {
+            id: styleButton3
+            source: "/res/buttonLeft"
+            fillMode: Image.PreserveAspectFill
+            width: parent.width * 0.5  
+            height: parent.height * 0.1  
+            visible: true
+        }
+        Image {
+            id: styleButton4
+            source: "/res/buttonLeft"
+            fillMode: Image.PreserveAspectFill
+            width: parent.width * 0.5  
+            height: parent.height * 0.1  
+            visible: true
+        }
+        Image {
+            id: styleButton5
+            source: "/res/buttonLeft"
+            fillMode: Image.PreserveAspectFill
+            width: parent.width * 0.5  
+            height: parent.height * 0.1  
+            visible: true
+        }
+    }
+
+    Item {
+        anchors.bottom: parent.bottom
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottomMargin: 30  
+
+        Text {
+            text: "SkyDrones Desktop Versão 1.0.0"
+            color: "white"
+        }
+    }
+
 }

@@ -23,7 +23,7 @@ Rectangle {
     id:     _root
     width:  parent.width
     height: ScreenTools.toolbarHeight
-    color:  qgcPal.toolbarBackground
+    color:  "#121212" //qgcPal.toolbarBackground
 
     property var    _activeVehicle:     QGroundControl.multiVehicleManager.activeVehicle
     property bool   _communicationLost: _activeVehicle ? _activeVehicle.vehicleLinkManager.communicationLost : false
@@ -45,7 +45,7 @@ Rectangle {
         visible:        qgcPal.globalTheme === QGCPalette.Light
     }
 
-    Rectangle {
+    /* Rectangle {
         anchors.fill: viewButtonRow
         
         gradient: Gradient {
@@ -54,7 +54,7 @@ Rectangle {
             GradientStop { position: currentButton.x + currentButton.width; color: _mainStatusBGColor }
             GradientStop { position: 1;                                     color: _root.color }
         }
-    }
+    } */
 
     RowLayout {
         id:                     viewButtonRow
@@ -62,28 +62,22 @@ Rectangle {
         anchors.top:            parent.top
         anchors.bottom:         parent.bottom
         spacing:                ScreenTools.defaultFontPixelWidth / 2
+        anchors.centerIn:       parent
+        width:                  300
+        height:                 parent.height
+        
 
-        QGCToolBarButton {
+        Image {
             id:                     currentButton
-            Layout.preferredHeight: viewButtonRow.height
-            icon.source:            "/res/QGCLogoFull"
-            logo:                   true
-            onClicked:              mainWindow.showToolSelectDialog()
-        }
-
-        MainStatusIndicator {
-            Layout.preferredHeight: viewButtonRow.height
-        }
-
-        QGCButton {
-            id:                 disconnectButton
-            text:               qsTr("Disconnect")
-            onClicked:          _activeVehicle.closeVehicle()
-            visible:            _activeVehicle && _communicationLost
+            Layout.preferredHeight: viewButtonRow.height 
+            source:            "/res/QGCLogoFull"
+            //logo:                   true
+            anchors.fill:       parent
+            //onClicked:              mainWindow.showToolSelectDialog()
         }
     }
 
-    QGCFlickable {
+    /* QGCFlickable {
         id:                     toolsFlickable
         anchors.leftMargin:     ScreenTools.defaultFontPixelWidth * ScreenTools.largeFontPointRatio * 1.5
         anchors.left:           viewButtonRow.right
@@ -95,16 +89,16 @@ Rectangle {
         flickableDirection:     Flickable.HorizontalFlick
 
         FlyViewToolBarIndicators { id: toolIndicators }
-    }
+    } */
 
     //-------------------------------------------------------------------------
     //-- Branding Logo
-    Image {
+    /* Image {
         anchors.right:          parent.right
         anchors.top:            parent.top
         anchors.bottom:         parent.bottom
         anchors.margins:        ScreenTools.defaultFontPixelHeight * 0.66
-        visible:                _activeVehicle && !_communicationLost && x > (toolsFlickable.x + toolsFlickable.contentWidth + ScreenTools.defaultFontPixelWidth)
+        visible:                true    //_activeVehicle && !_communicationLost && x > (toolsFlickable.x + toolsFlickable.contentWidth + ScreenTools.defaultFontPixelWidth)
         fillMode:               Image.PreserveAspectFit
         source:                 _outdoorPalette ? _brandImageOutdoor : _brandImageIndoor
         mipmap:                 true
@@ -149,7 +143,7 @@ Rectangle {
                 }
             }
         }
-    }
+    } */
 
     // Small parameter download progress bar
     Rectangle {
@@ -161,7 +155,7 @@ Rectangle {
     }
 
     // Large parameter download progress bar
-    Rectangle {
+    /* Rectangle {
         id:             largeProgressBar
         anchors.bottom: parent.bottom
         anchors.left:   parent.left
@@ -205,5 +199,5 @@ Rectangle {
             anchors.fill:   parent
             onClicked:      largeProgressBar._userHide = true
         }
-    }
+    } */
 }
