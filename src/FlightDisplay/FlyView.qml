@@ -120,6 +120,10 @@ Item {
         width: parent.width * 0.5
         height: parent.height * 0.1
 
+        function showAnalyzeTool() {
+            showTool("AnalyzeView.qml")
+        }
+
         Image {
             id: styleButton
             source: "/res/buttonLeft"
@@ -127,6 +131,17 @@ Item {
             width: parent.width * 0.5  
             height: parent.height * 0.1  
             visible: true
+            Text {
+                text: qsTr("FIRMWARE")
+                font.pixelSize: Math.round(styleButton5.height * 0.75) // Ajuste o multiplicador conforme necessário
+                font.bold: true
+                color: "white"
+                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                anchors.leftMargin: styleButton.width * 0.3
+            }
         }
         Image {
             id: styleButton2
@@ -135,6 +150,17 @@ Item {
             width: parent.width * 0.5  
             height: parent.height * 0.1  
             visible: true
+            Text {
+                text: qsTr("SUMMARY")
+                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.bold: true
+                color: "white"
+                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                anchors.rightMargin: 30
+            }
         }
         Image {
             id: styleButton3
@@ -143,6 +169,17 @@ Item {
             width: parent.width * 0.5  
             height: parent.height * 0.1  
             visible: true
+            Text {
+                text: qsTr("SENSOR")
+                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.bold: true
+                color: "white"
+                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                anchors.rightMargin: 30
+            }
         }
         Image {
             id: styleButton4
@@ -151,14 +188,37 @@ Item {
             width: parent.width * 0.5  
             height: parent.height * 0.1  
             visible: true
+            Text {
+                text: qsTr("PARÂMETROS")
+                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.bold: true
+                color: "white"
+                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                anchors.rightMargin: 30
+            }
         }
         Image {
             id: styleButton5
             source: "/res/buttonLeft"
             fillMode: Image.PreserveAspectFill
-            width: parent.width * 0.5  
-            height: parent.height * 0.1  
+            width: parent.width * 0.5
+            height: parent.height * 0.1
             visible: true
+
+            Text {
+                text: qsTr("LOG DOWNLOAD")
+                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.bold: true
+                color: "white"
+                anchors.verticalCenter: parent.verticalCenter
+                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                anchors.rightMargin: 30
+            }
         }
     }
 
@@ -170,6 +230,18 @@ Item {
         Text {
             text: "SkyDrones Desktop Versão 1.0.0"
             color: "white"
+        }
+    }
+
+    Item{
+        id:                     suporteIcon
+        //anchors.bottom:         parent.bottom
+        //anchors.bottomMargin:   30
+        //anchors.right:          parent.right
+
+        Image{
+            source:             "/res/Gripper"
+
         }
     }
 
