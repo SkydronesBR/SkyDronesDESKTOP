@@ -124,7 +124,7 @@ Item {
             showTool("AnalyzeView.qml")
         }
 
-        Image {
+        /* Image {
             id: styleButton
             source: "/res/buttonLeft"
             fillMode: Image.PreserveAspectFill
@@ -142,7 +142,8 @@ Item {
                 Layout.fillHeight: true
                 anchors.leftMargin: styleButton.width * 0.3
             }
-        }
+            
+        } //FIRMWARE
         Image {
             id: styleButton2
             source: "/res/buttonLeft"
@@ -152,16 +153,16 @@ Item {
             visible: true
             Text {
                 text: qsTr("SUMMARY")
-                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.pixelSize: Math.round(styleButton5.height * 0.75) // Ajuste o multiplicador conforme necessário
                 font.bold: true
                 color: "white"
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                anchors.rightMargin: 30
+                anchors.leftMargin: styleButton.width * 0.3
             }
-        }
+        } //SUMMARY
         Image {
             id: styleButton3
             source: "/res/buttonLeft"
@@ -171,16 +172,16 @@ Item {
             visible: true
             Text {
                 text: qsTr("SENSOR")
-                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.pixelSize: Math.round(styleButton5.height * 0.75) // Ajuste o multiplicador conforme necessário
                 font.bold: true
                 color: "white"
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                anchors.rightMargin: 30
+                anchors.leftMargin: styleButton.width * 0.3
             }
-        }
+        } //SENSOR
         Image {
             id: styleButton4
             source: "/res/buttonLeft"
@@ -190,16 +191,16 @@ Item {
             visible: true
             Text {
                 text: qsTr("PARÂMETROS")
-                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.pixelSize: Math.round(styleButton5.height * 0.75) // Ajuste o multiplicador conforme necessário
                 font.bold: true
                 color: "white"
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                anchors.rightMargin: 30
+                anchors.leftMargin: styleButton.width * 0.3
             }
-        }
+        } //PARAMETROS
         Image {
             id: styleButton5
             source: "/res/buttonLeft"
@@ -210,16 +211,221 @@ Item {
 
             Text {
                 text: qsTr("LOG DOWNLOAD")
-                font.pixelSize: Math.round(styleButton5.height * 0.4) // Ajuste o multiplicador conforme necessário
+                font.pixelSize: Math.round(styleButton5.height * 0.75) // Ajuste o multiplicador conforme necessário
                 font.bold: true
                 color: "white"
                 anchors.verticalCenter: parent.verticalCenter
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                anchors.rightMargin: 30
+                anchors.leftMargin: styleButton.width * 0.3
             }
-        }
+            MouseArea {
+                id: firmwareButton
+                anchors.fill: parent
+                onClicked: {
+                    stackView.push(showAnalyzeTool())
+                }
+                
+            }
+            
+        } //LOG DOWNLOAD */
+
+        Rectangle {
+            color: "#FF4D00"
+            radius: 25
+            width: parent.width * 0.3
+            height: parent.height * 0.1
+            visible: true
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                spacing: 10
+
+                Image {
+                    source: "/qmlimages/Analyze.svg"
+                    Layout.preferredWidth: height
+                    Layout.preferredHeight: height
+                    Layout.alignment: Qt.AlignVCenter
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
+                    anchors.leftMargin: 10
+                }
+
+                Text {
+                    text: qsTr("FIRMWARE")
+                    font.pixelSize: Math.round(parent.height * 0.5)
+                    font.bold: true
+                    color: "white"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    stackView.push(showAnalyzeTool())
+                }
+            }
+        } // FIRMWARE
+        Rectangle {
+            color: "#FF4D00"
+            radius: 25
+            width: parent.width * 0.3
+            height: parent.height * 0.1
+            visible: true
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                spacing: 10
+
+                Image {
+                    source: "/qmlimages/Analyze.svg"
+                    Layout.preferredWidth: height
+                    Layout.preferredHeight: height
+                    Layout.alignment: Qt.AlignVCenter
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
+                    anchors.leftMargin: 10
+                }
+
+                Text {
+                    text: qsTr("SENSOR")
+                    font.pixelSize: Math.round(parent.height * 0.5)
+                    font.bold: true
+                    color: "white"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    stackView.push(showAnalyzeTool())
+                }
+            }
+        } // SENSOR
+        Rectangle {
+            color: "#FF4D00"
+            radius: 25
+            width: parent.width * 0.3
+            height: parent.height * 0.1
+            visible: true
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                spacing: 10
+
+                Image {
+                    source: "/qmlimages/Analyze.svg"
+                    Layout.preferredWidth: height
+                    Layout.preferredHeight: height
+                    Layout.alignment: Qt.AlignVCenter
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
+                    anchors.leftMargin: 10
+                }
+
+                Text {
+                    text: qsTr("PARÂMETROS")
+                    font.pixelSize: Math.round(parent.height * 0.5)
+                    font.bold: true
+                    color: "white"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    stackView.push(showAnalyzeTool())
+                }
+            }
+        } // PARAMETROS
+        Rectangle {
+            color: "#FF4D00"
+            radius: 25
+            width: parent.width * 0.3
+            height: parent.height * 0.1
+            visible: true
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                spacing: 10
+
+                Image {
+                    source: "/qmlimages/Analyze.svg"
+                    Layout.preferredWidth: height
+                    Layout.preferredHeight: height
+                    Layout.alignment: Qt.AlignVCenter
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
+                    anchors.leftMargin: 10
+                }
+
+                Text {
+                    text: qsTr("LOG DOWNLOAD")
+                    font.pixelSize: Math.round(parent.height * 0.5)
+                    font.bold: true
+                    color: "white"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    stackView.push(showAnalyzeTool())
+                }
+            }
+        } // LOG DOWNLOAD
+        Rectangle {
+            color: "#FF4D00"
+            radius: 25
+            width: parent.width * 0.3
+            height: parent.height * 0.1
+            visible: true
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                spacing: 10
+
+                Image {
+                    source: "/qmlimages/Analyze.svg"
+                    Layout.preferredWidth: height
+                    Layout.preferredHeight: height
+                    Layout.alignment: Qt.AlignVCenter
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
+                    anchors.leftMargin: 10
+                }
+
+                Text {
+                    text: qsTr("GERAL")
+                    font.pixelSize: Math.round(parent.height * 0.5)
+                    font.bold: true
+                    color: "white"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    stackView.push(showAnalyzeTool())
+                }
+            }
+        } // GERAL
     }
 
     Item {
@@ -233,16 +439,17 @@ Item {
         }
     }
 
-    Item{
-        id:                     suporteIcon
-        //anchors.bottom:         parent.bottom
-        //anchors.bottomMargin:   30
-        //anchors.right:          parent.right
-
-        Image{
-            source:             "/res/Gripper"
-
+    Item {
+        id: suporteIcon
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 110 // Aumentei a margem inferior para mover a imagem para cima
+        anchors.right: parent.right
+        anchors.rightMargin: 150
+        Image {
+            source: "/res/suporte.png"
         }
     }
+
+
 
 }
