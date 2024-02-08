@@ -120,9 +120,7 @@ Item {
         width: parent.width * 0.5
         height: parent.height * 0.1
 
-        function showAnalyzeTool() {
-            showTool("AnalyzeView.qml")
-        }
+        
 
         Rectangle {
             color: "#FF4D00"
@@ -130,6 +128,9 @@ Item {
             width: parent.width * 0.3
             height: parent.height * 0.1
             visible: true
+            function showAnalyzeTool() {
+                showTool("AnalyzeView.qml")
+            }
 
             RowLayout {
                 anchors.fill: parent
@@ -137,7 +138,7 @@ Item {
                 spacing: 10
 
                 Image {
-                    source: "/qmlimages/Analyze.svg"
+                    source: "/qmlimages/FirmwareUpgradeIcon.png"
                     Layout.preferredWidth: height
                     Layout.preferredHeight: height
                     Layout.alignment: Qt.AlignVCenter
@@ -169,6 +170,9 @@ Item {
             width: parent.width * 0.3
             height: parent.height * 0.1
             visible: true
+            function showSensor(){
+                showTool("BatteryIndicator.qml")
+            }
 
             RowLayout {
                 anchors.fill: parent
@@ -176,7 +180,7 @@ Item {
                 spacing: 10
 
                 Image {
-                    source: "/qmlimages/Analyze.svg"
+                    source: "/qmlimages/SensorsComponentIcon.png"
                     Layout.preferredWidth: height
                     Layout.preferredHeight: height
                     Layout.alignment: Qt.AlignVCenter
@@ -198,7 +202,7 @@ Item {
                 anchors.fill: parent 
 
                 onClicked: {
-                    stackView.push(showAnalyzeTool())
+                    stackView.push(showSensor())
                 }
             }
         } // SENSOR
@@ -215,7 +219,7 @@ Item {
                 spacing: 10
 
                 Image {
-                    source: "/qmlimages/Analyze.svg"
+                    source: "/qmlimages/RidIconGreen"
                     Layout.preferredWidth: height
                     Layout.preferredHeight: height
                     Layout.alignment: Qt.AlignVCenter
@@ -254,7 +258,7 @@ Item {
                 spacing: 10
 
                 Image {
-                    source: "/qmlimages/Analyze.svg"
+                    source: "/qmlimages/Analyze"
                     Layout.preferredWidth: height
                     Layout.preferredHeight: height
                     Layout.alignment: Qt.AlignVCenter
@@ -293,7 +297,7 @@ Item {
                 spacing: 10
 
                 Image {
-                    source: "/qmlimages/Analyze.svg"
+                    source: "/res/LockOpen"
                     Layout.preferredWidth: height
                     Layout.preferredHeight: height
                     Layout.alignment: Qt.AlignVCenter
