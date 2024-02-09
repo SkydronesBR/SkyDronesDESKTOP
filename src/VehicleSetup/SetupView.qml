@@ -134,7 +134,7 @@ Rectangle {
         }
     } */
 
-    /* Component {
+    Component {
         id: noComponentsVehicleSummaryComponent
         Rectangle {
             color: qgcPal.windowShade
@@ -150,9 +150,9 @@ Rectangle {
                 onLinkActivated: Qt.openUrlExternally(link)
             }
         }
-    } */
+    }
 
-    Component {
+    /* Component {
         id: disconnectedVehicleSummaryComponent
         Rectangle {
             color: qgcPal.windowShade
@@ -169,7 +169,7 @@ Rectangle {
                 onLinkActivated: Qt.openUrlExternally(link)
             }
         }
-    }
+    } */
 
     /* Component {
         id: missingParametersVehicleSummaryComponent
@@ -223,7 +223,7 @@ Rectangle {
         ColumnLayout {
             id:         buttonColumn
             spacing:    _defaultTextHeight / 2
-
+            width:              250
             /* SubMenuButton {
                 id:                 summaryButton
                 imageResource:      "/qmlimages/VehicleSummaryIcon.png"

@@ -146,13 +146,13 @@ Rectangle {
     } */
 
     // Small parameter download progress bar
-    Rectangle {
+    /* Rectangle {
         anchors.bottom: parent.bottom
         height:         _root.height * 0.05
         width:          _activeVehicle ? _activeVehicle.loadProgress * parent.width : 0
         color:          qgcPal.colorGreen
         visible:        !largeProgressBar.visible
-    }
+    } */
 
     // Large parameter download progress bar
     /* Rectangle {

@@ -98,7 +98,7 @@
     "shortDesc": "Mute audio output",
     "longDesc":  "If this option is enabled all audio output will be muted.",
     "type":             "bool",
-    "default":     false
+    "default":     true
 },
 {
     "name":             "checkInternet",

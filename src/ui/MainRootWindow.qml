@@ -125,7 +125,7 @@ ApplicationWindow {
     }
 
     function showTool(toolTitle, toolSource, toolIcon) {
-        toolDrawer.backIcon     = flightView.visible ? "/qmlimages/PaperPlane.svg" : "/qmlimages/Plan.svg"
+        toolDrawer.backIcon     = flightView.visible ? "/qmlimages/roi.svg" : "/qmlimages/Plan.svg"
         toolDrawer.toolTitle    = toolTitle
         toolDrawer.toolSource   = toolSource
         toolDrawer.toolIcon     = toolIcon
@@ -152,7 +152,8 @@ ApplicationWindow {
     }
 
     function showSettingsTool(settingsPage = "") { //GERAL
-        showTool(qsTr("Application Settings"), "AppSettings.qml", "/res/QGCLogoWhite")
+        showTool(qsTr("Summary"), "MavlinkSettings.qml", "/res/QGCLogoBlack")
+        //showTool(qsTr("Application Settings"), "AppSettings.qml", "/res/QGCLogoWhite")
         if (settingsPage !== "") {
             toolDrawerLoader.item.showSettingsPage(settingsPage)
         }
@@ -326,7 +327,7 @@ ApplicationWindow {
                             Layout.fillWidth:   true
                             text:               qsTr("Application Settings")
                             imageResource:      "/res/QGCLogoFull"
-                            imageColor:         "transparent"
+                            imageColor:         qgcPal.text
                             visible:            !QGroundControl.corePlugin.options.combineSettingsAndSetup
                             onClicked: {
                                 if (!mainWindow.preventViewSwitch()) {
@@ -472,7 +473,8 @@ ApplicationWindow {
                     id:                     backIcon
                     width:                  ScreenTools.defaultFontPixelHeight * 2
                     height:                 ScreenTools.defaultFontPixelHeight * 2
-                    fillMode:               Image.PreserveAspectFit
+                    //fillMode:               Image.PreserveAspectFit
+                    
                     mipmap:                 true
                     color:                  qgcPal.text
                 }

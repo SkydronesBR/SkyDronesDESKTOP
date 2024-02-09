@@ -223,6 +223,7 @@ Rectangle {
         ColumnLayout {
             id:         buttonColumn
             spacing:    _defaultTextHeight / 2
+            width:              250
 
             /* SubMenuButton {
                 id:                 summaryButton
