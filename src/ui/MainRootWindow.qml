@@ -132,22 +132,34 @@ ApplicationWindow {
         toolDrawer.visible      = true
     }
 
-    function showAnalyzeTool() {
-        showTool(qsTr("Analyze Tools"), "AnalyzeView.qml", "/qmlimages/Analyze.svg")
-    }
-
-    function showVehicleSetupTool(setupPage = "") {
-        showTool(qsTr("Vehicle Setup"), "SetupView.qml", "/qmlimages/Gears.svg")
+    function showVehicleSetupTool(setupPage = "") { //FIRMWARE
+        showTool(qsTr("Firmware"), "SetupView.qml", "/qmlimages/Gears.svg")
         if (setupPage !== "") {
             toolDrawerLoader.item.showNamedComponentPanel(setupPage)
         }
     }
 
-    function showSettingsTool(settingsPage = "") {
+    function showSensorTool() { //SENSOR
+        showTool(qsTr("Sensor"), "LinkSettings.qml", "/qmlimages/SensorsComponentIcon.png")
+    }
+
+    function showParamTool() { //PARAMETROS
+        showTool(qsTr("Parâmetros"), "MockLink.qml", "/qmlimages/RidIconGreen")
+    }
+
+    function showLogTool() { //LOG DOWNLOAD
+        showTool(qsTr("LogDownload"), "AnalyzeView.qml", "/qmlimages/Analyze.svg")
+    }
+
+    function showSettingsTool(settingsPage = "") { //GERAL
         showTool(qsTr("Application Settings"), "AppSettings.qml", "/res/QGCLogoWhite")
         if (settingsPage !== "") {
             toolDrawerLoader.item.showSettingsPage(settingsPage)
         }
+    }
+
+    function showHelpTool() { //SUPORTE
+        showTool(qsTr("Suporte"), "HelpSettings.qml", "/qmlimages/Gears.svg")
     }
 
     //-------------------------------------------------------------------------

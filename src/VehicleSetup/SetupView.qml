@@ -107,18 +107,18 @@ Rectangle {
         }
     }
 
-    Component.onCompleted: _showSummaryPanel()
+    //Component.onCompleted: _showSummaryPanel()
 
-    Connections {
+    /* Connections {
         target: QGroundControl.corePlugin
         onShowAdvancedUIChanged: {
             if(!QGroundControl.corePlugin.showAdvancedUI) {
                 _showSummaryPanel()
             }
         }
-    }
+    } */
 
-    Connections {
+    /* Connections {
         target: QGroundControl.multiVehicleManager
         onParameterReadyVehicleAvailableChanged: {
             if(!QGroundControl.skipSetupPage) {
@@ -132,9 +132,9 @@ Rectangle {
                 }
             }
         }
-    }
+    } */
 
-    Component {
+    /* Component {
         id: noComponentsVehicleSummaryComponent
         Rectangle {
             color: qgcPal.windowShade
@@ -150,7 +150,7 @@ Rectangle {
                 onLinkActivated: Qt.openUrlExternally(link)
             }
         }
-    }
+    } */
 
     Component {
         id: disconnectedVehicleSummaryComponent
@@ -171,7 +171,7 @@ Rectangle {
         }
     }
 
-    Component {
+    /* Component {
         id: missingParametersVehicleSummaryComponent
 
         Rectangle {
@@ -190,7 +190,7 @@ Rectangle {
                 onLinkActivated: Qt.openUrlExternally(link)
             }
         }
-    }
+    } */
 
     Component {
         id: messagePanelComponent
@@ -224,7 +224,7 @@ Rectangle {
             id:         buttonColumn
             spacing:    _defaultTextHeight / 2
 
-            SubMenuButton {
+            /* SubMenuButton {
                 id:                 summaryButton
                 imageResource:      "/qmlimages/VehicleSummaryIcon.png"
                 setupIndicator:     false
@@ -234,7 +234,7 @@ Rectangle {
                 Layout.fillWidth:   true
 
                 onClicked: showSummaryPanel()
-            }
+            } */
 
             SubMenuButton {
                 id:                 firmwareButton
@@ -248,7 +248,7 @@ Rectangle {
                 onClicked: showPanel(this, "FirmwareUpgrade.qml")
             }
 
-            SubMenuButton {
+            /* SubMenuButton {
                 id:                 px4FlowButton
                 buttonGroup:     setupButtonGroup
                 visible:            QGroundControl.multiVehicleManager.activeVehicle ? QGroundControl.multiVehicleManager.activeVehicle.vehicleLinkManager.primaryLinkIsPX4Flow : false
@@ -256,9 +256,9 @@ Rectangle {
                 text:               qsTr("PX4Flow")
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "PX4FlowSensor.qml")
-            }
+            } */
 
-            SubMenuButton {
+            /* SubMenuButton {
                 id:                 joystickButton
                 imageResource:      "/qmlimages/Joystick.png"
                 setupIndicator:     true
@@ -272,9 +272,9 @@ Rectangle {
                 property var    _activeJoystick:        joystickManager.activeJoystick
                 property bool   _buttonsOnly:           _activeJoystick ? _activeJoystick.axisCount == 0 : false
                 property bool   _forcedToButtonsOnly:   !QGroundControl.corePlugin.options.allowJoystickSelection && _buttonsOnly
-            }
+            } */
 
-            Repeater {
+            /* Repeater {
                 id:     componentRepeater
                 model:  _fullParameterVehicleAvailable ? QGroundControl.multiVehicleManager.activeVehicle.autopilot.vehicleComponents : 0
 
@@ -290,9 +290,9 @@ Rectangle {
 
                     property var componentUrl: modelData
                 }
-            }
+            } */
 
-            SubMenuButton {
+            /* SubMenuButton {
                 id:                 parametersButton
                 setupIndicator:     false
                 buttonGroup:     setupButtonGroup
@@ -302,7 +302,7 @@ Rectangle {
                 text:               qsTr("Parameters")
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "SetupParameterEditor.qml")
-            }
+            } */
 
         }
     }

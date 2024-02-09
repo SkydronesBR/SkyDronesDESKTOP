@@ -9,278 +9,339 @@
 
 import QtQuick
 import QtQuick.Controls
-import QtQuick.Dialogs
 import QtQuick.Layouts
 
 import QGroundControl
+import QGroundControl.AutoPilotPlugin
+import QGroundControl.Palette
 import QGroundControl.Controls
 import QGroundControl.ScreenTools
-import QGroundControl.Palette
+import QGroundControl.MultiVehicleManager
 
 Rectangle {
-    id:                 _linkRoot
-    color:              qgcPal.window
-    anchors.fill:       parent
-    anchors.margins:    ScreenTools.defaultFontPixelWidth
+    id:     setupView
+    color:  qgcPal.window
+    z:      QGroundControl.zOrderTopMost
 
-    property var _currentSelection:     null
-    property int _firstColumnWidth:     ScreenTools.defaultFontPixelWidth * 12
-    property int _secondColumnWidth:    ScreenTools.defaultFontPixelWidth * 30
-    property int _rowSpacing:           ScreenTools.defaultFontPixelHeight / 2
-    property int _colSpacing:           ScreenTools.defaultFontPixelWidth / 2
+    QGCPalette { id: qgcPal; colorGroupEnabled: true }
 
-    QGCPalette {
-        id:                 qgcPal
-        colorGroupEnabled:  enabled
-    }
+    ButtonGroup { id: setupButtonGroup }
 
-    function openCommSettings(originalLinkConfig) {
-        settingsLoader.originalLinkConfig = originalLinkConfig
-        if (originalLinkConfig) {
-            // Editing existing link config
-            settingsLoader.editingConfig = QGroundControl.linkManager.startConfigurationEditing(originalLinkConfig)
-        } else {
-            // Create new link configuration
-            settingsLoader.editingConfig = QGroundControl.linkManager.createConfiguration(ScreenTools.isSerialAvailable ? LinkConfiguration.TypeSerial : LinkConfiguration.TypeUdp, "")
+    readonly property real      _defaultTextHeight: ScreenTools.defaultFontPixelHeight
+    readonly property real      _defaultTextWidth:  ScreenTools.defaultFontPixelWidth
+    readonly property real      _horizontalMargin:  _defaultTextWidth / 2
+    readonly property real      _verticalMargin:    _defaultTextHeight / 2
+    readonly property real      _buttonWidth:       _defaultTextWidth * 18
+    readonly property string    _armedVehicleText:  qsTr("This operation cannot be performed while the vehicle is armed.")
+
+    property bool   _vehicleArmed:                  QGroundControl.multiVehicleManager.activeVehicle ? QGroundControl.multiVehicleManager.activeVehicle.armed : false
+    property string _messagePanelText:              qsTr("missing message panel text")
+    property bool   _fullParameterVehicleAvailable: QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable && !QGroundControl.multiVehicleManager.activeVehicle.parameterManager.missingParameters
+    property var    _corePlugin:                    QGroundControl.corePlugin
+
+    function showSummaryPanel() {
+        if (mainWindow.preventViewSwitch()) {
+            return
         }
-        settingsLoader.sourceComponent = commSettings
+        _showSummaryPanel()
     }
 
-    Component.onDestruction: {
-        if (settingsLoader.sourceComponent) {
-            settingsLoader.sourceComponent = null
-            QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfig)
+    function _showSummaryPanel() {
+        if (_fullParameterVehicleAvailable) {
+            if (QGroundControl.multiVehicleManager.activeVehicle.autopilot.vehicleComponents.length === 0) {
+                panelLoader.setSourceComponent(noComponentsVehicleSummaryComponent)
+            } else {
+                panelLoader.setSource("VehicleSummary.qml")
+            }
+        } else if (QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable) {
+            panelLoader.setSourceComponent(missingParametersVehicleSummaryComponent)
+        } else {
+            panelLoader.setSourceComponent(disconnectedVehicleSummaryComponent)
+        }
+        summaryButton.checked = true
+    }
+
+    function showPanel(button, qmlSource) {
+        if (mainWindow.preventViewSwitch()) {
+            return
+        }
+        button.checked = true
+        panelLoader.setSource(qmlSource)
+    }
+
+    function showVehicleComponentPanel(vehicleComponent)
+    {
+        if (mainWindow.preventViewSwitch()) {
+            return
+        }
+        var autopilotPlugin = QGroundControl.multiVehicleManager.activeVehicle.autopilot
+        var prereq = autopilotPlugin.prerequisiteSetup(vehicleComponent)
+        if (prereq !== "") {
+            _messagePanelText = qsTr("%1 setup must be completed prior to %2 setup.").arg(prereq).arg(vehicleComponent.name)
+            panelLoader.setSourceComponent(messagePanelComponent)
+        } else {
+            panelLoader.setSource(vehicleComponent.setupSource, vehicleComponent)
+            for(var i = 0; i < componentRepeater.count; i++) {
+                var obj = componentRepeater.itemAt(i);
+                if (obj.text === vehicleComponent.name) {
+                    obj.checked = true
+                    break;
+                }
+            }
+        }
+    }
+
+    function showNamedComponentPanel(panelButtonName) {
+        if (mainWindow.preventViewSwitch()) {
+            return
+        }
+        for (var i=0; i<componentRepeater.count; i++) {
+            var panelButton = componentRepeater.itemAt(i)
+            if (panelButton.text === panelButtonName) {
+                showVehicleComponentPanel(panelButton.componentUrl)
+                break;
+            }
+        }
+        if (panelButtonName === parametersButton.text) {
+            parametersButton.clicked()
+        }
+    }
+
+    //Component.onCompleted: _showSummaryPanel()
+
+    /* Connections {
+        target: QGroundControl.corePlugin
+        onShowAdvancedUIChanged: {
+            if(!QGroundControl.corePlugin.showAdvancedUI) {
+                _showSummaryPanel()
+            }
+        }
+    } */
+
+    /* Connections {
+        target: QGroundControl.multiVehicleManager
+        onParameterReadyVehicleAvailableChanged: {
+            if(!QGroundControl.skipSetupPage) {
+                if (QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable || summaryButton.checked || setupButtonGroup.current != firmwareButton) {
+                    // Show/Reload the Summary panel when:
+                    //      A new vehicle shows up
+                    //      The summary panel is already showing and the active vehicle goes away
+                    //      The active vehicle goes away and we are not on the Firmware panel.
+                    summaryButton.checked = true
+                    _showSummaryPanel()
+                }
+            }
+        }
+    } */
+
+    /* Component {
+        id: noComponentsVehicleSummaryComponent
+        Rectangle {
+            color: qgcPal.windowShade
+            QGCLabel {
+                anchors.margins:        _defaultTextWidth * 2
+                anchors.fill:           parent
+                verticalAlignment:      Text.AlignVCenter
+                horizontalAlignment:    Text.AlignHCenter
+                wrapMode:               Text.WordWrap
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                text:                   qsTr("%1 does not currently support setup of your vehicle type. ").arg(QGroundControl.appName) +
+                                        "If your vehicle is already configured you can still Fly."
+                onLinkActivated: Qt.openUrlExternally(link)
+            }
+        }
+    } */
+
+    Component {
+        id: disconnectedVehicleSummaryComponent
+        Rectangle {
+            color: qgcPal.windowShade
+            QGCLabel {
+                anchors.margins:        _defaultTextWidth * 2
+                anchors.fill:           parent
+                verticalAlignment:      Text.AlignVCenter
+                horizontalAlignment:    Text.AlignHCenter
+                wrapMode:               Text.WordWrap
+                font.pointSize:         ScreenTools.largeFontPointSize
+                text:                   qsTr("Vehicle settings and info will display after connecting your vehicle.") +
+                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : " Click Firmware on the left to upgrade your vehicle.")
+
+                onLinkActivated: Qt.openUrlExternally(link)
+            }
+        }
+    }
+
+    /* Component {
+        id: missingParametersVehicleSummaryComponent
+
+        Rectangle {
+            color: qgcPal.windowShade
+
+            QGCLabel {
+                anchors.margins:        _defaultTextWidth * 2
+                anchors.fill:           parent
+                verticalAlignment:      Text.AlignVCenter
+                horizontalAlignment:    Text.AlignHCenter
+                wrapMode:               Text.WordWrap
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                text:                   qsTr("You are currently connected to a vehicle but it did not return the full parameter list. ") +
+                                        qsTr("As a result, the full set of vehicle setup options are not available.")
+
+                onLinkActivated: Qt.openUrlExternally(link)
+            }
+        }
+    } */
+
+    Component {
+        id: messagePanelComponent
+
+        Item {
+            QGCLabel {
+                anchors.margins:        _defaultTextWidth * 2
+                anchors.fill:           parent
+                verticalAlignment:      Text.AlignVCenter
+                horizontalAlignment:    Text.AlignHCenter
+                wrapMode:               Text.WordWrap
+                font.pointSize:         ScreenTools.mediumFontPointSize
+                text:                   _messagePanelText
+            }
         }
     }
 
     QGCFlickable {
-        clip:               true
+        id:                 buttonScroll
+        width:              buttonColumn.width
+        anchors.topMargin:  _defaultTextHeight / 2
         anchors.top:        parent.top
-        width:              parent.width
-        height:             parent.height - buttonRow.height
-        contentHeight:      settingsColumn.height
-        contentWidth:       _linkRoot.width
+        anchors.bottom:     parent.bottom
+        anchors.leftMargin: _horizontalMargin
+        anchors.left:       parent.left
+        contentHeight:      buttonColumn.height
         flickableDirection: Flickable.VerticalFlick
+        clip:               true
 
-        Column {
-            id:                 settingsColumn
-            width:              _linkRoot.width
-            anchors.margins:    ScreenTools.defaultFontPixelWidth
-            spacing:            ScreenTools.defaultFontPixelHeight / 2
-            Repeater {
-                model: QGroundControl.linkManager.linkConfigurations
-                delegate: QGCButton {
-                    anchors.horizontalCenter:   settingsColumn.horizontalCenter
-                    width:                      _linkRoot.width * 0.5
-                    text:                       object.name
-                    autoExclusive:              true
-                    visible:                    !object.dynamic
-                    onClicked: {
-                        checked = true
-                        _currentSelection = object
-                        console.log("clicked", object, object.link)
-                    }
-                }
+        ColumnLayout {
+            id:         buttonColumn
+            spacing:    _defaultTextHeight / 2
+
+            /* SubMenuButton {
+                id:                 summaryButton
+                imageResource:      "/qmlimages/VehicleSummaryIcon.png"
+                setupIndicator:     false
+                checked:            true
+                buttonGroup:     setupButtonGroup
+                text:               qsTr("Summary")
+                Layout.fillWidth:   true
+
+                onClicked: showSummaryPanel()
+            } */
+
+            SubMenuButton {
+                id:                 sensorButton
+                imageResource:      "/qmlimages/SensorsComponentIcon.png"
+                setupIndicator:     false
+                buttonGroup:        setupButtonGroup
+                visible:            !ScreenTools.isMobile && _corePlugin.options.showFirmwareUpgrade
+                text:               qsTr("Sensor")
+                Layout.fillWidth:   true
+
+                onClicked: showPanel(this, "APMSensorsComponent.qml")
             }
+
+            /* SubMenuButton {
+                id:                 px4FlowButton
+                buttonGroup:     setupButtonGroup
+                visible:            QGroundControl.multiVehicleManager.activeVehicle ? QGroundControl.multiVehicleManager.activeVehicle.vehicleLinkManager.primaryLinkIsPX4Flow : false
+                setupIndicator:     false
+                text:               qsTr("Sensor")
+                Layout.fillWidth:   true
+                onClicked:          showPanel(this, "APMSensorsComponent.qml")
+            } */
+
+            /* SubMenuButton {
+                id:                 joystickButton
+                imageResource:      "/qmlimages/Joystick.png"
+                setupIndicator:     true
+                setupComplete:      _activeJoystick ? _activeJoystick.calibrated || _buttonsOnly : false
+                buttonGroup:     setupButtonGroup
+                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0
+                text:               _forcedToButtonsOnly ? qsTr("Buttons") : qsTr("Joystick")
+                Layout.fillWidth:   true
+                onClicked:          showPanel(this, "JoystickConfig.qml")
+
+                property var    _activeJoystick:        joystickManager.activeJoystick
+                property bool   _buttonsOnly:           _activeJoystick ? _activeJoystick.axisCount == 0 : false
+                property bool   _forcedToButtonsOnly:   !QGroundControl.corePlugin.options.allowJoystickSelection && _buttonsOnly
+            } */
+
+            /* Repeater {
+                id:     componentRepeater
+                model:  _fullParameterVehicleAvailable ? QGroundControl.multiVehicleManager.activeVehicle.autopilot.vehicleComponents : 0
+
+                SubMenuButton {
+                    imageResource:      modelData.iconResource
+                    setupIndicator:     modelData.requiresSetup
+                    setupComplete:      modelData.setupComplete
+                    buttonGroup:     setupButtonGroup
+                    text:               modelData.name
+                    visible:            modelData.setupSource.toString() !== ""
+                    Layout.fillWidth:   true
+                    onClicked:          showVehicleComponentPanel(componentUrl)
+
+                    property var componentUrl: modelData
+                }
+            } */
+
+            /* SubMenuButton {
+                id:                 parametersButton
+                setupIndicator:     false
+                buttonGroup:     setupButtonGroup
+                visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
+                                    !QGroundControl.multiVehicleManager.activeVehicle.usingHighLatencyLink &&
+                                    _corePlugin.showAdvancedUI
+                text:               qsTr("Parameters")
+                Layout.fillWidth:   true
+                onClicked:          showPanel(this, "SetupParameterEditor.qml")
+            } */
+
         }
     }
 
-    Row {
-        id:                 buttonRow
-        spacing:            ScreenTools.defaultFontPixelWidth
-        anchors.bottom:     parent.bottom
-        anchors.margins:    ScreenTools.defaultFontPixelWidth
-        anchors.horizontalCenter: parent.horizontalCenter
-        QGCButton {
-            width:      ScreenTools.defaultFontPixelWidth * 10
-            text:       qsTr("Delete")
-            enabled:    _currentSelection && !_currentSelection.dynamic
-            onClicked:  deleteDialog.visible = true
-
-            MessageDialog {
-                id:         deleteDialog
-                visible:    false
-                //icon:       StandardIcon.Warning
-                buttons:    MessageDialog.Yes | MessageDialog.No
-                title:      qsTr("Remove Link Configuration")
-                text:       _currentSelection ? qsTr("Remove %1. Is this really what you want?").arg(_currentSelection.name) : ""
-
-                onButtonClicked: function (button, role) {
-                    switch (button) {
-                    case MessageDialog.Yes:
-                        QGroundControl.linkManager.removeConfiguration(_currentSelection)
-                        _currentSelection = null
-                        deleteDialog.visible = false
-                        break;
-                    case MessageDialog.No:
-                        deleteDialog.visible = false
-                        break;
-                    }
-                }
-            }
-        }
-        QGCButton {
-            text:       qsTr("Edit")
-            enabled:    _currentSelection && !_currentSelection.link
-            onClicked:  _linkRoot.openCommSettings(_currentSelection)
-        }
-        QGCButton {
-            text:       qsTr("Add")
-            onClicked:  _linkRoot.openCommSettings(null)
-        }
-        QGCButton {
-            text:       qsTr("Connect")
-            enabled:    _currentSelection && !_currentSelection.link
-            onClicked:  QGroundControl.linkManager.createConnectedLink(_currentSelection)
-        }
-        QGCButton {
-            text:       qsTr("Disconnect")
-            enabled:    _currentSelection && _currentSelection.link
-            onClicked:  {
-                _currentSelection.link.disconnect()
-                _currentSelection.linkChanged()
-            }
-        }
-        QGCButton {
-            text:       qsTr("MockLink Options")
-            visible:    _currentSelection && _currentSelection.link && _currentSelection.link.isMockLink
-            onClicked:  mockLinkOptionDialog.open()
-
-            MockLinkOptionsDlg {
-                id:     mockLinkOptionDialog
-                link:   _currentSelection ? _currentSelection.link : undefined
-            }
-        }
+    Rectangle {
+        id:                     divider
+        anchors.topMargin:      _verticalMargin
+        anchors.bottomMargin:   _verticalMargin
+        anchors.leftMargin:     _horizontalMargin
+        anchors.left:           buttonScroll.right
+        anchors.top:            parent.top
+        anchors.bottom:         parent.bottom
+        width:                  1
+        color:                  qgcPal.windowShade
     }
 
     Loader {
-        id:             settingsLoader
-        anchors.fill:   parent
-        visible:        sourceComponent ? true : false
+        id:                     panelLoader
+        anchors.topMargin:      _verticalMargin
+        anchors.bottomMargin:   _verticalMargin
+        anchors.leftMargin:     _horizontalMargin
+        anchors.rightMargin:    _horizontalMargin
+        anchors.left:           divider.right
+        anchors.right:          parent.right
+        anchors.top:            parent.top
+        anchors.bottom:         parent.bottom
 
-        property var originalLinkConfig:    null
-        property var editingConfig:      null
-    }
-
-    //---------------------------------------------
-    // Comm Settings
-    Component {
-        id: commSettings
-        Rectangle {
-            id:             settingsRect
-            color:          qgcPal.window
-            anchors.fill:   parent
-            property real   _panelWidth:    width * 0.8
-
-            QGCFlickable {
-                id:                 settingsFlick
-                clip:               true
-                anchors.fill:       parent
-                anchors.margins:    ScreenTools.defaultFontPixelWidth
-                contentHeight:      mainLayout.height
-                contentWidth:       mainLayout.width
-
-                ColumnLayout {
-                    id:         mainLayout
-                    spacing:    _rowSpacing
-
-                    QGCGroupBox {
-                        title: originalLinkConfig ? qsTr("Edit Link Configuration Settings") : qsTr("Create New Link Configuration")
-
-                        ColumnLayout {
-                            spacing: _rowSpacing
-
-                            GridLayout {
-                                columns:        2
-                                columnSpacing:  _colSpacing
-                                rowSpacing:     _rowSpacing
-
-                                QGCLabel { text: qsTr("Name") }
-                                QGCTextField {
-                                    id:                     nameField
-                                    Layout.preferredWidth:  _secondColumnWidth
-                                    Layout.fillWidth:       true
-                                    text:                   editingConfig.name
-                                    placeholderText:        qsTr("Enter name")
-                                }
-
-                                QGCCheckBox {
-                                    Layout.columnSpan:  2
-                                    text:               qsTr("Automatically Connect on Start")
-                                    checked:            editingConfig.autoConnect
-                                    onCheckedChanged:   editingConfig.autoConnect = checked
-                                }
-
-                                QGCCheckBox {
-                                    Layout.columnSpan:  2
-                                    text:               qsTr("High Latency")
-                                    checked:            editingConfig.highLatency
-                                    onCheckedChanged:   editingConfig.highLatency = checked
-                                }
-
-                                QGCLabel { text: qsTr("Type") }
-                                QGCComboBox {
-                                    Layout.preferredWidth:  _secondColumnWidth
-                                    Layout.fillWidth:       true
-                                    enabled:                originalLinkConfig == null
-                                    model:                  QGroundControl.linkManager.linkTypeStrings
-                                    currentIndex:           editingConfig.linkType
-
-                                    onActivated: {
-                                        if (index !== editingConfig.linkType) {
-                                            // Save current name
-                                            var name = nameField.text
-                                            // Create new link configuration
-                                            editingConfig = QGroundControl.linkManager.createConfiguration(index, name)
-                                        }
-                                    }
-                                }
-                            }
-
-                            Loader {
-                                id:     linksettingsLoader
-                                source: subEditConfig.settingsURL
-
-                                property var subEditConfig: editingConfig
-                            }
-                        }
-                    }
-
-                    RowLayout {
-                        Layout.alignment:   Qt.AlignHCenter
-                        spacing:            _colSpacing
-
-                        QGCButton {
-                            width:      ScreenTools.defaultFontPixelWidth * 10
-                            text:       qsTr("OK")
-                            enabled:    nameField.text !== ""
-
-                            onClicked: {
-                                // Save editing
-                                linksettingsLoader.item.saveSettings()
-                                editingConfig.name = nameField.text
-                                settingsLoader.sourceComponent = null
-                                if (originalLinkConfig) {
-                                    QGroundControl.linkManager.endConfigurationEditing(originalLinkConfig, editingConfig)
-                                } else {
-                                    // If it was edited, it's no longer "dynamic"
-                                    editingConfig.dynamic = false
-                                    QGroundControl.linkManager.endCreateConfiguration(editingConfig)
-                                }
-                            }
-                        }
-
-                        QGCButton {
-                            width:      ScreenTools.defaultFontPixelWidth * 10
-                            text:       qsTr("Cancel")
-                            onClicked: {
-                                settingsLoader.sourceComponent = null
-                                QGroundControl.linkManager.cancelConfigurationEditing(settingsLoader.editingConfig)
-                            }
-                        }
-                    }
-                }
-            }
+        function setSource(source, vehicleComponent) {
+            panelLoader.source = ""
+            panelLoader.vehicleComponent = vehicleComponent
+            panelLoader.source = source
         }
+
+        function setSourceComponent(sourceComponent, vehicleComponent) {
+            panelLoader.sourceComponent = undefined
+            panelLoader.vehicleComponent = vehicleComponent
+            panelLoader.sourceComponent = sourceComponent
+        }
+
+        property var vehicleComponent
     }
 }

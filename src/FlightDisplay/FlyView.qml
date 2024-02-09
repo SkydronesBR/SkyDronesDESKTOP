@@ -128,9 +128,6 @@ Item {
             width: parent.width * 0.3
             height: parent.height * 0.1
             visible: true
-            function showAnalyzeTool() {
-                showTool("AnalyzeView.qml")
-            }
 
             RowLayout {
                 anchors.fill: parent
@@ -160,7 +157,7 @@ Item {
                 anchors.fill: parent 
 
                 onClicked: {
-                    stackView.push(showAnalyzeTool())
+                    stackView.push(showVehicleSetupTool())
                 }
             }
         } // FIRMWARE
@@ -170,9 +167,6 @@ Item {
             width: parent.width * 0.3
             height: parent.height * 0.1
             visible: true
-            function showSensor(){
-                showTool("BatteryIndicator.qml")
-            }
 
             RowLayout {
                 anchors.fill: parent
@@ -202,7 +196,7 @@ Item {
                 anchors.fill: parent 
 
                 onClicked: {
-                    stackView.push(showSensor())
+                    stackView.push(showSensorTool())
                 }
             }
         } // SENSOR
@@ -241,7 +235,7 @@ Item {
                 anchors.fill: parent 
 
                 onClicked: {
-                    stackView.push(showAnalyzeTool())
+                    stackView.push(showParamTool())
                 }
             }
         } // PARAMETROS
@@ -280,7 +274,7 @@ Item {
                 anchors.fill: parent 
 
                 onClicked: {
-                    stackView.push(showAnalyzeTool())
+                    stackView.push(showLogTool())
                 }
             }
         } // LOG DOWNLOAD
@@ -319,12 +313,12 @@ Item {
                 anchors.fill: parent 
 
                 onClicked: {
-                    stackView.push(showAnalyzeTool())
+                    stackView.push(showSettingsTool())
                 }
             }
         } // GERAL
     }
-
+    //0800 9416791  
     Item {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
@@ -344,7 +338,15 @@ Item {
         anchors.rightMargin: 150
         Image {
             source: "/res/suporte.png"
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    stackView.push(showHelpTool())
+                }
+            }
         }
+        
     }
 
 
