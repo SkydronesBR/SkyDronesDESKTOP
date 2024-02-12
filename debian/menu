@@ -1,4 +1,4 @@
   ?package(qgroundcontrol):needs="x11" \
       section="Applications/Electronics" \
-      title="QGroundControl" \
+      title="SkyDrones Desktop" \
       command="/usr/bin/qgroundcontrol"
