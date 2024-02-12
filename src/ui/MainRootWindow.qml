@@ -133,7 +133,7 @@ ApplicationWindow {
     }
 
     function showVehicleSetupTool(setupPage = "") { //FIRMWARE
-        showTool(qsTr("Firmware"), "SetupView.qml", "/qmlimages/Gears.svg")
+        showTool(qsTr("Firmware"), "SetupView.qml", "/res/FirmwareIcon")
         if (setupPage !== "") {
             toolDrawerLoader.item.showNamedComponentPanel(setupPage)
         }

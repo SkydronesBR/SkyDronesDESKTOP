@@ -19,7 +19,7 @@ import QGroundControl.ScreenTools
 
 Rectangle {
     id:     _root
-    color:  qgcPal.window
+    color:  "#0A0A0A"//qgcPal.window
     z:      QGroundControl.zOrderTopMost
 
     signal popout()
@@ -52,7 +52,7 @@ Rectangle {
 
         Column {
             id:         buttonColumn
-            width:      _maxButtonWidth
+            width:      250//_maxButtonWidth
             spacing:    _defaultTextHeight / 2
 
             property real _maxButtonWidth: 0

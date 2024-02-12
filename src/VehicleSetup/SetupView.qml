@@ -20,7 +20,7 @@ import QGroundControl.MultiVehicleManager
 
 Rectangle {
     id:     setupView
-    color:  qgcPal.window
+    color:  "#0A0A0A"//qgcPal.window
     z:      QGroundControl.zOrderTopMost
 
     QGCPalette { id: qgcPal; colorGroupEnabled: true }
@@ -223,22 +223,11 @@ Rectangle {
         ColumnLayout {
             id:         buttonColumn
             spacing:    _defaultTextHeight / 2
-            width:              250
-            /* SubMenuButton {
-                id:                 summaryButton
-                imageResource:      "/qmlimages/VehicleSummaryIcon.png"
-                setupIndicator:     false
-                checked:            true
-                buttonGroup:     setupButtonGroup
-                text:               qsTr("Summary")
-                Layout.fillWidth:   true
-
-                onClicked: showSummaryPanel()
-            } */
+            width:      250
 
             SubMenuButton {
                 id:                 firmwareButton
-                imageResource:      "/qmlimages/FirmwareUpgradeIcon.png"
+                imageResource:      "/res/FirmwareIcon"
                 setupIndicator:     false
                 buttonGroup:     setupButtonGroup
                 visible:            !ScreenTools.isMobile && _corePlugin.options.showFirmwareUpgrade
@@ -248,63 +237,28 @@ Rectangle {
                 onClicked: showPanel(this, "FirmwareUpgrade.qml")
             }
 
-            /* SubMenuButton {
-                id:                 px4FlowButton
-                buttonGroup:     setupButtonGroup
-                visible:            QGroundControl.multiVehicleManager.activeVehicle ? QGroundControl.multiVehicleManager.activeVehicle.vehicleLinkManager.primaryLinkIsPX4Flow : false
-                setupIndicator:     false
-                text:               qsTr("PX4Flow")
-                Layout.fillWidth:   true
-                onClicked:          showPanel(this, "PX4FlowSensor.qml")
-            } */
+            Item {
+                width: parent.width // Garante que a largura da Item seja igual à largura da ColumnLayout
 
-            /* SubMenuButton {
-                id:                 joystickButton
-                imageResource:      "/qmlimages/Joystick.png"
-                setupIndicator:     true
-                setupComplete:      _activeJoystick ? _activeJoystick.calibrated || _buttonsOnly : false
-                buttonGroup:     setupButtonGroup
-                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0
-                text:               _forcedToButtonsOnly ? qsTr("Buttons") : qsTr("Joystick")
-                Layout.fillWidth:   true
-                onClicked:          showPanel(this, "JoystickConfig.qml")
-
-                property var    _activeJoystick:        joystickManager.activeJoystick
-                property bool   _buttonsOnly:           _activeJoystick ? _activeJoystick.axisCount == 0 : false
-                property bool   _forcedToButtonsOnly:   !QGroundControl.corePlugin.options.allowJoystickSelection && _buttonsOnly
-            } */
-
-            /* Repeater {
-                id:     componentRepeater
-                model:  _fullParameterVehicleAvailable ? QGroundControl.multiVehicleManager.activeVehicle.autopilot.vehicleComponents : 0
-
-                SubMenuButton {
-                    imageResource:      modelData.iconResource
-                    setupIndicator:     modelData.requiresSetup
-                    setupComplete:      modelData.setupComplete
-                    buttonGroup:     setupButtonGroup
-                    text:               modelData.name
-                    visible:            modelData.setupSource.toString() !== ""
-                    Layout.fillWidth:   true
-                    onClicked:          showVehicleComponentPanel(componentUrl)
-
-                    property var componentUrl: modelData
+                Text {
+                    text: "O botão de firmware é usado para atualizar e instalar novas versões do firmware do dispositivo. Clique nele para verificar e instalar atualizações, garantindo que seu dispositivo funcione com a versão mais recente e otimizada do software."
+                    color: "white"
+                    wrapMode: Text.WordWrap // Permite que o texto quebre automaticamente em várias linhas
+                    width: parent.width 
+                    font.bold:              true
                 }
-            } */
 
-            /* SubMenuButton {
-                id:                 parametersButton
-                setupIndicator:     false
-                buttonGroup:     setupButtonGroup
-                visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
-                                    !QGroundControl.multiVehicleManager.activeVehicle.usingHighLatencyLink &&
-                                    _corePlugin.showAdvancedUI
-                text:               qsTr("Parameters")
-                Layout.fillWidth:   true
-                onClicked:          showPanel(this, "SetupParameterEditor.qml")
-            } */
-
+                Image {
+                    source: "/res/FirmwareIcon"
+                    width: 300
+                    height: 600
+                    fillMode: Image.PreserveAspectFit
+                    opacity: 0.3
+                    rotation: -30
+                }
+            }
         }
+
     }
 
     Rectangle {

@@ -29,7 +29,7 @@ import QGroundControl.Vehicle
 
 Item {
     id: _root
-
+    
     // These should only be used by MainRootWindow
     property var planController:    _planController
     property var guidedController:  _guidedController
@@ -352,7 +352,7 @@ Item {
     }
 
     //---------LOADING SCREEN
-    Item {
+    /* Item {
         anchors.fill: parent
         visible: _activeVehicle ? _activeVehicle.parameterManager.loadProgress * parent.width : 0
         anchors.verticalCenter: parent.verticalCenter
@@ -481,6 +481,6 @@ Item {
                 anchors.top:                    parent.top
             }
         }
-    }
+    } */
 
 }

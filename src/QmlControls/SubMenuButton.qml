@@ -40,8 +40,8 @@ Button {
 
     background: Rectangle {
         id:     innerRect
-        color:  showHighlight ? qgcPal.buttonHighlight : qgcPal.windowShade
-
+        color:  "#FF4D00"//showHighlight ? qgcPal.buttonHighlight : qgcPal.windowShade
+        radius: 15
         implicitWidth: titleBar.x + titleBar.contentWidth + ScreenTools.defaultFontPixelWidth
 
         QGCColoredImage {
@@ -53,7 +53,7 @@ Button {
             height:                 ScreenTools.defaultFontPixelHeight * 2
             fillMode:               Image.PreserveAspectFit
             mipmap:                 true
-            color:                  imageColor ? imageColor : (control.setupComplete ? qgcPal.button : "red")
+            color:                  "white"//imageColor ? imageColor : (control.setupComplete ? qgcPal.button : "red")
             source:                 control.imageResource
             sourceSize:             control.sourceSize
         }
@@ -63,9 +63,12 @@ Button {
             anchors.leftMargin:     ScreenTools.defaultFontPixelWidth
             anchors.left:           image.right
             anchors.verticalCenter: parent.verticalCenter
+            anchors.centerIn: parent
             verticalAlignment:      TextEdit.AlignVCenter
             color:                  showHighlight ? qgcPal.buttonHighlightText : qgcPal.buttonText
             text:                   control.text
+            font.bold:              true
+            font.pointSize:          15
         }
     }
 
