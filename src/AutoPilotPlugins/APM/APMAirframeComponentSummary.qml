@@ -20,20 +20,20 @@ Item {
         anchors.fill:       parent
 
         VehicleSummaryRow {
-            labelText:  qsTr("Frame Class")
+            labelText:  qsTr("Classe do Frame")
             valueText:  _frameClass.enumStringValue
 
         }
 
         VehicleSummaryRow {
-            labelText:  qsTr("Frame Type")
+            labelText:  qsTr("Tipo de Frame")
             valueText:  visible ? _frameType.enumStringValue : ""
             visible:    _frameTypeAvailable
         }
 
         VehicleSummaryRow {
-            labelText: qsTr("Firmware Version")
-            valueText: globals.activeVehicle.firmwareMajorVersion == -1 ? qsTr("Unknown") : globals.activeVehicle.firmwareMajorVersion + "." + globals.activeVehicle.firmwareMinorVersion + "." + globals.activeVehicle.firmwarePatchVersion + globals.activeVehicle.firmwareVersionTypeString
+            labelText: qsTr("Versão do Firmware")
+            valueText: globals.activeVehicle.firmwareMajorVersion == -1 ? qsTr("Inválido") : globals.activeVehicle.firmwareMajorVersion + "." + globals.activeVehicle.firmwareMinorVersion + "." + globals.activeVehicle.firmwarePatchVersion + globals.activeVehicle.firmwareVersionTypeString
         }
     }
 }

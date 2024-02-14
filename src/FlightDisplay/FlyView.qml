@@ -303,7 +303,7 @@ Item {
                 }
 
                 Text {
-                    text: qsTr("SUMMARY")
+                    text: qsTr("GERAL")
                     font.pixelSize: Math.round(parent.height * 0.5)
                     font.bold: true
                     color: "white"
@@ -337,7 +337,7 @@ Item {
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 110 
         anchors.right: parent.right
-        anchors.rightMargin: 150
+        anchors.rightMargin: 100
         Image {
             source: "/res/suporte.png"
             MouseArea {
@@ -351,8 +351,23 @@ Item {
         
     }
 
+    Item {
+        id: connectionDrone
+        anchors.top: parent.top
+        anchors.topMargin: 60 
+        anchors.right: parent.right
+        anchors.rightMargin: 70
+
+        Image {
+            source: _activeVehicle ? "/qmlimages/Armed" : "/qmlimages/Disarmed"
+            width:                  70
+            height:                 70
+        }
+    }
+
+
     //---------LOADING SCREEN
-    /* Item {
+    Item {
         anchors.fill: parent
         visible: _activeVehicle ? _activeVehicle.parameterManager.loadProgress * parent.width : 0
         anchors.verticalCenter: parent.verticalCenter
@@ -368,119 +383,132 @@ Item {
             anchors.horizontalCenter: parent.horizontalCenter
             border.color: "white"
             border.width: 1
-            Rectangle {
-                id: loader
-                anchors.verticalCenter: parent.verticalCenter
+            Rectangle{
+                width:      500
+                height:     500
+                radius:     15
+                anchors.centerIn: parent
                 anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                color:  qgcPal.window
+                border.color: "white"
 
-                Item{
-                    id: control
-                    anchors.horizontalCenter: parent.horizontalCenter
+                Rectangle {
+                    id: loader
                     anchors.verticalCenter: parent.verticalCenter
-                    
-                    property    int     itemCount:  10
-                    property    int     itemSize:   13
-                    property    int     itemExpand: 10
-                    property    color   itemColor:  "white"
-                    property    int     itemIndex:  0
-                    property    int     duration:   1500
-                    property    bool    running:    visible
-
-                    implicitHeight:     200
-                    implicitWidth:      200
-
-                    NumberAnimation{
-                        target:             control 
-                        property:           "itemIndex"
-                        from:               0
-                        to:                 control.itemCount-1
-                        loops:              Animation.Infinite
-                        duration:           control.duration
-                        running:            control.running
-                    }
+                    anchors.horizontalCenter: parent.horizontalCenter
 
                     Item{
-                        id:                 content
-                        anchors.fill:       parent
-                        anchors.margins:    control.itemExpand/2+1
+                        id: control
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        
+                        property    int     itemCount:  10
+                        property    int     itemSize:   10
+                        property    int     itemExpand: 10
+                        property    color   itemColor:  "white"
+                        property    int     itemIndex:  0
+                        property    int     duration:   1500
+                        property    bool    running:    visible
 
-                        Repeater{
-                            id:             repeater 
-                            model:          control.itemCount
-                            Rectangle{
-                                id:         item 
-                                height:     control.itemSize
-                                width:      height
-                                x:          content.width/2 -   width/2
-                                y:          content.height/2    -   height/2
-                                radius:     height/2
-                                color:      control.itemColor
+                        implicitHeight:     200
+                        implicitWidth:      200
 
-                                transform:  [
-                                    Translate{
-                                        y:      content.height/2    -   height/2
-                                    },
-                                    Rotation{
-                                        angle:  index   /   repeater.count  *   360
-                                        origin.x:       width/2
-                                        origin.y:       width/2
-                                    }
-                                ]
+                        NumberAnimation{
+                            target:             control 
+                            property:           "itemIndex"
+                            from:               0
+                            to:                 control.itemCount-1
+                            loops:              Animation.Infinite
+                            duration:           control.duration
+                            running:            control.running
+                        }
 
-                                state:          control.itemIndex===index?"current":"normal"
-                                states: [
-                                    State {
-                                        name:   "current"
-                                        PropertyChanges{
-                                            target:         item
-                                            opacity:        1
-                                            height:         control.itemSize+control.itemExpand
-                                        }
-                                    },
-                                    State {
-                                        name:       "normal"
-                                        PropertyChanges{
-                                            target:         item
-                                            opacity:        0.1
-                                            height:         control.itemSize
-                                        }
-                                    }
-                                ]
+                        Item{
+                            id:                 content
+                            anchors.fill:       parent
+                            anchors.margins:    control.itemExpand/2+1
 
-                                transitions:[
-                                    Transition{
-                                        from:       "current"
-                                        to:         "normal"
-                                        NumberAnimation{
-                                            properties:     "opacity,height"
-                                            duration:       control.duration
+                            Repeater{
+                                id:             repeater 
+                                model:          control.itemCount
+                                Rectangle{
+                                    id:         item 
+                                    height:     control.itemSize
+                                    width:      height
+                                    x:          content.width/2 -   width/2
+                                    y:          content.height/2    -   height/2
+                                    radius:     height/2
+                                    color:      control.itemColor
+
+                                    transform:  [
+                                        Translate{
+                                            y:      content.height/2    -   height/2
+                                        },
+                                        Rotation{
+                                            angle:  index   /   repeater.count  *   360
+                                            origin.x:       width/2
+                                            origin.y:       width/2
                                         }
-                                    },
-                                    Transition{
-                                        from:               "normal"
-                                        to:                 "current"
-                                        NumberAnimation{
-                                            properties:     "opacity,height"
-                                            duration:       0
+                                    ]
+
+                                    state:          control.itemIndex===index?"current":"normal"
+                                    states: [
+                                        State {
+                                            name:   "current"
+                                            PropertyChanges{
+                                                target:         item
+                                                opacity:        1
+                                                height:         control.itemSize+control.itemExpand
+                                            }
+                                        },
+                                        State {
+                                            name:       "normal"
+                                            PropertyChanges{
+                                                target:         item
+                                                opacity:        0.1
+                                                height:         control.itemSize
+                                            }
                                         }
-                                    }
-                                ]
+                                    ]
+
+                                    transitions:[
+                                        Transition{
+                                            from:       "current"
+                                            to:         "normal"
+                                            NumberAnimation{
+                                                properties:     "opacity,height"
+                                                duration:       control.duration
+                                            }
+                                        },
+                                        Transition{
+                                            from:               "normal"
+                                            to:                 "current"
+                                            NumberAnimation{
+                                                properties:     "opacity,height"
+                                                duration:       0
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         }
                     }
+                    
                 }
-                
-            }
 
-            Text{
-                text:                           "Conectando com o drone, por favor aguarde!"
-                anchors.horizontalCenter:       parent.horizontalCenter
-                anchors.topMargin:              60   
-                color:                          "white"
-                font.pointSize:                 40
-                anchors.top:                    parent.top
+                Text{
+                    text:                           "Conectando com o drone, por favor aguarde!"
+                    anchors.horizontalCenter:       parent.horizontalCenter
+                    anchors.topMargin:              60   
+                    color:                          "white"
+                    font.pointSize:                 15
+                    font.bold:                      true
+                    anchors.top:                    parent.top
+                }
             }
+            
         }
-    } */
+    }
 
 }

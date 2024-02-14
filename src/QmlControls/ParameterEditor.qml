@@ -58,7 +58,7 @@ Item {
 
         QGCLabel {
             anchors.verticalCenter: parent.verticalCenter
-            text: qsTr("Search:")
+            text: qsTr("Procurar:")
         }
 
         QGCTextField {
@@ -69,7 +69,7 @@ Item {
         }
 
         QGCButton {
-            text: qsTr("Clear")
+            text: qsTr("Limpar")
             onClicked: {
                 if(ScreenTools.isMobile) {
                     Qt.inputMethod.hide();
@@ -92,57 +92,57 @@ Item {
         anchors.top:    header.top
         anchors.bottom: header.bottom
         anchors.right:  parent.right
-        text:           qsTr("Tools")
+        text:           qsTr("Ferramentas")
         onClicked:      toolsMenu.popup()
     }
 
     QGCMenu {
         id:                 toolsMenu
         QGCMenuItem {
-            text:           qsTr("Refresh")
+            text:           qsTr("Atualizar")
             onTriggered:	controller.refresh()
         }
         QGCMenuItem {
-            text:           qsTr("Reset all to firmware's defaults")
-            onTriggered:    mainWindow.showMessageDialog(qsTr("Reset All"),
-                                                         qsTr("Select Reset to reset all parameters to their defaults.\n\nNote that this will also completely reset everything, including UAVCAN nodes, all vehicle settings, setup and calibrations."),
+            text:           qsTr("Redefinir tudo para os padrões do firmware")
+            onTriggered:    mainWindow.showMessageDialog(qsTr("Reiniciar tudo"),
+                                                         qsTr("Selecione Redefinir para redefinir todos os parâmetros para seus padrões.\n\nObserve que isso também redefinirá tudo completamente, incluindo nós UAVCAN, todas as configurações, configurações e calibrações do veículo."),
                                                          Dialog.Cancel | Dialog.Reset,
                                                          function() { controller.resetAllToDefaults() })
         }
         QGCMenuItem {
-            text:           qsTr("Reset to vehicle's configuration defaults")
+            text:           qsTr("Redefinir para os padrões de configuração do veículo")
             visible:        !_activeVehicle.apmFirmware
-            onTriggered:    mainWindow.showMessageDialog(qsTr("Reset All"),
-                                                         qsTr("Select Reset to reset all parameters to the vehicle's configuration defaults."),
+            onTriggered:    mainWindow.showMessageDialog(qsTr("Reiniciar tudo"),
+                                                         qsTr("Selecione Redefinir para redefinir todos os parâmetros para os padrões de configuração do veículo."),
                                                          Dialog.Cancel | Dialog.Reset,
                                                          function() { controller.resetAllToVehicleConfiguration() })
         }
         QGCMenuSeparator { }
         QGCMenuItem {
-            text:           qsTr("Load from file...")
+            text:           qsTr("Carregar do arquivo...")
             onTriggered: {
-                fileDialog.title =          qsTr("Load Parameters")
+                fileDialog.title =          qsTr("Carregar parâmetros")
                 fileDialog.openForLoad()
             }
         }
         QGCMenuItem {
-            text:           qsTr("Save to file...")
+            text:           qsTr("Salvar em arquivo...")
             onTriggered: {
-                fileDialog.title =          qsTr("Save Parameters")
+                fileDialog.title =          qsTr("Salvar parâmetros")
                 fileDialog.openForSave()
             }
         }
         QGCMenuSeparator { visible: _showRCToParam }
         QGCMenuItem {
-            text:           qsTr("Clear all RC to Param")
+            text:           qsTr("Limpar todo RC para Param")
             onTriggered:	_activeVehicle.clearAllParamMapRC()
             visible:        _showRCToParam
         }
         QGCMenuSeparator { }
         QGCMenuItem {
-            text:           qsTr("Reboot Vehicle")
-            onTriggered:    mainWindow.showMessageDialog(qsTr("Reboot Vehicle"),
-                                                         qsTr("Select Ok to reboot vehicle."),
+            text:           qsTr("Reiniciar")
+            onTriggered:    mainWindow.showMessageDialog(qsTr("Reiniciar"),
+                                                         qsTr("Selecione Ok para reiniciar."),
                                                          Dialog.Cancel | Dialog.Ok,
                                                          function() { _activeVehicle.rebootVehicle() })
         }
@@ -294,7 +294,7 @@ Item {
     QGCFileDialog {
         id:             fileDialog
         folder:         _appSettings.parameterSavePath
-        nameFilters:    [ qsTr("Parameter Files (*.%1)").arg(_appSettings.parameterFileExtension) , qsTr("All Files (*)") ]
+        nameFilters:    [ qsTr("Arquivos (*.%1)").arg(_appSettings.parameterFileExtension) , qsTr("Todos Arquivos (*)") ]
 
         onAcceptedForSave: (file) => {
             controller.saveToFile(file)

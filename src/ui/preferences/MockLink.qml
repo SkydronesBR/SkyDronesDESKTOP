@@ -220,34 +220,12 @@ Rectangle {
         flickableDirection: Flickable.VerticalFlick
         clip:               true
 
-        ColumnLayout {
+        /* ColumnLayout {
             id:         buttonColumn
             spacing:    _defaultTextHeight / 2
             width:              250
 
-            /* SubMenuButton {
-                id:                 summaryButton
-                imageResource:      "/qmlimages/VehicleSummaryIcon.png"
-                setupIndicator:     false
-                checked:            true
-                buttonGroup:     setupButtonGroup
-                text:               qsTr("Summary")
-                Layout.fillWidth:   true
-
-                onClicked: showSummaryPanel()
-            } */
-
-            /* SubMenuButton {
-                id:                 firmwareButton
-                imageResource:      "/qmlimages/FirmwareUpgradeIcon.png"
-                setupIndicator:     false
-                buttonGroup:     setupButtonGroup
-                visible:            !ScreenTools.isMobile && _corePlugin.options.showFirmwareUpgrade
-                text:               qsTr("Firmware")
-                Layout.fillWidth:   true
-
-                onClicked: showPanel(this, "FirmwareUpgrade.qml")
-            } */
+            
 
             SubMenuButton {
                 id:                 px4FlowButton
@@ -259,39 +237,7 @@ Rectangle {
                 onClicked:          showPanel(this, "PX4FlowSensor.qml")
             }
 
-            /* SubMenuButton {
-                id:                 joystickButton
-                imageResource:      "/qmlimages/Joystick.png"
-                setupIndicator:     true
-                setupComplete:      _activeJoystick ? _activeJoystick.calibrated || _buttonsOnly : false
-                buttonGroup:     setupButtonGroup
-                visible:            _fullParameterVehicleAvailable && joystickManager.joysticks.length !== 0
-                text:               _forcedToButtonsOnly ? qsTr("Buttons") : qsTr("Joystick")
-                Layout.fillWidth:   true
-                onClicked:          showPanel(this, "JoystickConfig.qml")
-
-                property var    _activeJoystick:        joystickManager.activeJoystick
-                property bool   _buttonsOnly:           _activeJoystick ? _activeJoystick.axisCount == 0 : false
-                property bool   _forcedToButtonsOnly:   !QGroundControl.corePlugin.options.allowJoystickSelection && _buttonsOnly
-            } */
-
-            /* Repeater {
-                id:     componentRepeater
-                model:  _fullParameterVehicleAvailable ? QGroundControl.multiVehicleManager.activeVehicle.autopilot.vehicleComponents : 0
-
-                SubMenuButton {
-                    imageResource:      modelData.iconResource
-                    setupIndicator:     modelData.requiresSetup
-                    setupComplete:      modelData.setupComplete
-                    buttonGroup:     setupButtonGroup
-                    text:               modelData.name
-                    visible:            modelData.setupSource.toString() !== ""
-                    Layout.fillWidth:   true
-                    onClicked:          showVehicleComponentPanel(componentUrl)
-
-                    property var componentUrl: modelData
-                }
-            } */
+            
 
             SubMenuButton {
                 id:                 parametersButton
@@ -305,6 +251,44 @@ Rectangle {
                 onClicked:          showPanel(this, "SetupParameterEditor.qml")
             }
 
+        } */
+        ColumnLayout {
+            id:         buttonColumn
+            spacing:    _defaultTextHeight / 2
+            width:      250
+
+            SubMenuButton {
+                id:                 parametersButton
+                setupIndicator:     false
+                buttonGroup:     setupButtonGroup
+                visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
+                                    !QGroundControl.multiVehicleManager.activeVehicle.usingHighLatencyLink &&
+                                    _corePlugin.showAdvancedUI
+                text:               qsTr("Parameters")
+                Layout.fillWidth:   true
+                onClicked:          showPanel(this, "SetupParameterEditor.qml")
+            }
+
+            Item {
+                width: parent.width 
+
+                Text {      
+                    text:                   "O botão de parâmetros permite ajustar configurações como RTL ou Bateria. As funções associadas a ele processam suas escolhas, fazendo com que as mudanças desejadas aconteçam."
+                    color:                  "white"
+                    wrapMode:               Text.WordWrap 
+                    width:                  parent.width 
+                    font.bold:              true
+                }
+
+                Image {
+                    source:                 "/qmlimages/RidIconGreen"
+                    width:                  300
+                    height:                 600
+                    fillMode:               Image.PreserveAspectFit
+                    opacity:                0.3
+                    rotation:               -30
+                }
+            }
         }
     }
 

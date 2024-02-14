@@ -64,7 +64,7 @@ Item {
 
                     QGCLabel {
                         id:             flightModeLabel
-                        text:           qsTr("Flight Mode Settings")
+                        text:           qsTr("Configurações do modo de voo")
                         font.family:    ScreenTools.demiboldFontFamily
                     }
 

@@ -84,8 +84,8 @@ Rectangle {
                 font.family:    ScreenTools.demiboldFontFamily
                 horizontalAlignment: Text.AlignHCenter
                 text:           setupComplete ?
-                    qsTr("Below you will find a summary of the settings for your vehicle. To the left are the setup menus for each component.") :
-                    qsTr("WARNING: Your vehicle requires setup prior to flight. Please resolve the items marked in red using the menu on the left.")
+                    qsTr("Abaixo você encontrará um resumo das configurações do seu veículo. À esquerda estão os menus de configuração de cada componente.") :
+                    qsTr("AVISO: Seu veículo requer configuração antes do voo. Por favor, resolva os itens marcados em vermelho usando o menu à esquerda.")
 
                 property bool setupComplete: QGroundControl.multiVehicleManager.activeVehicle ? QGroundControl.multiVehicleManager.activeVehicle.autopilot.setupComplete : false
             }

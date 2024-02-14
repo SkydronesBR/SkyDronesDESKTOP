@@ -49,15 +49,15 @@ SetupPage {
                 nextButton:     nextButton
                 skipButton:     skipButton
                 onChannelCountChanged:              updateChannelCount()
-                onFunctionMappingChangedAPMReboot:  mainWindow.showMessageDialog(qsTr("Reboot required"), qsTr("Your stick mappings have changed, you must reboot the vehicle for correct operation."))
-                onThrottleReversedCalFailure:       mainWindow.showMessageDialog(qsTr("Throttle channel reversed"), qsTr("Calibration failed. The throttle channel on your transmitter is reversed. You must correct this on your transmitter in order to complete calibration."))
+                onFunctionMappingChangedAPMReboot:  mainWindow.showMessageDialog(qsTr("Reinicialização necessária"), qsTr("Your stick mappings have changed, you must reboot the vehicle for correct operation."))
+                onThrottleReversedCalFailure:       mainWindow.showMessageDialog(qsTr("Canal do acelerador invertido"), qsTr("A calibração falhou. O canal do acelerador em seu transmissor está invertido. Você deve corrigir isso em seu transmissor para concluir a calibração."))
             }
 
             Component {
                 id: spektrumBindDialogComponent
 
                 QGCPopupDialog {
-                    title:      qsTr("Spektrum Bind")
+                    title:      qsTr("Ligação Spektrum")
                     buttons:    Dialog.Ok | Dialog.Cancel
 
                     onAccepted: { controller.spektrumBindMode(radioGroup.checkedButton.bindMode) }
@@ -69,12 +69,12 @@ SetupPage {
 
                         QGCLabel {
                             wrapMode:   Text.WordWrap
-                            text:       qsTr("Click Ok to place your Spektrum receiver in the bind mode.")
+                            text:       qsTr("Clique em Ok para colocar seu receptor Spektrum no modo de ligação.")
                         }
 
                         QGCLabel {
                             wrapMode:   Text.WordWrap
-                            text:       qsTr("Select the specific receiver type below:")
+                            text:       qsTr("Selecione o tipo de receptor específico abaixo:")
                         }
 
                         QGCRadioButton {
@@ -173,7 +173,7 @@ SetupPage {
                 Column {
                     width:      parent.width
                     spacing:    5
-                    QGCLabel { text: qsTr("Attitude Controls") }
+                    QGCLabel { text: qsTr("Controles de atitude") }
 
                     Item {
                         width:  parent.width
@@ -296,33 +296,33 @@ SetupPage {
 
                     QGCButton {
                         id:         skipButton
-                        text:       qsTr("Skip")
+                        text:       qsTr("Próximo")
                         onClicked:  controller.skipButtonClicked()
                     }
 
                     QGCButton {
                         id:         cancelButton
-                        text:       qsTr("Cancel")
+                        text:       qsTr("Cancelar")
                         onClicked:  controller.cancelButtonClicked()
                     }
 
                     QGCButton {
                         id:         nextButton
                         primary:    true
-                        text:       qsTr("Calibrate")
+                        text:       qsTr("Calibrar")
 
                         onClicked: {
-                            if (text === qsTr("Calibrate")) {
+                            if (text === qsTr("Calibrar")) {
                                 if (controller.channelCount < controller.minChannelCount) {
-                                    mainWindow.showMessageDialog(qsTr("Radio Not Ready"),
-                                                                 controller.channelCount == 0 ? qsTr("Please turn on transmitter.") :
+                                    mainWindow.showMessageDialog(qsTr("Rádio não está pronto"),
+                                                                 controller.channelCount == 0 ? qsTr("Por favor ligue o transmissor.") :
                                                                                                 (controller.channelCount < controller.minChannelCount ?
-                                                                                                     qsTr("%1 channels or more are needed to fly.").arg(controller.minChannelCount) :
-                                                                                                     qsTr("Ready to calibrate.")))
+                                                                                                     qsTr("%1 canais ou mais são necessários para voar.").arg(controller.minChannelCount) :
+                                                                                                     qsTr("Pronto para calibrar.")))
                                 } else {
-                                    mainWindow.showMessageDialog(qsTr("Zero Trims"),
-                                                                 qsTr("Before calibrating you should zero all your trims and subtrims. Click Ok to start Calibration.\n\n%1").arg(
-                                                                     (QGroundControl.multiVehicleManager.activeVehicle.px4Firmware ? "" : qsTr("Please ensure all motor power is disconnected AND all props are removed from the vehicle."))),
+                                    mainWindow.showMessageDialog(qsTr("Zero cortes"),
+                                                                 qsTr("Antes de calibrar você deve zerar todos os seus cortes e subtrims. Clique em Ok para iniciar a calibração.\n\n%1").arg(
+                                                                     (QGroundControl.multiVehicleManager.activeVehicle.px4Firmware ? "" : qsTr("Certifique-se de que toda a alimentação do motor esteja desconectada E que todos os suportes sejam removidos do veículo."))),
                                                                  Dialog.Ok,
                                                                  function() { controller.nextButtonClicked() })
                                 }
@@ -347,7 +347,7 @@ SetupPage {
                     border.width:   1
                 }
 
-                QGCLabel { text: qsTr("Additional Radio setup:") }
+                QGCLabel { text: qsTr("Configuração adicional de rádio:") }
 
                 GridLayout {
                     id:                 switchSettingsGrid
@@ -384,14 +384,14 @@ SetupPage {
                 RowLayout {
                     QGCButton {
                         id:         bindButton
-                        text:       qsTr("Spektrum Bind")
+                        text:       qsTr("Ligação Spektrum")
                         onClicked:  spektrumBindDialogComponent.createObject(mainWindow).open()
                     }
 
                     QGCButton {
-                        text:       qsTr("Copy Trims")
-                        onClicked:  mainWindow.showMessageDialog(qsTr("Copy Trims"),
-                                                                 qsTr("Center your sticks and move throttle all the way down, then press Ok to copy trims. After pressing Ok, reset the trims on your radio back to zero."),
+                        text:       qsTr("Copiar guarnições")
+                        onClicked:  mainWindow.showMessageDialog(qsTr("Copiar guarnições"),
+                                                                 qsTr("Centralize seus manípulos e mova o acelerador totalmente para baixo e pressione Ok para copiar os cortes. Depois de pressionar OK, redefina os trims do seu rádio para zero."),
                                                                  Dialog.Ok | Dialog.Cancel,
                                                                  function() { controller.copyTrims() })
                     }
@@ -416,13 +416,13 @@ SetupPage {
                     spacing: ScreenTools.defaultFontPixelWidth
 
                     QGCRadioButton {
-                        text:       qsTr("Mode 1")
+                        text:       qsTr("Modo 1")
                         checked:    controller.transmitterMode == 1
                         onClicked:  controller.transmitterMode = 1
                     }
 
                     QGCRadioButton {
-                        text:       qsTr("Mode 2")
+                        text:       qsTr("Modo 2")
                         checked:    controller.transmitterMode == 2
                         onClicked:  controller.transmitterMode = 2
                     }

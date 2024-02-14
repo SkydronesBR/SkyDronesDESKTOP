@@ -57,7 +57,7 @@ SetupPage {
                 visible: !_batt1MonitorEnabled || !_batt1ParamsAvailable
 
                 QGCLabel {
-                    text:       qsTr("Battery 1")
+                    text:       qsTr("Bateria 1")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -107,7 +107,7 @@ SetupPage {
                 visible:    _batt1MonitorEnabled && _batt1ParamsAvailable
 
                 QGCLabel {
-                    text:       qsTr("Battery 1")
+                    text:       qsTr("Bateria 1")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -144,7 +144,7 @@ SetupPage {
                 visible: !_batt2MonitorEnabled || !_batt2ParamsAvailable
 
                 QGCLabel {
-                    text:       qsTr("Battery 2")
+                    text:       qsTr("Bateria 2")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -164,7 +164,7 @@ SetupPage {
                             id:                 batt2MonitorRow
                             spacing:            ScreenTools.defaultFontPixelWidth
 
-                            QGCLabel { text: qsTr("Battery2 monitor:") }
+                            QGCLabel { text: qsTr("Monitor de Bateria 2 :") }
                             FactComboBox {
                                 id:         monitor2Combo
                                 fact:       _batt2Monitor
@@ -230,7 +230,7 @@ SetupPage {
                 visible:    _escCalibrationAvailable
 
                 QGCLabel {
-                    text:       qsTr("ESC Calibration")
+                    text:       qsTr("Calibração ESC")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -249,7 +249,7 @@ SetupPage {
                             spacing: _margins
 
                             QGCLabel {
-                                text:   qsTr("WARNING: Remove props prior to calibration!")
+                                text:   qsTr("AVISO: Remova os suportes antes da calibração!")
                                 color:  qgcPal.warningText
                             }
 
@@ -257,22 +257,23 @@ SetupPage {
                                 spacing: _margins
 
                                 QGCButton {
-                                    text: qsTr("Calibrate")
+                                    text: qsTr("Calibrar")
                                     enabled:    _escCalibration && _escCalibration.rawValue === 0
                                     onClicked:  if(_escCalibration) _escCalibration.rawValue = 3
                                 }
 
                                 Column {
                                     enabled: _escCalibration && _escCalibration.rawValue === 3
-                                    QGCLabel { text:   _escCalibration ? (_escCalibration.rawValue === 3 ? qsTr("Now perform these steps:") : qsTr("Click Calibrate to start, then:")) : "" }
-                                    QGCLabel { text:   qsTr("- Disconnect USB and battery so flight controller powers down") }
-                                    QGCLabel { text:   qsTr("- Connect the battery") }
-                                    QGCLabel { text:   qsTr("- The arming tone will be played (if the vehicle has a buzzer attached)") }
-                                    QGCLabel { text:   qsTr("- If using a flight controller with a safety button press it until it displays solid red") }
-                                    QGCLabel { text:   qsTr("- You will hear a musical tone then two beeps") }
-                                    QGCLabel { text:   qsTr("- A few seconds later you should hear a number of beeps (one for each battery cell you're using)") }
-                                    QGCLabel { text:   qsTr("- And finally a single long beep indicating the end points have been set and the ESC is calibrated") }
-                                    QGCLabel { text:   qsTr("- Disconnect the battery and power up again normally") }
+                                    QGCLabel { text:   _escCalibration ? (_escCalibration.rawValue === 3 ? qsTr("Agora realize essas etapas:") : qsTr("Clique em Calibrar para começar e então:")) : "" }
+                                    QGCLabel { text:   qsTr("- Desconecte o USB e a bateria para que o controlador de voo seja desligado") }
+                                    QGCLabel { text:   qsTr("- Conecte a bateria") }
+                                    QGCLabel { text:   qsTr("- O tom de armamento será reproduzido (se o veículo tiver um buzzer conectado)") }
+                                    QGCLabel { text:   qsTr("- Se estiver usando um controlador de voo com um botão de segurança, pressione-o até que ele exiba vermelho sólido") }
+                                    QGCLabel { text:   qsTr("- Você ouvirá um tom musical e depois dois bipes") }
+                                    QGCLabel { text:   qsTr("- Alguns segundos depois, você deverá ouvir vários bipes (um para cada célula da bateria que está usando)") }
+                                    QGCLabel { text:   qsTr("- E finalmente um bipe longo único indicando que os pontos finais foram ajustados e o ESC está calibrado") }
+                                    QGCLabel { text:   qsTr("- Desconecte a bateria e ligue novamente normalmente") }
+
                                 }
                             }
                         }
@@ -314,7 +315,7 @@ SetupPage {
                 id: sensorModel
 
                 ListElement {
-                    text:       qsTr("Power Module 90A")
+                    text:       qsTr("Módulo de Potência 90A")
                     voltPin:    2
                     currPin:    3
                     voltMult:   10.1
@@ -323,7 +324,7 @@ SetupPage {
                 }
 
                 ListElement {
-                    text:       qsTr("Power Module HV")
+                    text:       qsTr("Módulo de potência AT")
                     voltPin:    2
                     currPin:    3
                     voltMult:   12.02
@@ -341,7 +342,7 @@ SetupPage {
                 }
 
                 ListElement {
-                    text:       qsTr("Blue Robotics Power Sense Module")
+                    text:       qsTr("Módulo de detecção de potência da Blue Robotics")
                     voltPin:    2
                     currPin:    3
                     voltMult:   11.000
@@ -350,7 +351,7 @@ SetupPage {
                 }
 
                 ListElement {
-                    text:       qsTr("Navigator w/ Blue Robotics Power Sense Module")
+                    text:       qsTr("Navegador com módulo Blue Robotics Power Sense")
                     voltPin:    5
                     currPin:    4
                     voltMult:   11.000
@@ -359,7 +360,7 @@ SetupPage {
                 }
 
                 ListElement {
-                    text:       qsTr("Other")
+                    text:       qsTr("Outro")
                 }
             }
 
@@ -369,7 +370,7 @@ SetupPage {
                 rowSpacing:     _margins
                 columnSpacing:  _margins
 
-                QGCLabel { text: qsTr("Battery monitor:") }
+                QGCLabel { text: qsTr("Monitor de bateria:") }
 
                 FactComboBox {
                     id:         monitorCombo
@@ -381,7 +382,7 @@ SetupPage {
                 QGCLabel {
                     Layout.row:     1
                     Layout.column:  0
-                    text:           qsTr("Battery capacity:")
+                    text:           qsTr("Capacidade de carga:")
                 }
 
                 FactTextField {
@@ -393,7 +394,7 @@ SetupPage {
                 QGCLabel {
                     Layout.row:     2
                     Layout.column:  0
-                    text:           qsTr("Minimum arming voltage:")
+                    text:           qsTr("Tensão mínima de armar:")
                 }
 
                 FactTextField {
@@ -405,7 +406,7 @@ SetupPage {
                 QGCLabel {
                     Layout.row:     3
                     Layout.column:  0
-                    text:           qsTr("Power sensor:")
+                    text:           qsTr("Sensor de potência:")
                 }
 
                 QGCComboBox {
@@ -430,7 +431,7 @@ SetupPage {
                 QGCLabel {
                     Layout.row:     4
                     Layout.column:  0
-                    text:           qsTr("Current pin:")
+                    text:           qsTr("PIN atual:")
                     visible:        _showAdvanced
                 }
 
@@ -445,7 +446,7 @@ SetupPage {
                 QGCLabel {
                     Layout.row:     5
                     Layout.column:  0
-                    text:           qsTr("Voltage pin:")
+                    text:           qsTr("Pino de tensão:")
                     visible:        _showAdvanced
                 }
 
@@ -460,7 +461,7 @@ SetupPage {
                 QGCLabel {
                     Layout.row:     6
                     Layout.column:  0
-                    text:           qsTr("Voltage multiplier:")
+                    text:           qsTr("Multiplicador de tensão:")
                     visible:        _showAdvanced
                 }
 
@@ -471,7 +472,7 @@ SetupPage {
                 }
 
                 QGCButton {
-                    text:       qsTr("Calculate")
+                    text:       qsTr("Calcular")
                     visible:    _showAdvanced
                     onClicked:  calcVoltageMultiplierDlgComponent.createObject(mainWindow, { vehicleVoltageFact: vehicleVoltage, battVoltMultFact: battVoltMult }).open()
                 }
@@ -481,12 +482,12 @@ SetupPage {
                     Layout.fillWidth:   true
                     font.pointSize:     ScreenTools.smallFontPointSize
                     wrapMode:           Text.WordWrap
-                    text:               qsTr("If the battery voltage reported by the vehicle is largely different than the voltage read externally using a voltmeter you can adjust the voltage multiplier value to correct this. Click the Calculate button for help with calculating a new value.")
+                    text:               qsTr("Se a tensão da bateria informada pelo veículo for muito diferente da tensão lida externamente usando um voltímetro, você poderá ajustar o valor do multiplicador de tensão para corrigir isso. Clique no botão Calcular para obter ajuda no cálculo de um novo valor.")
                     visible:            _showAdvanced
                 }
 
                 QGCLabel {
-                    text:       qsTr("Amps per volt:")
+                    text:       qsTr("Ampères por volt:")
                     visible:    _showAdvanced
                 }
 
@@ -497,7 +498,7 @@ SetupPage {
                 }
 
                 QGCButton {
-                    text:       qsTr("Calculate")
+                    text:       qsTr("Calcular")
                     visible:    _showAdvanced
                     onClicked:  calcAmpsPerVoltDlgComponent.createObject(mainWindow, { vehicleCurrentFact: vehicleCurrent, battAmpPerVoltFact: battAmpPerVolt }).open()
                 }
@@ -507,12 +508,12 @@ SetupPage {
                     Layout.fillWidth:   true
                     font.pointSize:     ScreenTools.smallFontPointSize
                     wrapMode:           Text.WordWrap
-                    text:               qsTr("If the current draw reported by the vehicle is largely different than the current read externally using a current meter you can adjust the amps per volt value to correct this. Click the Calculate button for help with calculating a new value.")
+                    text:               qsTr("Se o consumo de corrente relatado pelo veículo for muito diferente da corrente lida externamente usando um medidor de corrente, você poderá ajustar o valor de amperes por volt para corrigir isso. Clique no botão Calcular para obter ajuda no cálculo de um novo valor.")
                     visible:            _showAdvanced
                 }
 
                 QGCLabel {
-                    text:       qsTr("Amps Offset:")
+                    text:       qsTr("Compensação de Amps:")
                     visible:    _showAdvanced
                 }
 
@@ -527,7 +528,7 @@ SetupPage {
                     Layout.fillWidth:   true
                     font.pointSize:     ScreenTools.smallFontPointSize
                     wrapMode:           Text.WordWrap
-                    text:               qsTr("If the vehicle reports a high current read when there is little or no current going through it, adjust the Amps Offset. It should be equal to the voltage reported by the sensor when the current is zero.")
+                    text:               qsTr("Se o veículo relatar uma leitura de corrente alta quando houver pouca ou nenhuma corrente passando por ele, ajuste o Compensação de Amps. Deve ser igual à tensão informada pelo sensor quando a corrente é zero.")
                     visible:            _showAdvanced
                 }
 
@@ -539,7 +540,7 @@ SetupPage {
         id: calcVoltageMultiplierDlgComponent
 
         QGCPopupDialog {
-            title:      qsTr("Calculate Voltage Multiplier")
+            title:      qsTr("Calcular o multiplicador de tensão")
             buttons:    Dialog.Close
 
             property Fact vehicleVoltageFact
@@ -551,7 +552,7 @@ SetupPage {
                 QGCLabel {
                     Layout.preferredWidth:  gridLayout.width
                     wrapMode:               Text.WordWrap
-                    text:                   qsTr("Measure battery voltage using an external voltmeter and enter the value below. Click Calculate to set the new adjusted voltage multiplier.")
+                    text:                   qsTr("Meça a tensão da bateria usando um voltímetro externo e insira o valor abaixo. Clique em Calcular para definir o novo multiplicador de tensão ajustado.")
                 }
 
                 GridLayout {
@@ -559,19 +560,19 @@ SetupPage {
                     columns:    2
 
                     QGCLabel {
-                        text: qsTr("Measured voltage:")
+                        text: qsTr("Tensão medida:")
                     }
                     QGCTextField { id: measuredVoltage }
 
-                    QGCLabel { text: qsTr("Vehicle voltage:") }
+                    QGCLabel { text: qsTr("Tensão do veículo:") }
                     FactLabel { fact: vehicleVoltageFact }
 
-                    QGCLabel { text: qsTr("Voltage multiplier:") }
+                    QGCLabel { text: qsTr("Multiplicador de tensão:") }
                     FactLabel { fact: battVoltMultFact }
                 }
 
                 QGCButton {
-                    text: qsTr("Calculate And Set")
+                    text: qsTr("Calcular e definir")
 
                     onClicked:  {
                         var measuredVoltageValue = parseFloat(measuredVoltage.text)
@@ -592,7 +593,7 @@ SetupPage {
         id: calcAmpsPerVoltDlgComponent
 
         QGCPopupDialog {
-            title:      qsTr("Calculate Amps per Volt")
+            title:      qsTr("Calcular e definir")
             buttons:    Dialog.Close
 
             property Fact vehicleCurrentFact
@@ -604,7 +605,7 @@ SetupPage {
                 QGCLabel {
                     Layout.preferredWidth:  gridLayout.width
                     wrapMode:               Text.WordWrap
-                    text:                   qsTr("Measure current draw using an external current meter and enter the value below. Click Calculate to set the new amps per volt value.")
+                    text:                   qsTr("Meça o consumo de corrente usando um medidor de corrente externo e insira o valor abaixo. Clique em Calcular para definir o novo valor de amperes por volt.")
                 }
 
                 GridLayout {
@@ -612,19 +613,19 @@ SetupPage {
                     columns:    2
 
                     QGCLabel {
-                        text: qsTr("Measured current:")
+                        text: qsTr("Corrente medida:")
                     }
                     QGCTextField { id: measuredCurrent }
 
-                    QGCLabel { text: qsTr("Vehicle current:") }
+                    QGCLabel { text: qsTr("Corrente do veículo:") }
                     FactLabel { fact: vehicleCurrentFact }
 
-                    QGCLabel { text: qsTr("Amps per volt:") }
+                    QGCLabel { text: qsTr("Ampères por volt:") }
                     FactLabel { fact: battAmpPerVoltFact }
                 }
 
                 QGCButton {
-                    text: qsTr("Calculate And Set")
+                    text: qsTr("Calcular e definir")
 
                     onClicked:  {
                         var measuredCurrentValue = parseFloat(measuredCurrent.text)

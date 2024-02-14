@@ -20,7 +20,7 @@ import QGroundControl.MultiVehicleManager
 
 Rectangle {
     id:     setupView
-    color:  "#0A0A0A"//qgcPal.window
+    color:  qgcPal.window
     z:      QGroundControl.zOrderTopMost
 
     QGCPalette { id: qgcPal; colorGroupEnabled: true }
@@ -253,7 +253,7 @@ Rectangle {
                     width: 300
                     height: 600
                     fillMode: Image.PreserveAspectFit
-                    opacity: 0.3
+                    opacity: 0.1
                     rotation: -30
                 }
             }

@@ -15,7 +15,7 @@
 
 APMPowerComponent::APMPowerComponent(Vehicle* vehicle, AutoPilotPlugin* autopilot, QObject* parent)
     : VehicleComponent(vehicle, autopilot, parent),
-    _name(tr("Power"))
+    _name(tr("Energia"))
 {
 }
 
@@ -26,7 +26,7 @@ QString APMPowerComponent::name(void) const
 
 QString APMPowerComponent::description(void) const
 {
-    return tr("The Power Component is used to setup battery parameters.");
+    return tr("O componente de energia é usado para configurar os parâmetros da bateria.");
 }
 
 QString APMPowerComponent::iconResource(void) const

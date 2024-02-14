@@ -21,7 +21,7 @@ struct SwitchListItem {
 
 FlightModesComponent::FlightModesComponent(Vehicle* vehicle, AutoPilotPlugin* autopilot, QObject* parent) :
     VehicleComponent(vehicle, autopilot, parent),
-    _name(tr("Flight Modes"))
+    _name(tr("Modos de Voo"))
 {
 }
 
@@ -32,7 +32,7 @@ QString FlightModesComponent::name(void) const
 
 QString FlightModesComponent::description(void) const
 {
-    return tr("Flight Modes Setup is used to configure the transmitter switches associated with Flight Modes.");
+    return tr("A configuração dos modos de voo é usada para configurar as chaves do transmissor associadas aos modos de voo.");
 }
 
 QString FlightModesComponent::iconResource(void) const

@@ -101,7 +101,7 @@ Item {
 
         QGCLabel {
             Layout.columnSpan:  parent.columns
-            text:               qsTr("Channel Monitor")
+            text:               qsTr("Monitor de canal")
         }
 
         Connections {

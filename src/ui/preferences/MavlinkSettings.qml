@@ -230,9 +230,29 @@ Rectangle {
                 setupIndicator:     false
                 checked:            true
                 buttonGroup:     setupButtonGroup
-                text:               qsTr("Summary")
+                text:               qsTr("Geral")
                 Layout.fillWidth:   true
                 onClicked: showSummaryPanel()
+            }
+            Item {
+                width: parent.width 
+
+                Text {      
+                    text:                   "O botão geral de configurações é uma ferramenta versátil que permite aos usuários ajustar uma variedade de funções em quadros (frames), rádios, modos de voo e mais. Com este botão, os usuários podem personalizar e configurar diversos aspectos de seu equipamento, incluindo preferências de voo, ajustes de controle e modos de operação. Ele oferece uma maneira conveniente de adaptar o dispositivo às necessidades individuais do usuário, garantindo uma experiência de voo personalizada e otimizada."
+                    color:                  "white"
+                    wrapMode:               Text.WordWrap 
+                    width:                  parent.width 
+                    font.bold:              true
+                }
+
+                Image {
+                    source:                 "/res/QGCLogoBlack"
+                    width:                  300
+                    height:                 800
+                    fillMode:               Image.PreserveAspectFit
+                    opacity:                0.1
+                    rotation:               -30
+                }
             }
 
             /* SubMenuButton {

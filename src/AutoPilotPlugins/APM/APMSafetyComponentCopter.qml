@@ -81,7 +81,7 @@ SetupPage {
                 visible: _batt1MonitorEnabled && _batt1ParamsAvailable
 
                 QGCLabel {
-                    text:       qsTr("Battery1 Failsafe Triggers")
+                    text:       qsTr("Gatilhos à prova de falhas da bateria1")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 

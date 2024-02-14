@@ -37,7 +37,7 @@ QString APMAirframeComponent::name(void) const
 
 QString APMAirframeComponent::description(void) const
 {
-    return tr("Frame Setup is used to select the airframe which matches your vehicle.");
+    return tr("Frame Setup é usado para selecionar a fuselagem que corresponde ao seu veículo.");
 }
 
 QString APMAirframeComponent::iconResource(void) const

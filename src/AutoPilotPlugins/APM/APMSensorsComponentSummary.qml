@@ -28,7 +28,7 @@ Item {
         anchors.fill:       parent
 
         VehicleSummaryRow {
-        labelText:  qsTr("Compasses:")
+        labelText:  qsTr("Bússolas:")
         valueText: ""
         }
 
@@ -46,20 +46,20 @@ Item {
                                      (sensorParams.rgCompassExternalParamAvailable[index] ?
                                           (sensorParams.rgCompassExternal[index] ? ", External" : ", Internal" ) :
                                           "") :
-                                     qsTr("Setup required")) :
-                                qsTr("Not installed")
+                                     qsTr("Configuração necessária")) :
+                                qsTr("Não instalado")
 
                     function getPriority (index) {
                         if (sensorParams.rgCompassId[index].value == sensorParams.rgCompassPrio[0].value) {
-                            return "Primary"
+                            return "Primario"
                         }
                         if (sensorParams.rgCompassId[index].value == sensorParams.rgCompassPrio[1].value) {
-                            return "Secondary"
+                            return "Secundário"
                         }
                         if (sensorParams.rgCompassId[index].value == sensorParams.rgCompassPrio[2].value) {
-                            return "Tertiary"
+                            return "Terciário"
                         }
-                        return "Unused"
+                        return "Não utilizado"
                     }
                 }
 
@@ -73,8 +73,8 @@ Item {
         }
 
         VehicleSummaryRow {
-            labelText: qsTr("Accelerometer(s):")
-            valueText: controller.accelSetupNeeded ? qsTr("Setup required") : qsTr("Ready")
+            labelText: qsTr("Acelerômetro(s):")
+            valueText: controller.accelSetupNeeded ? qsTr("Configuração necessária") : qsTr("Pronto")
         }
 
         Repeater {
@@ -86,8 +86,8 @@ Item {
         }
 
         VehicleSummaryRow {
-            labelText: qsTr("Barometer(s):")
-            valueText: sensorParams.baroIdAvailable ? "" : qsTr("Not Supported(Over APM 4.1)")
+            labelText: qsTr("Barômetro(s):")
+            valueText: sensorParams.baroIdAvailable ? "" : qsTr("Configuração necessária(Over APM 4.1)")
         }
 
         Repeater {

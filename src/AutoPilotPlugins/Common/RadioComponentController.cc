@@ -115,23 +115,23 @@ RadioComponentController::~RadioComponentController()
 /// @brief Returns the state machine entry for the specified state.
 const RadioComponentController::stateMachineEntry* RadioComponentController::_getStateMachineEntry(int step) const
 {
-    static const char* msgBeginPX4 =        QT_TR_NOOP("Lower the Throttle stick all the way down as shown in diagram.\n\n"
-                                            "It is recommended to disconnect all motors for additional safety, however, the system is designed to not arm during the calibration.\n\n"
-                                            "Click Next to continue");
-    static const char* msgBeginAPM =        QT_TR_NOOP("Lower the Throttle stick all the way down as shown in diagram.\nReset all transmitter trims to center.\n\n"
-                                            "Please ensure all motor power is disconnected AND all props are removed from the vehicle.\n\n"
-                                            "Click Next to continue");
-    static const char* msgThrottleUp =      QT_TR_NOOP("Move the Throttle stick all the way up and hold it there...");
-    static const char* msgThrottleDown =    QT_TR_NOOP("Move the Throttle stick all the way down and leave it there...");
-    static const char* msgYawLeft =         QT_TR_NOOP("Move the Yaw stick all the way to the left and hold it there...");
-    static const char* msgYawRight =        QT_TR_NOOP("Move the Yaw stick all the way to the right and hold it there...");
-    static const char* msgRollLeft =        QT_TR_NOOP("Move the Roll stick all the way to the left and hold it there...");
-    static const char* msgRollRight =       QT_TR_NOOP("Move the Roll stick all the way to the right and hold it there...");
-    static const char* msgPitchDown =       QT_TR_NOOP("Move the Pitch stick all the way down and hold it there...");
-    static const char* msgPitchUp =         QT_TR_NOOP("Move the Pitch stick all the way up and hold it there...");
-    static const char* msgPitchCenter =     QT_TR_NOOP("Allow the Pitch stick to move back to center...");
-    static const char* msgSwitchMinMax =    QT_TR_NOOP("Move all the transmitter switches and/or dials back and forth to their extreme positions.");
-    static const char* msgComplete =        QT_TR_NOOP("All settings have been captured. Click Next to write the new parameters to your board.");
+    static const char* msgBeginPX4 =        QT_TR_NOOP("Abaixe a alavanca do acelerador totalmente, conforme mostrado no diagrama.\n\n"
+                                            "Recomenda-se desconectar todos os motores para segurança adicional, porém, o sistema foi projetado para não armar durante a calibração.\n\n"
+                                            "Clique em próximo para continuar");
+    static const char* msgBeginAPM =        QT_TR_NOOP("Abaixe o acelerador totalmente, conforme mostrado no diagrama.\nRedefinir todos os ajustes do transmissor para o centro.\n\n"
+                                            "Certifique-se de que toda a alimentação do motor esteja desconectada E que todos os suportes sejam removidos do veículo.\n\n"
+                                            "Clique em próximo para continuar");
+    static const char* msgThrottleUp =      QT_TR_NOOP("Mova o stick do acelerador totalmente para cima e segure-o ali...");
+    static const char* msgThrottleDown =    QT_TR_NOOP("Mova o stick do acelerador totalmente para baixo e deixe-o lá...");
+    static const char* msgYawLeft =         QT_TR_NOOP("Mova o stick Yaw totalmente para a esquerda e segure-o ali...");
+    static const char* msgYawRight =        QT_TR_NOOP("Mova o stick Yaw totalmente para a direita e segure-o ali...");
+    static const char* msgRollLeft =        QT_TR_NOOP("Mova o Roll stick totalmente para a esquerda e segure-o ali...");
+    static const char* msgRollRight =       QT_TR_NOOP("Mova o Roll stick totalmente para a direita e segure-o ali...");
+    static const char* msgPitchDown =       QT_TR_NOOP("Mova o Pitch stick totalmente para baixo e segure-o nessa posição...");
+    static const char* msgPitchUp =         QT_TR_NOOP("Mova o Pitch stick totalmente para cima e segure-o ali...");
+    static const char* msgPitchCenter =     QT_TR_NOOP("Permita que o Pitch stick volte ao centro...");
+    static const char* msgSwitchMinMax =    QT_TR_NOOP("Mova todos os interruptores e/ou mostradores do transmissor para frente e para trás até suas posições extremas.");
+    static const char* msgComplete =        QT_TR_NOOP("Todas as configurações foram capturadas. Clique em Avançar para gravar os novos parâmetros em sua placa.");
 
     static const stateMachineEntry rgStateMachinePX4[] = {
         //Function
@@ -198,9 +198,9 @@ void RadioComponentController::_advanceState(void)
 /// @brief Sets up the state machine according to the current step from _currentStep.
 void RadioComponentController::_setupCurrentState(void)
 {
-    static const char* msgBeginAPMRover = QT_TR_NOOP("Center the Throttle stick as shown in diagram.\nReset all transmitter trims to center.\n\n"
-                                          "Please ensure all motor power is disconnected from the vehicle.\n\n"
-                                          "Click Next to continue");
+    static const char* msgBeginAPMRover = QT_TR_NOOP("Centralize o stick do acelerador conforme mostrado no diagrama.\nRedefinir todos os ajustes do transmissor para o centro.\n\n"
+                                          "Certifique-se de que toda a alimentação do motor esteja desconectada do veículo.\n\n"
+                                          "Clique em próximo para continuar");
     const stateMachineEntry* state = _getStateMachineEntry(_currentStep);
 
     const char* instructions = state->instructions;
@@ -799,7 +799,7 @@ void RadioComponentController::_startCalibration(void)
     // Let the mav known we are starting calibration. This should turn off motors and so forth.
     _vehicle->startCalibration(Vehicle::CalibrationRadio);
 
-    _nextButton->setProperty("text", tr("Next"));
+    _nextButton->setProperty("text", tr("Próximo"));
     _cancelButton->setEnabled(true);
 
     _currentStep = 0;
@@ -821,7 +821,7 @@ void RadioComponentController::_stopCalibration(void)
     }
 
     if(_statusText)   _statusText->setProperty("text", "");
-    if(_nextButton)   _nextButton->setProperty("text", tr("Calibrate"));
+    if(_nextButton)   _nextButton->setProperty("text", tr("Calibrar"));
     if(_nextButton)   _nextButton->setEnabled(true);
     if(_cancelButton) _cancelButton->setEnabled(false);
     if(_skipButton)   _skipButton->setEnabled(false);

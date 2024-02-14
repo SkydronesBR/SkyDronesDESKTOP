@@ -424,7 +424,7 @@ Item {
             IndicatorButton {
                 id:             accelButton
                 width:          _buttonWidth
-                text:           qsTr("Accelerometer")
+                text:           qsTr("Acelerômetro")
                 indicatorGreen: cal_acc0_id.value !== 0
                 visible:        QGroundControl.corePlugin.options.showSensorCalibrationAccel && showSensorCalibrationAccel
 

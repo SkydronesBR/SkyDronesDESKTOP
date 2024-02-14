@@ -76,21 +76,21 @@ SetupPage {
                         columnSpacing:  _margins
                         rowSpacing:     _margins
                         columns:        2
-                        QGCLabel { text: qsTr("Low action:") }
+                        QGCLabel { text: qsTr("Baixa ação:") }
                         FactComboBox {
                             fact:               failsafeBattLowAct
                             indexModel:         false
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Critical action:") }
+                        QGCLabel { text: qsTr("Ação crítica:") }
                         FactComboBox {
                             fact:               failsafeBattCritAct
                             indexModel:         false
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Low voltage threshold:") }
+                        QGCLabel { text: qsTr("Limite de baixa tensão:") }
                         FactTextField {
                             fact:               failsafeBattLowVoltage
                             showUnits:          true
@@ -98,21 +98,21 @@ SetupPage {
                         }
 
 
-                        QGCLabel { text: qsTr("Critical voltage threshold:") }
+                        QGCLabel { text: qsTr("Limite de tensão crítica:") }
                         FactTextField {
                             fact:               failsafeBattCritVoltage
                             showUnits:          true
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Low mAh threshold:") }
+                        QGCLabel { text: qsTr("Limiar baixo de mAh:") }
                         FactTextField {
                             fact:               failsafeBattLowMah
                             showUnits:          true
                             Layout.fillWidth:   true
                         }
 
-                        QGCLabel { text: qsTr("Critical mAh threshold:") }
+                        QGCLabel { text: qsTr("Limite crítico de mAh:") }
                         FactTextField {
                             fact:               failsafeBattCritMah
                             showUnits:          true
@@ -133,7 +133,7 @@ SetupPage {
                     }
 
                     QGCButton {
-                        text:       qsTr("Reboot vehicle")
+                        text:       qsTr("Reinicializar veículo")
                         onClicked:  controller.vehicle.rebootVehicle()
                     }
                 }
@@ -144,7 +144,7 @@ SetupPage {
                 visible: _batt1MonitorEnabled
 
                 QGCLabel {
-                    text:       qsTr("Battery1 Failsafe Triggers")
+                    text:       qsTr("Gatilhos à prova de falhas da bateria1")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -178,7 +178,7 @@ SetupPage {
                 visible: _batt2MonitorEnabled
 
                 QGCLabel {
-                    text:       qsTr("Battery2 Failsafe Triggers")
+                    text:       qsTr("Gatilhos à prova de falhas da bateria2")
                     font.family: ScreenTools.demiboldFontFamily
                 }
 
@@ -217,7 +217,7 @@ SetupPage {
                     property Fact _failsafeGCSEnable:   controller.getParameterFact(-1, "FS_GCS_ENABL")
 
                     QGCLabel {
-                        text:       qsTr("Failsafe Triggers")
+                        text:       qsTr("Gatilhos à prova de falhas")
                         font.family: ScreenTools.demiboldFontFamily
                     }
 
@@ -235,7 +235,7 @@ SetupPage {
                             RowLayout {
                                 QGCCheckBox {
                                     id:                 throttleEnableCheckBox
-                                    text:               qsTr("Throttle PWM threshold:")
+                                    text:               qsTr("Limite de aceleração PWM:")
                                     checked:            _failsafeThrEnable.value === 1
 
                                     onClicked: _failsafeThrEnable.value = (checked ? 1 : 0)
@@ -249,7 +249,7 @@ SetupPage {
                             }
 
                             QGCCheckBox {
-                                text:       qsTr("GCS failsafe")
+                                text:       qsTr("GCS à prova de falhas")
                                 checked:    _failsafeGCSEnable.value != 0
                                 onClicked:  _failsafeGCSEnable.value = checked ? 1 : 0
                             }
@@ -276,7 +276,7 @@ SetupPage {
 
                     QGCLabel {
                         id:         failsafeLabel
-                        text:       qsTr("Failsafe Triggers")
+                        text:       qsTr("Gatilhos à prova de falhas")
                         font.family: ScreenTools.demiboldFontFamily
                     }
 
@@ -293,27 +293,27 @@ SetupPage {
                             anchors.top:        parent.top
                             columns:            2
 
-                            QGCLabel { text: qsTr("Ground Station failsafe:") }
+                            QGCLabel { text: qsTr("Estação terrestre à prova de falhas:") }
                             FactComboBox {
                                 Layout.fillWidth:   true
                                 fact:               _failsafeGCSEnable
                                 indexModel:         false
                             }
 
-                            QGCLabel { text: qsTr("Throttle failsafe:") }
+                            QGCLabel { text: qsTr("Acelerador à prova de falhas:") }
                             FactComboBox {
                                 Layout.fillWidth:   true
                                 fact:               _failsafeThrEnable
                                 indexModel:         false
                             }
 
-                            QGCLabel { text: qsTr("PWM threshold:") }
+                            QGCLabel { text: qsTr("Limite PWM:") }
                             FactTextField {
                                 Layout.fillWidth:   true
                                 fact:               _failsafeThrValue
                             }
 
-                            QGCLabel { text: qsTr("Failsafe Crash Check:") }
+                            QGCLabel { text: qsTr("Verificação de falha à prova de falhas:") }
                             FactComboBox {
                                 Layout.fillWidth:   true
                                 fact:               _failsafeCrashCheck
@@ -342,7 +342,7 @@ SetupPage {
                     property Fact _failsafeThrValue:                controller.getParameterFact(-1, "FS_THR_VALUE")
 
                     QGCLabel {
-                        text:       qsTr("General Failsafe Triggers")
+                        text:       qsTr("Gatilhos gerais à prova de falhas")
                         font.family: ScreenTools.demiboldFontFamily
                     }
 
@@ -363,24 +363,24 @@ SetupPage {
                                 rowSpacing:     _margins
                                 columns:        2
 
-                                QGCLabel { text: qsTr("Ground Station failsafe:") }
+                                QGCLabel { text: qsTr("Estação Terrestre à prova de falhas:") }
                                 FactComboBox {
                                     fact:               _failsafeGCSEnable
                                     indexModel:         false
                                     Layout.fillWidth:   true
                                 }
 
-                                QGCLabel { text: qsTr("Throttle failsafe:") }
+                                QGCLabel { text: qsTr("Acelerador à prova de falhas:") }
                                 QGCComboBox {
-                                    model:              [qsTr("Disabled"), qsTr("Always RTL"),
-                                        qsTr("Continue with Mission in Auto Mode"), qsTr("Always Land")]
+                                    model:              [qsTr("Desabilitado"), qsTr("Sempre RTL"),
+                                        qsTr("Continue com a missão no modo automático"), qsTr("Sempre Land")]
                                     currentIndex:       _failsafeThrEnable.value
                                     Layout.fillWidth:   true
 
                                     onActivated: _failsafeThrEnable.value = index
                                 }
 
-                                QGCLabel { text: qsTr("PWM threshold:") }
+                                QGCLabel { text: qsTr("Limite PWM:") }
                                 FactTextField {
                                     fact:               _failsafeThrValue
                                     showUnits:          true
@@ -431,7 +431,7 @@ SetupPage {
 
                             FactCheckBox {
                                 id:     enabledCheckBox
-                                text:   qsTr("Enabled")
+                                text:   qsTr("Habilitado")
                                 fact:   _fenceEnable
                             }
 
@@ -440,7 +440,7 @@ SetupPage {
                                 enabled:    enabledCheckBox.checked
 
                                 QGCCheckBox {
-                                    text:       qsTr("Maximum Altitude")
+                                    text:       qsTr("Altitude Máxima")
                                     checked:    _fenceType.rawValue & _maxAltitudeFenceBitMask
 
                                     onClicked: {
@@ -457,7 +457,7 @@ SetupPage {
                                 }
 
                                 QGCCheckBox {
-                                    text:       qsTr("Circle centered on Home")
+                                    text:       qsTr("Círculo centrado na página inicial")
                                     checked:    _fenceType.rawValue & _circleFenceBitMask
 
                                     onClicked: {
@@ -475,7 +475,7 @@ SetupPage {
                                 }
 
                                 QGCCheckBox {
-                                    text:       qsTr("Inclusion/Exclusion Circles+Polygons")
+                                    text:       qsTr("Círculos de inclusão/exclusão + polígonos")
                                     checked:    _fenceType.rawValue & _polygonFenceBitMask
 
                                     onClicked: {
@@ -503,7 +503,7 @@ SetupPage {
                                 enabled: enabledCheckBox.checked
 
                                 QGCLabel {
-                                    text: qsTr("Breach action")
+                                    text: qsTr("Ação de violação")
                                 }
 
                                 FactComboBox {
@@ -512,7 +512,7 @@ SetupPage {
                                 }
 
                                 QGCLabel {
-                                    text: qsTr("Fence margin")
+                                    text: qsTr("Margem da cerca")
                                 }
 
                                 FactTextField {
@@ -541,7 +541,7 @@ SetupPage {
 
                     QGCLabel {
                         id:             rtlLabel
-                        text:           qsTr("Return to Launch")
+                        text:           qsTr("Voltar ao lançamento")
                         font.family:    ScreenTools.demiboldFontFamily
                     }
 
@@ -577,7 +577,7 @@ SetupPage {
                             anchors.margins:    _innerMargin
                             anchors.left:       _showIcon ? icon.right : parent.left
                             anchors.top:        parent.top
-                            text:               qsTr("Return at current altitude")
+                            text:               qsTr("Retorno na altitude atual")
                             checked:            _rtlAltFact.value == 0
 
                             onClicked: _rtlAltFact.value = 0
@@ -588,7 +588,7 @@ SetupPage {
                             anchors.topMargin:  _innerMargin
                             anchors.top:        returnAtCurrentRadio.bottom
                             anchors.left:       returnAtCurrentRadio.left
-                            text:               qsTr("Return at specified altitude:")
+                            text:               qsTr("Retorno na altitude especificada:")
                             checked:            _rtlAltFact.value != 0
 
                             onClicked: _rtlAltFact.value = 1500
@@ -609,7 +609,7 @@ SetupPage {
                             anchors.left:       returnAtCurrentRadio.left
                             anchors.baseline:   landDelayField.baseline
                             checked:            _rtlLoitTimeFact.value > 0
-                            text:               qsTr("Loiter above Home for:")
+                            text:               qsTr("Loiter acima da casa para:")
 
                             onClicked: _rtlLoitTimeFact.value = (checked ? 60 : 0)
                         }
@@ -627,7 +627,7 @@ SetupPage {
                         QGCLabel {
                             anchors.left:       returnAtCurrentRadio.left
                             anchors.baseline:   rltAltFinalField.baseline
-                            text:               qsTr("Final land stage altitude:")
+                            text:               qsTr("Altitude final da fase terrestre:")
                         }
 
                         FactTextField {
@@ -642,7 +642,7 @@ SetupPage {
                         QGCLabel {
                             anchors.left:       returnAtCurrentRadio.left
                             anchors.baseline:   landSpeedField.baseline
-                            text:               qsTr("Final land stage descent speed:")
+                            text:               qsTr("Velocidade final de descida da fase terrestre:")
                         }
 
                         FactTextField {
@@ -670,7 +670,7 @@ SetupPage {
                     property Fact _rtlAltFact: controller.getParameterFact(-1, "ALT_HOLD_RTL")
 
                     QGCLabel {
-                        text:           qsTr("Return to Launch")
+                        text:           qsTr("Voltar ao lançamento")
                         font.family:    ScreenTools.demiboldFontFamily
                     }
 
@@ -684,7 +684,7 @@ SetupPage {
                             anchors.margins:    _margins
                             anchors.left:       parent.left
                             anchors.top:        parent.top
-                            text:               qsTr("Return at current altitude")
+                            text:               qsTr("Retorno na altitude atual")
                             checked:            _rtlAltFact.value < 0
 
                             onClicked: _rtlAltFact.value = -1
@@ -695,7 +695,7 @@ SetupPage {
                             anchors.topMargin:  _margins / 2
                             anchors.left:       returnAtCurrentRadio.left
                             anchors.top:        returnAtCurrentRadio.bottom
-                            text:               qsTr("Return at specified altitude:")
+                            text:               qsTr("Retorno na altitude especificada:")
                             checked:            _rtlAltFact.value >= 0
 
                             onClicked: _rtlAltFact.value = 10000
@@ -722,7 +722,7 @@ SetupPage {
                 spacing: _margins / 2
 
                 QGCLabel {
-                    text:           qsTr("Arming Checks")
+                    text:           qsTr("Verificações de Armamento")
                     font.family:    ScreenTools.demiboldFontFamily
                 }
 
@@ -753,7 +753,7 @@ SetupPage {
                             anchors.right:  parent.right
                             wrapMode:       Text.WordWrap
                             color:          qgcPal.warningText
-                            text:            qsTr("Warning: Turning off arming checks can lead to loss of Vehicle control.")
+                            text:            qsTr("Aviso: Desligar as verificações de armar pode levar à perda de controle do veículo.")
                             visible:        _armingCheck.value != 1
                         }
                     }

@@ -41,12 +41,12 @@ SetupPage {
             // a better way to hightlight them, or use less highlights.
 
             // User visible strings
-            readonly property string title:             qsTr("Firmware Setup") // Popup dialog title
+            readonly property string title:             qsTr("Atualizar Firmware") // Popup dialog title
             readonly property string highlightPrefix:   "<font color=\"" + qgcPal.warningText + "\">"
             readonly property string highlightSuffix:   "</font>"
-            readonly property string welcomeText:       qsTr("%1 can upgrade the firmware on Pixhawk devices, SiK Radios and PX4 Flow Smart Cameras.").arg(QGroundControl.appName)
+            readonly property string welcomeText:       qsTr("%1 pode atualizar o firmware em dispositivos Pixhawk, rádios SiK e câmeras inteligentes PX4 Flow.").arg(QGroundControl.appName)
             readonly property string welcomeTextSingle: qsTr("Update the autopilot firmware to the latest version")
-            readonly property string plugInText:        "<big>" + highlightPrefix + qsTr("Plug in your device") + highlightSuffix + qsTr(" via USB to ") + highlightPrefix + qsTr("start") + highlightSuffix + qsTr(" firmware upgrade.") + "</big>"
+            readonly property string plugInText:        "<big>" + highlightPrefix + qsTr("Conecte seu dispositivo") + highlightSuffix + qsTr(" via USB para ") + highlightPrefix + qsTr("Iniciar") + highlightSuffix + qsTr(" atualização do firmware.") + "</big>"
             readonly property string flashFailText:     qsTr("If upgrade failed, make sure to connect ") + highlightPrefix + qsTr("directly") + highlightSuffix + qsTr(" to a powered USB port on your computer, not through a USB hub. ") +
                                                         qsTr("Also make sure you are only powered via USB ") + highlightPrefix + qsTr("not battery") + highlightSuffix + "."
             readonly property string qgcUnplugText1:    qsTr("All %1 connections to vehicles must be ").arg(QGroundControl.appName) + highlightPrefix + qsTr(" disconnected ") + highlightSuffix + qsTr("prior to firmware upgrade.")
@@ -138,7 +138,7 @@ SetupPage {
 
                 QGCPopupDialog {
                     id:         firmwareSelectDialog
-                    title:      qsTr("Firmware Setup")
+                    title:      qsTr("Atualizar Firmware")
                     buttons:    Dialog.Ok | Dialog.Cancel
 
                     property bool showFirmwareTypeSelection:    _advanced.checked
@@ -468,7 +468,7 @@ SetupPage {
 
             QGCButton {
                 id:         flashBootloaderButton
-                text:       qsTr("Flash ChibiOS Bootloader")
+                text:       qsTr("Carregador de inicialização Flash ChibiOS")
                 visible:    firmwarePage.advanced
                 onClicked:  globals.activeVehicle.flashBootloader()
             }

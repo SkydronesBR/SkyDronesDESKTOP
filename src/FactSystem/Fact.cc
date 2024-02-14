@@ -776,9 +776,9 @@ void Fact::_checkForRebootMessaging(void)
     if(qgcApp()) {
         if (!qgcApp()->runningUnitTests()) {
             if (vehicleRebootRequired()) {
-                qgcApp()->showRebootAppMessage(tr("Reboot vehicle for changes to take effect."));
+                qgcApp()->showRebootAppMessage(tr("Reinicie o veículo para que as alterações tenham efeito."));
             } else if (qgcRebootRequired()) {
-                qgcApp()->showRebootAppMessage(tr("Restart application for changes to take effect."));
+                qgcApp()->showRebootAppMessage(tr("Reinicie o aplicativo para que as alterações tenham efeito."));
             }
         }
     }

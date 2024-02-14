@@ -41,7 +41,7 @@ Item {
     property bool   _disableDueToFlying:    vehicleComponent ? (!_vehicleIsRover && !vehicleComponent.allowSetupWhileFlying && _vehicleFlying) : false
     property string _disableReason:         _disableDueToArmed ? qsTr("armed") : qsTr("flying")
     property real   _margins:               ScreenTools.defaultFontPixelHeight * 0.5
-    property string _pageTitle:             qsTr("%1 Setup").arg(pageName)
+    property string _pageTitle:             qsTr("Atualizar %1").arg(pageName)
 
     Component.onCompleted: {
         if(pageLoader.item && pageLoader.item.setupPageCompleted) {
@@ -64,7 +64,7 @@ Item {
 
             QGCCheckBox {
                 id:         advancedCheckBox
-                text:       qsTr("Advanced")
+                text:       qsTr("Avançado")
                 visible:    showAdvanced
             }
 
@@ -75,7 +75,7 @@ Item {
                 QGCLabel {
                     Layout.fillWidth:   true
                     font.pointSize:     ScreenTools.largeFontPointSize
-                    text:               !setupView.enabled ? _pageTitle + "<font color=\"red\">" + qsTr(" (Disabled while the vehicle is %1)").arg(_disableReason) + "</font>" : _pageTitle
+                    text:               !setupView.enabled ? _pageTitle + "<font color=\"red\">" + qsTr(" (Desativado enquanto o veículo estiver %1)").arg(_disableReason) + "</font>" : _pageTitle
                     visible:            !ScreenTools.isShortScreen
                 }
 

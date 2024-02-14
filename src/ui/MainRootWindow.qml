@@ -152,7 +152,7 @@ ApplicationWindow {
     }
 
     function showSettingsTool(settingsPage = "") { //GERAL
-        showTool(qsTr("Summary"), "MavlinkSettings.qml", "/res/QGCLogoBlack")
+        showTool(qsTr("Geral"), "MavlinkSettings.qml", "/res/QGCLogoBlack")
         //showTool(qsTr("Application Settings"), "AppSettings.qml", "/res/QGCLogoWhite")
         if (settingsPage !== "") {
             toolDrawerLoader.item.showSettingsPage(settingsPage)
@@ -160,7 +160,7 @@ ApplicationWindow {
     }
 
     function showHelpTool() { //SUPORTE
-        showTool(qsTr("Suporte"), "HelpSettings.qml", "/qmlimages/Gears.svg")
+        showTool(qsTr("Suporte"), "HelpSettings.qml", "/res/suporte.png")
     }
 
     //-------------------------------------------------------------------------
@@ -204,12 +204,12 @@ ApplicationWindow {
     //  Pending parameter writes - then
     //  Active connections
 
-    property string closeDialogTitle: qsTr("Close %1").arg(QGroundControl.appName)
+    property string closeDialogTitle: qsTr("Fechar %1").arg(QGroundControl.appName)
 
     function checkForUnsavedMission() {
         if (globals.planMasterControllerPlanView && globals.planMasterControllerPlanView.dirty) {
             showMessageDialog(closeDialogTitle,
-                              qsTr("You have a mission edit in progress which has not been saved/sent. If you close you will lose changes. Are you sure you want to close?"),
+                              qsTr("Você tem uma edição de missão em andamento que não foi salva/enviada. Se você fechar, perderá as alterações. Tem certeza de que deseja fechar?"),
                               Dialog.Yes | Dialog.No,
                               function() { checkForPendingParameterWrites() })
         } else {
@@ -221,7 +221,7 @@ ApplicationWindow {
         for (var index=0; index<QGroundControl.multiVehicleManager.vehicles.count; index++) {
             if (QGroundControl.multiVehicleManager.vehicles.get(index).parameterManager.pendingWrites) {
                 mainWindow.showMessageDialog(closeDialogTitle,
-                    qsTr("You have pending parameter updates to a vehicle. If you close you will lose changes. Are you sure you want to close?"),
+                    qsTr("Você tem atualizações de parâmetros pendentes para um veículo. Se você fechar, perderá as alterações. Tem certeza de que deseja fechar?"),
                     Dialog.Yes | Dialog.No,
                     function() { checkForActiveConnections() })
                 return
@@ -233,7 +233,7 @@ ApplicationWindow {
     function checkForActiveConnections() {
         if (QGroundControl.multiVehicleManager.activeVehicle) {
             mainWindow.showMessageDialog(closeDialogTitle,
-                qsTr("There are still active connections to vehicles. Are you sure you want to exit?"),
+                qsTr("Ainda existem ligações ativas a veículos. Você tem certeza que quer sair?"),
                 Dialog.Yes | Dialog.No,
                 function() { finishCloseProcess() })
         } else {
@@ -460,7 +460,7 @@ ApplicationWindow {
             anchors.right:  parent.right
             anchors.top:    parent.top
             height:         ScreenTools.toolbarHeight
-            color:          qgcPal.toolbarBackground
+            color:          "#0A0A0A" //qgcPal.toolbarBackground
 
             RowLayout {
                 anchors.leftMargin: ScreenTools.defaultFontPixelWidth
@@ -468,6 +468,7 @@ ApplicationWindow {
                 anchors.top:        parent.top
                 anchors.bottom:     parent.bottom
                 spacing:            ScreenTools.defaultFontPixelWidth
+                
 
                 QGCColoredImage {
                     id:                     backIcon
@@ -481,7 +482,7 @@ ApplicationWindow {
 
                 QGCLabel {
                     id:     backTextLabel
-                    text:   qsTr("Back")
+                    text:   qsTr("Voltar")
                 }
 
                 QGCLabel {

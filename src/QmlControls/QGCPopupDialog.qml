@@ -128,52 +128,52 @@ Popup {
             acceptButton.text = qsTr("Ok")
             acceptButton.visible = true
         } else if (buttons & Dialog.Open) {
-            acceptButton.text = qsTr("Open")
+            acceptButton.text = qsTr("Abrir")
             acceptButton.visible = true
         } else if (buttons & Dialog.Save) {
-            acceptButton.text = qsTr("Save")
+            acceptButton.text = qsTr("Salvar")
             acceptButton.visible = true
         } else if (buttons & Dialog.Apply) {
-            acceptButton.text = qsTr("Apply")
+            acceptButton.text = qsTr("Aplicar")
             acceptButton.visible = true
         } else if (buttons & Dialog.Open) {
-            acceptButton.text = qsTr("Open")
+            acceptButton.text = qsTr("Abrir")
             acceptButton.visible = true
         } else if (buttons & Dialog.SaveAll) {
-            acceptButton.text = qsTr("Save All")
+            acceptButton.text = qsTr("Salvar Todos")
             acceptButton.visible = true
         } else if (buttons & Dialog.Yes) {
-            acceptButton.text = qsTr("Yes")
+            acceptButton.text = qsTr("Sim")
             acceptButton.visible = true
         } else if (buttons & Dialog.YesToAll) {
-            acceptButton.text = qsTr("Yes to All")
+            acceptButton.text = qsTr("Sim para Todos")
             acceptButton.visible = true
         } else if (buttons & Dialog.Retry) {
-            acceptButton.text = qsTr("Retry")
+            acceptButton.text = qsTr("Tentar novamente")
             acceptButton.visible = true
         } else if (buttons & Dialog.Reset) {
-            acceptButton.text = qsTr("Reset")
+            acceptButton.text = qsTr("Reiniciar")
             acceptButton.visible = true
         } else if (buttons & Dialog.RestoreToDefaults) {
-            acceptButton.text = qsTr("Restore to Defaults")
+            acceptButton.text = qsTr("Restaurar Padrão")
             acceptButton.visible = true
         } else if (buttons & Dialog.Ignore) {
-            acceptButton.text = qsTr("Ignore")
+            acceptButton.text = qsTr("Ignorar")
             acceptButton.visible = true
         }
 
         // Reject role buttons
         if (buttons & Dialog.Cancel) {
-            rejectButton.text = qsTr("Cancel")
+            rejectButton.text = qsTr("Cancelar")
             rejectButton.visible = true
         } else if (buttons & Dialog.Close) {
-            rejectButton.text = qsTr("Close")
+            rejectButton.text = qsTr("Fechar")
             rejectButton.visible = true
         } else if (buttons & Dialog.No) {
-            rejectButton.text = qsTr("No")
+            rejectButton.text = qsTr("Não")
             rejectButton.visible = true
         } else if (buttons & Dialog.NoToAll) {
-            rejectButton.text = qsTr("No to All")
+            rejectButton.text = qsTr("Não para Todos")
             rejectButton.visible = true
         } else if (buttons & Dialog.Abort) {
             rejectButton.text = qsTr("Abort")

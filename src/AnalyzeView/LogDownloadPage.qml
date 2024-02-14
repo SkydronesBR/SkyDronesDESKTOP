@@ -22,7 +22,7 @@ import QGroundControl.ScreenTools
 AnalyzePage {
     id:                 logDownloadPage
     pageComponent:      pageComponent
-    pageDescription:    qsTr("Log Download allows you to download binary log files from your vehicle. Click Refresh to get list of available logs.")
+    pageDescription:    qsTr("Log Download permite que você baixe arquivos de log binários do seu veículo. Clique em Atualizar para obter uma lista de logs disponíveis.")
 
     property real _margin:          ScreenTools.defaultFontPixelWidth
     property real _butttonWidth:    ScreenTools.defaultFontPixelWidth * 10
@@ -99,7 +99,7 @@ AnalyzePage {
 
                     QGCLabel {
                         Layout.preferredWidth:  columnWidthProvider(2)
-                        text:                   qsTr("Date")
+                        text:                   qsTr("Data")
                     }
 
                     Repeater {
@@ -110,7 +110,7 @@ AnalyzePage {
                                 if (object.received) {
                                     var d = object.time
                                     if (d.getUTCFullYear() < 2010)
-                                        return qsTr("Date Unknown")
+                                        return qsTr("Date inválida")
                                     else
                                         return d.toLocaleString(undefined)
                                 }
@@ -121,7 +121,7 @@ AnalyzePage {
 
                     QGCLabel { 
                         Layout.preferredWidth:  columnWidthProvider(3)
-                        text:                   qsTr("Size")
+                        text:                   qsTr("Tamanho")
                     }
 
                     Repeater {
@@ -148,11 +148,11 @@ AnalyzePage {
                 Layout.alignment:   Qt.AlignTop | Qt.AlignLeft
                 QGCButton {
                     enabled:    !logController.requestingList && !logController.downloadingLogs
-                    text:       qsTr("Refresh")
+                    text:       qsTr("Atualizar")
                     width:      _butttonWidth
                     onClicked: {
                         if (!QGroundControl.multiVehicleManager.activeVehicle || QGroundControl.multiVehicleManager.activeVehicle.isOfflineEditingVehicle) {
-                            mainWindow.showMessageDialog(qsTr("Log Refresh"), qsTr("You must be connected to a vehicle in order to download logs."))
+                            mainWindow.showMessageDialog(qsTr("Atualizar Log"), qsTr("Você deve estar conectado a um veículo para baixar registros."))
                         } else {
                             logController.refresh()
                         }
@@ -160,7 +160,7 @@ AnalyzePage {
                 }
                 QGCButton {
                     enabled:    !logController.requestingList && !logController.downloadingLogs
-                    text:       qsTr("Download")
+                    text:       qsTr("Baixar")
                     width:      _butttonWidth
 
                     onClicked: {
@@ -173,7 +173,7 @@ AnalyzePage {
                             }
                         }
                         if (!logsSelected) {
-                            mainWindow.showMessageDialog(qsTr("Log Download"), qsTr("You must select at least one log file to download."))
+                            mainWindow.showMessageDialog(qsTr("Baixar Log"), qsTr("Você deve selecionar pelo menos um arquivo de log para download."))
                             return
                         }
 
@@ -181,7 +181,7 @@ AnalyzePage {
                             // You can't pick folders in mobile, only default location is used
                             logController.download()
                         } else {
-                            fileDialog.title =          qsTr("Select save directory")
+                            fileDialog.title =          qsTr("Selecione salvar diretório")
                             fileDialog.folder =         QGroundControl.settingsManager.appSettings.logSavePath
                             fileDialog.selectFolder =   true
                             fileDialog.openForLoad()
@@ -199,16 +199,16 @@ AnalyzePage {
 
                 QGCButton {
                     enabled:    !logController.requestingList && !logController.downloadingLogs && logController.model.count > 0
-                    text:       qsTr("Erase All")
+                    text:       qsTr("Apagar")
                     width:      _butttonWidth
-                    onClicked:  mainWindow.showMessageDialog(qsTr("Delete All Log Files"),
-                                                             qsTr("All log files will be erased permanently. Is this really what you want?"),
+                    onClicked:  mainWindow.showMessageDialog(qsTr("Excluir todos os arquivos de log"),
+                                                             qsTr("Todos os arquivos de log serão apagados permanentemente. É mesmo isto que queres?"),
                                                              Dialog.Yes | Dialog.No,
                                                              function() { logController.eraseAll() })
                 }
 
                 QGCButton {
-                    text:       qsTr("Cancel")
+                    text:       qsTr("Cancelar")
                     width:      _butttonWidth
                     enabled:    logController.requestingList || logController.downloadingLogs
                     onClicked:  logController.cancel()

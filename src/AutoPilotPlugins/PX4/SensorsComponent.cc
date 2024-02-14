@@ -24,7 +24,7 @@ const char* SensorsComponent::_magCalParam =  "CAL_MAG0_ID";
 
 SensorsComponent::SensorsComponent(Vehicle* vehicle, AutoPilotPlugin* autopilot, QObject* parent) :
     VehicleComponent(vehicle, autopilot, parent),
-    _name(tr("Sensors"))
+    _name(tr("Sensor"))
 {
     _deviceIds = QStringList({QStringLiteral("CAL_GYRO0_ID"), QStringLiteral("CAL_ACC0_ID") });
 }
@@ -36,7 +36,7 @@ QString SensorsComponent::name(void) const
 
 QString SensorsComponent::description(void) const
 {
-    return tr("Sensors Setup is used to calibrate the sensors within your vehicle.");
+    return tr("A configuração de sensores é usada para calibrar os sensores do seu veículo.");
 }
 
 QString SensorsComponent::iconResource(void) const

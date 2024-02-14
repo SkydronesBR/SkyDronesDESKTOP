@@ -22,7 +22,7 @@ import QGroundControl.ScreenTools
 
 QGCPopupDialog {
     id:         root
-    title:      qsTr("Parameter Editor")
+    title:      qsTr("Editor de Parâmetros")
     buttons:    Dialog.Save | (validate ? 0 : Dialog.Cancel)
 
     property Fact   fact
@@ -139,7 +139,7 @@ QGCPopupDialog {
 
             QGCButton {
                 visible:    _allowDefaultReset
-                text:       qsTr("Reset To Default")
+                text:       qsTr("Restaurar ao padrão")
 
                 onClicked: {
                     fact.value = fact.defaultValue
@@ -199,43 +199,43 @@ QGCPopupDialog {
             }
 
             QGCLabel {
-                text:       qsTr("Default: ") + fact.defaultValueString
+                text:       qsTr("Padrão: ") + fact.defaultValueString
                 visible:    _allowDefaultReset
             }
         }
 
         QGCLabel {
-            text:       qsTr("Parameter name: ") + fact.name
+            text:       qsTr("Nome do parâmetro: ") + fact.name
             visible:    fact.componentId > 0 // > 0 means it's a parameter fact
         }
 
         QGCLabel {
             visible:    fact.vehicleRebootRequired
-            text:       qsTr("Vehicle reboot required after change")
+            text:       qsTr("Reinicialização do veículo necessária após alteração")
         }
 
         QGCLabel {
             visible:    fact.qgcRebootRequired
-            text:       qsTr("Application restart required after change")
+            text:       qsTr("É necessário reiniciar o aplicativo após a alteração")
         }
 
         QGCLabel {
             Layout.fillWidth:   true
             wrapMode:   Text.WordWrap
-            text:       qsTr("Warning: Modifying values while vehicle is in flight can lead to vehicle instability and possible vehicle loss. ") +
-                        qsTr("Make sure you know what you are doing and double-check your values before Save!")
+            text:       qsTr("Aviso: Modificar os valores enquanto o veículo está em voo pode causar instabilidade do veículo e possível perda do veículo.") +
+                        qsTr("Certifique-se de saber o que está fazendo e verifique seus valores antes de Salvar!")
             visible:    fact.componentId != -1
         }
 
         QGCCheckBox {
             id:         forceSave
             visible:    false
-            text:       qsTr("Force save (dangerous!)")
+            text:       qsTr("Forçar salvamento (perigoso!)")
         }
 
         QGCCheckBox {
             id:         _advanced
-            text:       qsTr("Advanced settings")
+            text:       qsTr("Configurações avançadas")
             visible:    showRCToParam || factCombo.visible || bitmaskColumn.visible
         }
 
@@ -243,7 +243,7 @@ QGCPopupDialog {
         QGCCheckBox {
             id:         manualEntry
             visible:    _advanced.checked && (factCombo.visible || bitmaskColumn.visible)
-            text:       qsTr("Manual Entry")
+            text:       qsTr("Entrada manual")
 
             onClicked: {
                 valueField.text = fact.valueString
@@ -251,7 +251,7 @@ QGCPopupDialog {
         }
 
         QGCButton {
-            text:       qsTr("Set RC to Param")
+            text:       qsTr("Defina RC como parâmetro")
             visible:    _advanced.checked && !validate && showRCToParam
             onClicked:  rcToParamDialog.createObject(mainWindow).open()
         }

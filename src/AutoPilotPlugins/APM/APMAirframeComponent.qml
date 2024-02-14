@@ -68,11 +68,11 @@ SetupPage {
                 id:                 helpText
                 Layout.fillWidth:   true
                 text:               (_frameClass.rawValue === 0 ?
-                                         qsTr("Airframe is currently not set.") :
-                                         qsTr("Currently set to frame class '%1'").arg(_frameClass.enumStringValue) +
-                                         (_frameTypeAvailable ?  qsTr(" and frame type '%2'").arg(_frameType.enumStringValue) : "") +
-                                         qsTr(".", "period for end of sentence")) +
-                                    qsTr(" To change this configuration, select the desired frame class below and then reboot the vehicle.")
+                                         qsTr("A fuselagem não está definida no momento.") :
+                                         qsTr("Atualmente definido para classe de quadro '%1'").arg(_frameClass.enumStringValue) +
+                                         (_frameTypeAvailable ?  qsTr(" e tipo de quadro '%2'").arg(_frameType.enumStringValue) : "") +
+                                         qsTr(".", "prazo para final de sentença")) +
+                                    qsTr(" Para alterar esta configuração, selecione a classe de quadro desejada abaixo e reinicie o veículo.")
                 font.family:        ScreenTools.demiboldFontFamily
                 wrapMode:           Text.WordWrap
             }
@@ -163,7 +163,7 @@ SetupPage {
                                 }
 
                                 QGCLabel {
-                                    text:           qsTr("Frame Type")
+                                    text:           qsTr("Tipo do Frame")
                                     font.pointSize: ScreenTools.smallFontPointSize
                                     color:          qgcPal.buttonHighlightText
                                     visible:        airframeCheckBox.checked && object.frameTypeSupported
@@ -206,7 +206,7 @@ SetupPage {
 
                         QGCLabel {
                             anchors.fill:   imageComboRect
-                            text:           qsTr("Invalid setting for FRAME_TYPE. Click to Reset.")
+                            text:           qsTr("Configuração inválida para FRAME_TYPE. Clique para redefinir.")
                             wrapMode:       Text.WordWrap
                             visible:        !combo.valid
                         }

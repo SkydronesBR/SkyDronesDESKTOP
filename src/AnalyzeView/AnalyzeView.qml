@@ -19,7 +19,7 @@ import QGroundControl.ScreenTools
 
 Rectangle {
     id:     _root
-    color:  "#0A0A0A"//qgcPal.window
+    color:  qgcPal.window
     z:      QGroundControl.zOrderTopMost
 
     signal popout()
@@ -87,6 +87,7 @@ Rectangle {
                     setupIndicator:     false
                     autoExclusive:      true
                     text:               modelData.title
+                    width:              250
 
                     onClicked: {
                         panelLoader.source  = modelData.url
@@ -95,7 +96,28 @@ Rectangle {
                     }
                 }
             }
+            Item {
+                width: parent.width 
+                
+                /* Text {
+                    text: "O botão de firmware é usado para atualizar e instalar novas versões do firmware do dispositivo. Clique nele para verificar e instalar atualizações, garantindo que seu dispositivo funcione com a versão mais recente e otimizada do software."
+                    color: "white"
+                    wrapMode: Text.WordWrap
+                    width: parent.width 
+                    font.bold:              true
+                } */
+
+                Image {
+                    source: "/qmlimages/Analyze.svg"
+                    width: 300
+                    height: 600
+                    fillMode: Image.PreserveAspectFit
+                    opacity: 0.1
+                    rotation: -30
+                }
+            }
         }
+        
     }
 
     Rectangle {
