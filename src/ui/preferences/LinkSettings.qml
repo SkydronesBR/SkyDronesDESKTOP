@@ -38,6 +38,7 @@ Rectangle {
     property string _messagePanelText:              qsTr("missing message panel text")
     property bool   _fullParameterVehicleAvailable: QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable && !QGroundControl.multiVehicleManager.activeVehicle.parameterManager.missingParameters
     property var    _corePlugin:                    QGroundControl.corePlugin
+    property var    _activeVehicle:         QGroundControl.multiVehicleManager.activeVehicle
 
     function showSummaryPanel() {
         if (mainWindow.preventViewSwitch()) {
@@ -163,8 +164,8 @@ Rectangle {
                 horizontalAlignment:    Text.AlignHCenter
                 wrapMode:               Text.WordWrap
                 font.pointSize:         ScreenTools.largeFontPointSize
-                text:                   qsTr("Vehicle settings and info will display after connecting your vehicle.") +
-                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : " Click Firmware on the left to upgrade your vehicle.")
+                text:                   qsTr("As configurações e informações do veículo serão exibidas após conectar seu veículo.") +
+                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : " Clique em Firmware para atualizar seu veículo.")
 
                 onLinkActivated: Qt.openUrlExternally(link)
             }
@@ -239,21 +240,42 @@ Rectangle {
                 setupIndicator:     false
                 buttonGroup:        setupButtonGroup
                 visible:            !ScreenTools.isMobile && _corePlugin.options.showFirmwareUpgrade
-                text:               qsTr("Sensor")
+                text:               qsTr("Calibrar")
                 Layout.fillWidth:   true
 
-                onClicked: showPanel(this, "APMSensorsComponent.qml")
+                /* onClicked: {
+                    if (_activeVehicle) {
+                        showPanel(this, "APMSensorsComponent.qml")
+                    } else {
+                        console.log("O veículo não está ativo. Não é possível abrir o painel.")
+                    }
+                } */
+                onClicked: {
+
+                        if (!QGroundControl.multiVehicleManager.activeVehicle || QGroundControl.multiVehicleManager.activeVehicle.isOfflineEditingVehicle) {
+                            mainWindow.showMessageDialog(qsTr("CALIBRAR"), qsTr("Você deve estar conectado a um veículo para acessar as funções."))
+                        } else {
+                            showPanel(this, "APMSensorsComponent.qml")
+                        }
+                    }
+
+                
             }
 
             Item {
                 width: parent.width 
 
-                Text {      
-                    text:                   "O botão de Sensor é usado para calibrar funções como, Acelerômetro, Bússola, Nível de Horizonte e mais. Clique nele para abrir as opções e realizar as calibrações."
-                    color:                  "white"
-                    wrapMode:               Text.WordWrap 
-                    width:                  parent.width 
-                    font.bold:              true
+                Rectangle {
+                    width: parent.width
+                    color: "transparent"
+                    x: 5 
+                    Text {      
+                        text:                   "O botão de Sensor é usado para calibrar funções como, Acelerômetro, Bússola, Nível de Horizonte e mais. Clique nele para abrir as opções e realizar as calibrações."
+                        color:                  "white"
+                        wrapMode:               Text.WordWrap 
+                        width:                  parent.width 
+                        font.bold:              true
+                    }
                 }
 
                 Image {

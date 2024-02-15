@@ -163,8 +163,8 @@ Rectangle {
                 horizontalAlignment:    Text.AlignHCenter
                 wrapMode:               Text.WordWrap
                 font.pointSize:         ScreenTools.largeFontPointSize
-                text:                   qsTr("Vehicle settings and info will display after connecting your vehicle.") +
-                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : " Click Firmware on the left to upgrade your vehicle.")
+                text:                   qsTr("As configurações e informações do veículo serão exibidas após conectar seu veículo.") +
+                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : "")
 
                 onLinkActivated: Qt.openUrlExternally(link)
             }
@@ -237,12 +237,17 @@ Rectangle {
             Item {
                 width: parent.width 
 
-                Text {      
-                    text:                   "O botão geral de configurações é uma ferramenta versátil que permite aos usuários ajustar uma variedade de funções em quadros (frames), rádios, modos de voo e mais. Com este botão, os usuários podem personalizar e configurar diversos aspectos de seu equipamento, incluindo preferências de voo, ajustes de controle e modos de operação. Ele oferece uma maneira conveniente de adaptar o dispositivo às necessidades individuais do usuário, garantindo uma experiência de voo personalizada e otimizada."
-                    color:                  "white"
-                    wrapMode:               Text.WordWrap 
-                    width:                  parent.width 
-                    font.bold:              true
+                Rectangle {
+                    width: parent.width
+                    color: "transparent"
+                    x: 5 
+                    Text {      
+                        text:                   "O botão geral de configurações é uma ferramenta versátil que permite aos usuários ajustar uma variedade de funções em quadros (frames), rádios, modos de voo e mais. Com este botão, os usuários podem personalizar e configurar diversos aspectos de seu equipamento, incluindo preferências de voo, ajustes de controle e modos de operação. Ele oferece uma maneira conveniente de adaptar o dispositivo às necessidades individuais do usuário, garantindo uma experiência de voo personalizada e otimizada."
+                        color:                  "white"
+                        wrapMode:               Text.WordWrap 
+                        width:                  parent.width 
+                        font.bold:              true
+                    }
                 }
 
                 Image {

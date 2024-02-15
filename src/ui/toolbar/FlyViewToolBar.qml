@@ -55,25 +55,50 @@ Rectangle {
             GradientStop { position: 1;                                     color: _root.color }
         }
     } */
+    Item {
+        id: connectionDrone
+        anchors.top: parent.top
+        anchors.topMargin: 10 
+        anchors.left: parent.left
+        anchors.leftMargin: 10
+
+        Image {
+            source: _activeVehicle ? "/qmlimages/Armed" : "/qmlimages/Disarmed"
+            width:                  70
+            height:                 70
+        }
+    }
+    Item{
+        anchors.top:                parent.top
+        anchors.topMargin:          10 
+        anchors.left:               parent.left
+        anchors.leftMargin:         100
+        anchors.verticalCenter:     parent.verticalCenter
+
+        Text{
+            text:                   _activeVehicle ? "CONECTADO" : "DESCONECTADO"
+            font.pointSize:         20
+            font.bold:              true
+            color:                  _activeVehicle ? "#1DCC00"    :   "#F0493C"
+        }
+    }
 
     RowLayout {
         id:                     viewButtonRow
-        anchors.bottomMargin:   1
-        anchors.top:            parent.top
-        anchors.bottom:         parent.bottom
-        spacing:                ScreenTools.defaultFontPixelWidth / 2
-        anchors.centerIn:       parent
-        width:                  300
+        //anchors.bottomMargin:   1
+        //anchors.top:            parent.top
+        //anchors.bottom:         parent.bottom
+        //spacing:                ScreenTools.defaultFontPixelWidth / 2
+        width:                  parent.width
         height:                 parent.height
-        
+        anchors.right:          parent.right
 
         Image {
             id:                     currentButton
-            Layout.preferredHeight: viewButtonRow.height 
             source:            "/res/QGCLogoFull"
-            //logo:                   true
-            anchors.fill:       parent
-            //onClicked:              mainWindow.showToolSelectDialog()
+            //anchors.fill:       parent
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
         }
     }
 

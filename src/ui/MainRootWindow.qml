@@ -140,7 +140,7 @@ ApplicationWindow {
     }
 
     function showSensorTool() { //SENSOR
-        showTool(qsTr("Sensor"), "LinkSettings.qml", "/qmlimages/SensorsComponentIcon.png")
+        showTool(qsTr("Calibrar"), "LinkSettings.qml", "/qmlimages/SensorsComponentIcon.png")
     }
 
     function showParamTool() { //PARAMETROS
@@ -513,6 +513,24 @@ ApplicationWindow {
                 onClicked: {
                     toolDrawer.visible      = false
                     toolDrawer.toolSource   = ""
+                }
+            }
+            RowLayout {
+                id:                     viewButtonRow
+                //anchors.bottomMargin:   1
+                //anchors.top:            parent.top
+                //anchors.bottom:         parent.bottom
+                //spacing:                ScreenTools.defaultFontPixelWidth / 2
+                width:                  parent.width
+                height:                 parent.height
+                anchors.right:          parent.right
+
+                Image {
+                    id:                     currentButton
+                    source:            "/res/QGCLogoFull"
+                    //anchors.fill:       parent
+                    anchors.right: parent.right
+                    anchors.bottom: parent.bottom
                 }
             }
         }

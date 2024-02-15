@@ -238,14 +238,20 @@ Rectangle {
             }
 
             Item {
-                width: parent.width // Garante que a largura da Item seja igual à largura da ColumnLayout
+                width: parent.width 
 
-                Text {
-                    text: "O botão de firmware é usado para atualizar e instalar novas versões do firmware do dispositivo. Clique nele para verificar e instalar atualizações, garantindo que seu dispositivo funcione com a versão mais recente e otimizada do software."
-                    color: "white"
-                    wrapMode: Text.WordWrap // Permite que o texto quebre automaticamente em várias linhas
-                    width: parent.width 
-                    font.bold:              true
+                Rectangle {
+                    width: parent.width
+                    color: "transparent"
+                    x: 5 
+
+                    Text {
+                        text: "O botão de firmware é usado para atualizar e instalar novas versões do firmware do dispositivo. Clique nele para verificar e instalar atualizações, garantindo que seu dispositivo funcione com a versão mais recente e otimizada do software."
+                        color: "white"
+                        wrapMode: Text.WordWrap 
+                        width: parent.width 
+                        font.bold: true
+                    }
                 }
 
                 Image {
@@ -257,6 +263,7 @@ Rectangle {
                     rotation: -30
                 }
             }
+
         }
 
     }

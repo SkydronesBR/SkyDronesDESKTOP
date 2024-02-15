@@ -163,8 +163,8 @@ Rectangle {
                 horizontalAlignment:    Text.AlignHCenter
                 wrapMode:               Text.WordWrap
                 font.pointSize:         ScreenTools.largeFontPointSize
-                text:                   qsTr("Vehicle settings and info will display after connecting your vehicle.") +
-                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : " Click Firmware on the left to upgrade your vehicle.")
+                text:                   qsTr("As configurações e informações do veículo serão exibidas após conectar seu veículo.") +
+                                        (ScreenTools.isMobile || !_corePlugin.options.showFirmwareUpgrade ? "" : "")
 
                 onLinkActivated: Qt.openUrlExternally(link)
             }
@@ -261,9 +261,10 @@ Rectangle {
                 id:                 parametersButton
                 setupIndicator:     false
                 buttonGroup:     setupButtonGroup
-                visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
+                /* visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
                                     !QGroundControl.multiVehicleManager.activeVehicle.usingHighLatencyLink &&
-                                    _corePlugin.showAdvancedUI
+                                    _corePlugin.showAdvancedUI */
+                visible:            !ScreenTools.isMobile && _corePlugin.options.showFirmwareUpgrade
                 text:               qsTr("Parameters")
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "SetupParameterEditor.qml")
@@ -272,12 +273,17 @@ Rectangle {
             Item {
                 width: parent.width 
 
-                Text {      
-                    text:                   "O botão de parâmetros permite ajustar configurações como RTL ou Bateria. As funções associadas a ele processam suas escolhas, fazendo com que as mudanças desejadas aconteçam."
-                    color:                  "white"
-                    wrapMode:               Text.WordWrap 
-                    width:                  parent.width 
-                    font.bold:              true
+                Rectangle {
+                    width: parent.width
+                    color: "transparent"
+                    x: 5 
+                    Text {      
+                        text:                   "O botão de parâmetros permite ajustar configurações como RTL ou Bateria. As funções associadas a ele processam suas escolhas, fazendo com que as mudanças desejadas aconteçam."
+                        color:                  "white"
+                        wrapMode:               Text.WordWrap 
+                        width:                  parent.width 
+                        font.bold:              true
+                    }
                 }
 
                 Image {

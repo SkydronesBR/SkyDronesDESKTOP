@@ -80,33 +80,17 @@ Item {
         id:         toolbar
         visible:    !QGroundControl.videoManager.fullScreen
     }
-
-   /*  Item {
-        id:                 mapHolder
-        anchors.top:        toolbar.bottom
-        anchors.bottom:     parent.bottom
-        anchors.left:       parent.left
-        anchors.right:      parent.right
-
-        
-        
-    } */
-
-
     
     Item {
         id: viewFly
-        width:  parent.width    * 0.75
-        height: parent.height   * 0.75
-        anchors.centerIn: parent
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.verticalCenter: parent.verticalCenter
+        width:                      parent.width   
+        height:                     parent.height  
+        anchors.centerIn:           parent
         
         Image {
             id:                     viewImage
             source:                 "/res/QGCLogoWhite"
-            anchors.fill:           parent
-            //fillMode: Image.PreserveAspectCrop
+            anchors.centerIn:       parent
         }
     }
 
@@ -119,17 +103,19 @@ Item {
         anchors.bottom: parent.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        width: parent.width * 0.5
-        height: parent.height * 0.1
 
-        
-
+        // FIRMWARE
         Rectangle {
             color: "#FF4D00"
-            radius: 25
-            width: parent.width * 0.3
-            height: parent.height * 0.1
+            radius: 15
+            width:  400
+            height: 70
             visible: true
+            Keys.onPressed: {
+                if (event.key === Qt.Key_Escape) {
+                    insertPass.visible = false; 
+                }
+            }
 
             RowLayout {
                 anchors.fill: parent
@@ -141,9 +127,9 @@ Item {
                     Layout.preferredWidth: height
                     Layout.preferredHeight: height
                     Layout.alignment: Qt.AlignVCenter
-                    width: parent.height * 0.8
-                    height: parent.height * 0.8
-                    anchors.leftMargin: 10
+                    width: parent.height * 0.7
+                    height: parent.height * 0.7
+                    anchors.leftMargin: 20
                 }
 
                 Text {
@@ -162,12 +148,13 @@ Item {
                     stackView.push(showVehicleSetupTool())
                 }
             }
-        } // FIRMWARE
+        } 
+        // SENSOR
         Rectangle {
             color: "#FF4D00"
-            radius: 25
-            width: parent.width * 0.3
-            height: parent.height * 0.1
+            radius: 15
+            width:  400
+            height: 70
             visible: true
 
             RowLayout {
@@ -186,7 +173,7 @@ Item {
                 }
 
                 Text {
-                    text: qsTr("SENSOR")
+                    text: qsTr("CALIBRAR")
                     font.pixelSize: Math.round(parent.height * 0.5)
                     font.bold: true
                     color: "white"
@@ -201,51 +188,13 @@ Item {
                     stackView.push(showSensorTool())
                 }
             }
-        } // SENSOR
+        } 
+        // LOG DOWNLOAD
         Rectangle {
             color: "#FF4D00"
-            radius: 25
-            width: parent.width * 0.3
-            height: parent.height * 0.1
-            visible: true
-
-            RowLayout {
-                anchors.fill: parent
-                anchors.leftMargin: 10
-                spacing: 10
-
-                Image {
-                    source: "/qmlimages/RidIconGreen"
-                    Layout.preferredWidth: height
-                    Layout.preferredHeight: height
-                    Layout.alignment: Qt.AlignVCenter
-                    width: parent.height * 0.8
-                    height: parent.height * 0.8
-                    anchors.leftMargin: 10
-                }
-
-                Text {
-                    text: qsTr("PARÂMETROS")
-                    font.pixelSize: Math.round(parent.height * 0.5)
-                    font.bold: true
-                    color: "white"
-                    Layout.alignment: Qt.AlignVCenter
-                }
-            }
-
-            MouseArea {
-                anchors.fill: parent 
-
-                onClicked: {
-                    stackView.push(showParamTool())
-                }
-            }
-        } // PARAMETROS
-        Rectangle {
-            color: "#FF4D00"
-            radius: 25
-            width: parent.width * 0.3
-            height: parent.height * 0.1
+            radius: 15
+            width:  400
+            height: 70
             visible: true
 
             RowLayout {
@@ -279,12 +228,13 @@ Item {
                     stackView.push(showLogTool())
                 }
             }
-        } // LOG DOWNLOAD
+        } 
+        // GERAL
         Rectangle {
             color: "#FF4D00"
-            radius: 25
-            width: parent.width * 0.3
-            height: parent.height * 0.1
+            radius: 15
+            width:  400
+            height: 70
             visible: true
 
             RowLayout {
@@ -318,13 +268,202 @@ Item {
                     stackView.push(showSettingsTool())
                 }
             }
-        } // GERAL
+        } 
+        // PARÂMETROS
+        Rectangle {
+            color: "#FF4D00"
+            radius: 15
+            width:  400
+            height: 70
+            visible: true
+
+            RowLayout {
+                anchors.fill: parent
+                anchors.leftMargin: 10
+                spacing: 10
+
+                Image {
+                    source: "/qmlimages/RidIconGreen"
+                    Layout.preferredWidth: height
+                    Layout.preferredHeight: height
+                    Layout.alignment: Qt.AlignVCenter
+                    width: parent.height * 0.8
+                    height: parent.height * 0.8
+                    anchors.leftMargin: 10
+                }
+
+                Text {
+                    text: qsTr("PARÂMETROS")
+                    font.pixelSize: Math.round(parent.height * 0.5)
+                    font.bold: true
+                    color: "white"
+                    Layout.alignment: Qt.AlignVCenter
+                }
+            }
+
+            MouseArea {
+                anchors.fill: parent 
+
+                onClicked: {
+                    insertPass.visible = true; // Mostra a caixa de inserção de senha
+                }
+            }
+        } 
     }
+    Item{
+        id:         insertPass
+        anchors.fill: parent
+        visible:    false
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.horizontalCenter: parent.horizontalCenter
+        Keys.onPressed: {
+            if (event.key === Qt.Key_Escape) {
+                insertPass.visible = false; 
+            }
+        }
+        onVisibleChanged: {
+                if (!visible) {
+                    passwordField.text = ""; 
+                    senhaIncorretaText.visible = false;
+                    senhaIncorretaTextt.visible = false;
+            }
+        }
+        Rectangle{
+            anchors.fill: parent
+            color: qgcPal.window
+            opacity:    0.9
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.centerIn: parent
+            //border.color: "white"
+            //border.width: 1
+            Rectangle{
+                width:      300
+                height:     300
+                radius:     15
+                anchors.centerIn: parent
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                color:  qgcPal.window
+                border.color: "white"
+
+                Text{
+                    id: closePassaword
+                    text: "X"
+                    //anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.topMargin: 5
+                    anchors.right: parent.right  
+                    anchors.rightMargin: 10 
+                    color: "white"
+                    font.pointSize: 20
+                    font.bold:                      true
+                    anchors.top: parent.top
+                    
+                    MouseArea{
+                        anchors.fill: parent
+                        onClicked: {
+                            insertPass.visible = false; 
+                        }
+                        z: 1
+                    }
+                }
+
+                TextField{
+                    id: passwordField
+                    anchors.centerIn: parent
+                    width:  150
+                    placeholderText: "Digite a senha"
+                    echoMode: TextInput.Password 
+                    onAccepted: {
+                        if (passwordField.text === "vant2024$") { 
+                            stackView.push(showParamTool());
+                            insertPass.visible = false; 
+                        } else {
+                            console.log("Senha incorreta. Tente novamente.");
+                            senhaIncorretaText.visible = true;
+                            senhaIncorretaTextt.visible = true;
+                        }
+                    }
+                }
+                Rectangle{
+                    color: "#FF4D00"
+                    radius: 10
+                    width:  150
+                    height: 30
+                    anchors{
+                        bottom: parent.bottom
+                        horizontalCenter: parent.horizontalCenter
+                        bottomMargin: 30
+                    }
+                    Text{
+                        text:       "Confirmar"
+                        color:      "white"
+                        font.pointSize: 15
+                        font.bold:  true
+                        anchors.centerIn: parent
+                        MouseArea{
+                            anchors.fill: parent
+                            onClicked: {
+                                if (passwordField.text === "vant2024$") { 
+                                    stackView.push(showParamTool());
+                                    insertPass.visible = false; 
+                                } else {
+                                    console.log("Senha incorreta. Tente novamente.");
+                                    senhaIncorretaText.visible = true;
+                                    senhaIncorretaTextt.visible = true;
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+
+                
+                Text{
+                    text:                           "Senha"
+                    anchors.horizontalCenter:       parent.horizontalCenter
+                    anchors.topMargin:              60   
+                    color:                          "white"
+                    font.pointSize:                 15
+                    font.bold:                      true
+                    anchors.top:                    parent.top
+                }
+                Text{
+                    id: senhaIncorretaText
+                    text: "Senha incorreta"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.topMargin: 180   
+                    color: "red"
+                    font.pointSize:                 12
+                    font.bold:                      true
+                    anchors.top: parent.top
+                    visible: false 
+                }
+                Text {
+                    id: senhaIncorretaTextt
+                    textFormat: Text.RichText 
+                    text: "<font color='white'>Entre em contato com a </font> <font color='#FF4D00'>SkyDrones</font>"
+                    anchors.horizontalCenter: parent.horizontalCenter
+                    anchors.topMargin: 200   
+                    font.pointSize: 10
+                    anchors.top: parent.top
+                    visible: false 
+                    MouseArea {
+                        anchors.fill: parent 
+                        onClicked: {
+                            stackView.push(showHelpTool())
+                        }
+                    }
+                }
+
+            }
+        }
+    }// SENHA
 
     Item {
         anchors.bottom: parent.bottom
         anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottomMargin: 30  
+        anchors.bottomMargin: 20  
 
         Text {
             text: "SkyDrones Desktop Versão 1.0.0"
@@ -349,22 +488,7 @@ Item {
             }
         }
         
-    }
-
-    Item {
-        id: connectionDrone
-        anchors.top: parent.top
-        anchors.topMargin: 60 
-        anchors.right: parent.right
-        anchors.rightMargin: 70
-
-        Image {
-            source: _activeVehicle ? "/qmlimages/Armed" : "/qmlimages/Disarmed"
-            width:                  70
-            height:                 70
-        }
-    }
-
+    } //SUPORTE
 
     //---------LOADING SCREEN
     Item {
