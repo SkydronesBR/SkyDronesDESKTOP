@@ -2,7 +2,7 @@
 <component type="desktop-application">
   <id>org.mavlink.qgroundcontrol</id>
 
-  <name>QGroundControl</name>
+  <name>SkyDrones</name>
   <summary>UAS ground control station</summary>
   <developer_name>Dronecode Project, Inc.</developer_name>
 
