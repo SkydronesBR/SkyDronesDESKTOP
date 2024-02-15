@@ -52,6 +52,7 @@ elseif(WIN32)
 		set_target_properties(${PROJECT_NAME} PROPERTIES
 			WIN32_EXECUTABLE YES
 			LINK_FLAGS "/ENTRY:mainCRTStartup"
+			OUTPUT_NAME "SkyDrones"
 		)
 	endif()
 

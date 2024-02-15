@@ -47,10 +47,10 @@ SetupPage {
             readonly property string welcomeText:       qsTr("%1 pode atualizar o firmware em dispositivos Pixhawk, rádios SiK e câmeras inteligentes PX4 Flow.").arg(QGroundControl.appName)
             readonly property string welcomeTextSingle: qsTr("Update the autopilot firmware to the latest version")
             readonly property string plugInText:        "<big>" + highlightPrefix + qsTr("Conecte seu dispositivo") + highlightSuffix + qsTr(" via USB para ") + highlightPrefix + qsTr("Iniciar") + highlightSuffix + qsTr(" atualização do firmware.") + "</big>"
-            readonly property string flashFailText:     qsTr("If upgrade failed, make sure to connect ") + highlightPrefix + qsTr("directly") + highlightSuffix + qsTr(" to a powered USB port on your computer, not through a USB hub. ") +
-                                                        qsTr("Also make sure you are only powered via USB ") + highlightPrefix + qsTr("not battery") + highlightSuffix + "."
-            readonly property string qgcUnplugText1:    qsTr("All %1 connections to vehicles must be ").arg(QGroundControl.appName) + highlightPrefix + qsTr(" disconnected ") + highlightSuffix + qsTr("prior to firmware upgrade.")
-            readonly property string qgcUnplugText2:    highlightPrefix + "<big>" + qsTr("Please unplug your Pixhawk and/or Radio from USB.") + "</big>" + highlightSuffix
+            readonly property string flashFailText:     qsTr("Se a atualização falhar, certifique-se de conectar ") + highlightPrefix + qsTr("diretamente") + highlightSuffix + qsTr(" to a powered USB port on your computer, not through a USB hub. ") +
+                                                        qsTr("Certifique-se também de que você está alimentado apenas via USB ") + highlightPrefix + qsTr("não bateria") + highlightSuffix + "."
+            readonly property string qgcUnplugText1:    qsTr("Todas as %1 conexões com veículos devem ser ").arg(QGroundControl.appName) + highlightPrefix + qsTr(" desconectado ") + highlightSuffix + qsTr("prior to firmware upgrade.")
+            readonly property string qgcUnplugText2:    highlightPrefix + "<big>" + qsTr("Por favor, desconecte seu Pixhawk e/ou Rádio do USB.") + "</big>" + highlightSuffix
 
             readonly property int _defaultFimwareTypePX4:   12
             readonly property int _defaultFimwareTypeAPM:   3

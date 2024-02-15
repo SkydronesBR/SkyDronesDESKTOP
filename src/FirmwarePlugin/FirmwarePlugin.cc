@@ -1095,7 +1095,7 @@ void FirmwarePlugin::_versionFileDownloadFinished(QString& remoteFile, QString& 
         QString currentVersionNumber = QString("%1.%2.%3").arg(vehicle->firmwareMajorVersion())
                 .arg(vehicle->firmwareMinorVersion())
                 .arg(vehicle->firmwarePatchVersion());
-        qgcApp()->showAppMessage(tr("Vehicle is not running latest stable firmware! Running %1, latest stable is %2.").arg(currentVersionNumber, version));
+        qgcApp()->showAppMessage(tr("O veículo não está executando o firmware estável mais recente! Executando %1, o último estável é %2.").arg(currentVersionNumber, version));
     }
 }
 
