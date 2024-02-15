@@ -63,7 +63,7 @@ Rectangle {
         anchors.leftMargin: 10
 
         Image {
-            source: _activeVehicle ? "/qmlimages/Armed" : "/qmlimages/Disarmed"
+            source:                 _activeVehicle && !_communicationLost ? "/qmlimages/Armed" : "/qmlimages/Disarmed"
             width:                  70
             height:                 70
         }
@@ -76,12 +76,22 @@ Rectangle {
         anchors.verticalCenter:     parent.verticalCenter
 
         Text{
-            text:                   _activeVehicle ? "CONECTADO" : "DESCONECTADO"
+            text:                   _activeVehicle && !_communicationLost ? "CONECTADO" : "DESCONECTADO"
             font.pointSize:         20
             font.bold:              true
             color:                  _activeVehicle ? "#1DCC00"    :   "#F0493C"
         }
     }
+
+    /* Item{
+        anchors.centerIn: parent
+        QGCButton {
+            id:                 disconnectButton
+            text:               qsTr("Disconnect")
+            onClicked:          _activeVehicle.closeVehicle()
+            visible:            _activeVehicle && _communicationLost && currentToolbar === flyViewToolbar
+        }
+    } */
 
     RowLayout {
         id:                     viewButtonRow
