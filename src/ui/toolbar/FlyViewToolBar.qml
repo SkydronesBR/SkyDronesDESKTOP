@@ -79,7 +79,7 @@ Rectangle {
             text:                   _activeVehicle && !_communicationLost ? "CONECTADO" : "DESCONECTADO"
             font.pointSize:         20
             font.bold:              true
-            color:                  _activeVehicle ? "#1DCC00"    :   "#F0493C"
+            color:                  _activeVehicle && !_communicationLost ? "#1DCC00" : "#F0493C"
         }
     }
 

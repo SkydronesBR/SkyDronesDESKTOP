@@ -152,7 +152,7 @@ ApplicationWindow {
     }
 
     function showSettingsTool(settingsPage = "") { //GERAL
-        showTool(qsTr("Geral"), "MavlinkSettings.qml", "/res/QGCLogoBlack")
+        showTool(qsTr("Geral"), "MavlinkSettings.qml", "/res/LockOpen")
         //showTool(qsTr("Application Settings"), "AppSettings.qml", "/res/QGCLogoWhite")
         if (settingsPage !== "") {
             toolDrawerLoader.item.showSettingsPage(settingsPage)

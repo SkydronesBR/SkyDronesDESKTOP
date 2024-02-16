@@ -226,7 +226,7 @@ Rectangle {
             width:              250
             SubMenuButton {
                 id:                 summaryButton
-                imageResource:      "/qmlimages/VehicleSummaryIcon.png"
+                imageResource:      "/res/LockOpen"
                 setupIndicator:     false
                 checked:            true
                 buttonGroup:     setupButtonGroup
