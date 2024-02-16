@@ -375,7 +375,7 @@ Item {
                     placeholderText: "Digite a senha"
                     echoMode: TextInput.Password 
                     onAccepted: {
-                        if (passwordField.text === "vant2024$") { 
+                        if (passwordField.text === "skyP4r4m3tr0$") { 
                             stackView.push(showParamTool());
                             insertPass.visible = false; 
                         } else {
@@ -404,7 +404,7 @@ Item {
                         MouseArea{
                             anchors.fill: parent
                             onClicked: {
-                                if (passwordField.text === "vant2024$") { 
+                                if (passwordField.text === "skyP4r4m3tr0$") { 
                                     stackView.push(showParamTool());
                                     insertPass.visible = false; 
                                 } else {
@@ -466,7 +466,7 @@ Item {
         anchors.bottomMargin: 20  
 
         Text {
-            text: "SkyDrones versão 1.0.0-BETA"
+            text: "SkyDrones V 1.0.0-BETA"
             color: "white"
         }
     }

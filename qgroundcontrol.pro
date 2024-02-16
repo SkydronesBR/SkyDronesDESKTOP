@@ -63,10 +63,10 @@ WindowsBuild {
 #
 
 QGC_APP_NAME        = "SkyDrones"
-QGC_ORG_NAME        = "SkyDrones Tecnologia Aviônica"
-QGC_ORG_DOMAIN      = "SkyDrones Tecnologia Aviônica"
-QGC_APP_DESCRIPTION = "Aplicativo de controle terrestre fornecido pela equipe de desenvolvimento da SkyDrones"
-QGC_APP_COPYRIGHT   = "Copyright (C) 2019 QGroundControl Development Team. All rights reserved."
+QGC_ORG_NAME        = "SkyDrones Tecnologia Aviônica S/A"
+QGC_ORG_DOMAIN      = "SkyDrones Tecnologia Aviônica S/A"
+QGC_APP_DESCRIPTION = "Aplicativo de controle terrestre fornecido pela equipe de desenvolvimento SkyDrones Tecnologia Aviônica S/A"
+QGC_APP_COPYRIGHT   = "©2024 SkyDrones Tecnologia Aviônica S/A."
 
 WindowsBuild {
     QGC_INSTALLER_SCRIPT        = "$$SOURCE_DIR\\deploy\\windows\\nullsoft_installer.nsi"
