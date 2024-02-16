@@ -557,6 +557,7 @@ bool QGCApplication::_initForNormalAppBoot()
     if (rootWindow) {
         rootWindow->scheduleRenderJob (new FinishVideoInitialization (toolbox()->videoManager()),
                 QQuickWindow::BeforeSynchronizingStage);
+        rootWindow->setTitle("SkyDrones");
     }
 
     // Safe to show popup error messages now that main window is created
