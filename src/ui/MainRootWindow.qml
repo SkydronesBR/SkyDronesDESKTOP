@@ -530,7 +530,8 @@ ApplicationWindow {
                     source:            "/res/QGCLogoFull"
                     //anchors.fill:       parent
                     anchors.right: parent.right
-                    anchors.bottom: parent.bottom
+                    //anchors.bottom: parent.bottom
+                    anchors.rightMargin: 10
                 }
             }
         }

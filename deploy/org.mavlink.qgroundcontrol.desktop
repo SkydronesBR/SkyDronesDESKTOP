@@ -1,9 +1,9 @@
 [Desktop Entry]
 Type=Application
-Name=SkyDrones Desktop
+Name=SkyDrones
 GenericName=Ground Control Station
 Comment=UAS ground control station
 Icon=org.mavlink.qgroundcontrol
-Exec=QGroundControl
+Exec=SkyDrones
 Terminal=false
 Categories=Utility;

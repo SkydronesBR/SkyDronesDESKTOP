@@ -45,6 +45,6 @@
   </categories>
 
   <provides>
-    <binary>QGroundControl</binary>
+    <binary>SkyDrones</binary>
   </provides>
 </component>

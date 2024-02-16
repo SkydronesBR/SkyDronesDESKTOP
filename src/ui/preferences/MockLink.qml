@@ -261,11 +261,12 @@ Rectangle {
                 id:                 parametersButton
                 setupIndicator:     false
                 buttonGroup:     setupButtonGroup
+                imageResource:      "/qmlimages/RidIconGreen"
                 /* visible:            QGroundControl.multiVehicleManager.parameterReadyVehicleAvailable &&
                                     !QGroundControl.multiVehicleManager.activeVehicle.usingHighLatencyLink &&
                                     _corePlugin.showAdvancedUI */
                 visible:            !ScreenTools.isMobile && _corePlugin.options.showFirmwareUpgrade
-                text:               qsTr("Parameters")
+                text:               qsTr("Parâmetros")
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "SetupParameterEditor.qml")
             }

@@ -108,7 +108,8 @@ Rectangle {
             source:            "/res/QGCLogoFull"
             //anchors.fill:       parent
             anchors.right: parent.right
-            anchors.bottom: parent.bottom
+            anchors.rightMargin: 10
+            //anchors.bottom: parent.bottom
         }
     }
 

@@ -271,7 +271,7 @@ Item {
         } 
         // PARÂMETROS
         Rectangle {
-            color: "#FF4D00"
+            color: "#771100"
             radius: 15
             width:  400
             height: 70
@@ -466,7 +466,7 @@ Item {
         anchors.bottomMargin: 20  
 
         Text {
-            text: "SkyDrones Desktop Versão 1.0.0"
+            text: "SkyDrones Desktop V:1.0.0 BETA"
             color: "white"
         }
     }
