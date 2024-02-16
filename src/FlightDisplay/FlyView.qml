@@ -466,7 +466,7 @@ Item {
         anchors.bottomMargin: 20  
 
         Text {
-            text: "SkyDrones Desktop V:1.0.0 BETA"
+            text: "SkyDrones versão 1.0.0-BETA"
             color: "white"
         }
     }

@@ -63,9 +63,9 @@ WindowsBuild {
 #
 
 QGC_APP_NAME        = "SkyDrones"
-QGC_ORG_NAME        = "QGroundControl.org"
-QGC_ORG_DOMAIN      = "org.qgroundcontrol"
-QGC_APP_DESCRIPTION = "Open source ground control app provided by QGroundControl dev team"
+QGC_ORG_NAME        = "SkyDrones Tecnologia Aviônica"
+QGC_ORG_DOMAIN      = "SkyDrones Tecnologia Aviônica"
+QGC_APP_DESCRIPTION = "Aplicativo de controle terrestre fornecido pela equipe de desenvolvimento da SkyDrones"
 QGC_APP_COPYRIGHT   = "Copyright (C) 2019 QGroundControl Development Team. All rights reserved."
 
 WindowsBuild {
