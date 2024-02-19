@@ -228,11 +228,23 @@ Rectangle {
                 id:                 summaryButton
                 imageResource:      "/res/LockOpen"
                 setupIndicator:     false
-                checked:            true
+                //checked:            true
                 buttonGroup:     setupButtonGroup
-                text:               qsTr("Geral")
+                text:               qsTr("Resumo")
                 Layout.fillWidth:   true
                 onClicked: showSummaryPanel()
+            }
+            SubMenuButton{
+                id:                 commLinksButton
+                imageResource:      "/qmlimages/Quad"
+                setupIndicator:     false
+                //checked:          true
+                buttonGroup:        setupButtonGroup
+                text:               qsTr("Conectar Drone")
+                Layout.fillWidth:   true
+
+                //onClicked: showCommLinks()
+                 onClicked:          showPanel(this, "GeneralSettings2.qml")
             }
             Item {
                 width: parent.width 
@@ -242,7 +254,7 @@ Rectangle {
                     color: "transparent"
                     x: 5 
                     Text {      
-                        text:                   "O botão geral de configurações é uma ferramenta versátil que permite aos usuários ajustar uma variedade de funções em quadros (frames), rádios, modos de voo e mais. Com este botão, os usuários podem personalizar e configurar diversos aspectos de seu equipamento, incluindo preferências de voo, ajustes de controle e modos de operação. Ele oferece uma maneira conveniente de adaptar o dispositivo às necessidades individuais do usuário, garantindo uma experiência de voo personalizada e otimizada."
+                        text:                   "O botão geral de configurações é uma ferramenta versátil que permite aos usuários ajustar uma variedade de funções em quadros (frames), rádios, modos de voo e mais. Com este botão, os usuários podem personalizar e configurar diversos aspectos de seu equipamento, incluindo preferências de voo, ajustes de controle e modos de operação. O botão para conexão do drone serve para melhor definir o tipo de entrada com o drone através de uma porta USB"
                         color:                  "white"
                         wrapMode:               Text.WordWrap 
                         width:                  parent.width 
@@ -327,6 +339,7 @@ Rectangle {
                 Layout.fillWidth:   true
                 onClicked:          showPanel(this, "SetupParameterEditor.qml")
             } */
+
 
         }
     }

@@ -28,7 +28,7 @@ ColumnLayout {
         rowSpacing:     _rowSpacing
         columnSpacing:  _colSpacing
 
-        QGCLabel { text: qsTr("Serial Port") }
+        QGCLabel { text: qsTr("Porta Serial") }
         QGCComboBox {
             id:                     commPortCombo
             Layout.preferredWidth:  _secondColumnWidth
@@ -62,7 +62,7 @@ ColumnLayout {
                     }
                 }
                 if (serialPorts.length === 0) {
-                    serialPorts = [ qsTr("None Available") ]
+                    serialPorts = [ qsTr("Nenhum válido") ]
                     index = 0
                 }
                 commPortCombo.model = serialPorts
@@ -70,7 +70,7 @@ ColumnLayout {
             }
         }
 
-        QGCLabel { text: qsTr("Baud Rate") }
+        QGCLabel { text: qsTr("Taxa de transmissão") }
         QGCComboBox {
             id:                     baudCombo
             Layout.preferredWidth:  _secondColumnWidth
@@ -89,7 +89,7 @@ ColumnLayout {
                 }
                 var index = baudCombo.find(baud)
                 if (index === -1) {
-                    console.warn(qsTr("Baud rate name not in combo box"), baud)
+                    console.warn(qsTr("O nome da taxa de transmissão não está na caixa de combinação"), baud)
                 } else {
                     baudCombo.currentIndex = index
                 }
@@ -99,7 +99,7 @@ ColumnLayout {
 
     QGCCheckBox {
         id:         advancedSettings
-        text:       qsTr("Advanced Settings")
+        text:       qsTr("Configurações avançadas")
         checked:    false
     }
 
@@ -111,15 +111,15 @@ ColumnLayout {
 
         QGCCheckBox {
             Layout.columnSpan:  2
-            text:               qsTr("Enable Flow Control")
+            text:               qsTr("Ativar controle de fluxo")
             checked:            subEditConfig.flowControl !== 0
             onCheckedChanged:   subEditConfig.flowControl = checked ? 1 : 0
         }
 
-        QGCLabel { text: qsTr("Parity") }
+        QGCLabel { text: qsTr("Paridade") }
         QGCComboBox {
             Layout.preferredWidth:  _secondColumnWidth
-            model:                  [qsTr("None"), qsTr("Even"), qsTr("Odd")]
+            model:                  [qsTr("Nenhum"), qsTr("Até"), qsTr("Chance")]
 
             onActivated: {
                 // Hard coded values from qserialport.h
@@ -148,13 +148,13 @@ ColumnLayout {
                     currentIndex = 2
                     break
                 default:
-                    console.warn("Unknown parity", subEditConfig.parity)
+                    console.warn("Paridade desconhecida", subEditConfig.parity)
                     break
                 }
             }
         }
 
-        QGCLabel { text: qsTr("Data Bits") }
+        QGCLabel { text: qsTr("Bits de dados") }
         QGCComboBox {
             Layout.preferredWidth:  _secondColumnWidth
             model:                  [ "5", "6", "7", "8" ]
@@ -162,7 +162,7 @@ ColumnLayout {
             onActivated:            subEditConfig.dataBits = index + 5
         }
 
-        QGCLabel { text: qsTr("Stop Bits") }
+        QGCLabel { text: qsTr("Parar bits") }
         QGCComboBox {
             Layout.preferredWidth:  _secondColumnWidth
             model:                  [ "1", "2" ]

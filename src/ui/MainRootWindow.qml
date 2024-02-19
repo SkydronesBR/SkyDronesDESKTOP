@@ -159,6 +159,10 @@ ApplicationWindow {
         }
     }
 
+    function showCommLinks() { //COMM LINKS
+        showTool(qsTr("Adicionar Drone"), "GeneralSettings2.qml", "")
+    }
+
     function showHelpTool() { //SUPORTE
         showTool(qsTr("Suporte"), "HelpSettings.qml", "/res/suporte.png")
     }
