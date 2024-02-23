@@ -47,9 +47,9 @@ SetupPage {
             readonly property string welcomeText:       qsTr("%1 pode atualizar o firmware em dispositivos Pixhawk, rádios SiK e câmeras inteligentes PX4 Flow.").arg(QGroundControl.appName)
             readonly property string welcomeTextSingle: qsTr("Update the autopilot firmware to the latest version")
             readonly property string plugInText:        "<big>" + highlightPrefix + qsTr("Conecte seu dispositivo") + highlightSuffix + qsTr(" via USB para ") + highlightPrefix + qsTr("Iniciar") + highlightSuffix + qsTr(" atualização do firmware.") + "</big>"
-            readonly property string flashFailText:     qsTr("Se a atualização falhar, certifique-se de conectar ") + highlightPrefix + qsTr("diretamente") + highlightSuffix + qsTr(" to a powered USB port on your computer, not through a USB hub. ") +
+            readonly property string flashFailText:     qsTr("Se a atualização falhar, certifique-se de conectar ") + highlightPrefix + qsTr("diretamente") + highlightSuffix + qsTr(" a uma porta USB alimentada no seu computador, e não através de um hub USB. ") +
                                                         qsTr("Certifique-se também de que você está alimentado apenas via USB ") + highlightPrefix + qsTr("não bateria") + highlightSuffix + "."
-            readonly property string qgcUnplugText1:    qsTr("Todas as %1 conexões com veículos devem ser ").arg(QGroundControl.appName) + highlightPrefix + qsTr(" desconectado ") + highlightSuffix + qsTr("prior to firmware upgrade.")
+            readonly property string qgcUnplugText1:    qsTr("Todas as %1 conexões com veículos devem ser ").arg(QGroundControl.appName) + highlightPrefix + qsTr(" desconectado ") + highlightSuffix + qsTr("antes da atualização do firmware.")
             readonly property string qgcUnplugText2:    highlightPrefix + "<big>" + qsTr("Por favor, desconecte seu Pixhawk e/ou Rádio do USB.") + "</big>" + highlightSuffix
 
             readonly property int _defaultFimwareTypePX4:   12
@@ -73,8 +73,8 @@ SetupPage {
 
             QGCFileDialog {
                 id:                 customFirmwareDialog
-                title:              qsTr("Select Firmware File")
-                nameFilters:        [qsTr("Firmware Files (*.px4 *.apj *.bin *.ihx)"), qsTr("All Files (*)")]
+                title:              qsTr("Selecione o arquivo")
+                nameFilters:        [qsTr("Arquivos de Firmware (*.px4 *.apj *.bin *.ihx)"), qsTr("Todos Arquivos (*)")]
                 folder:             QGroundControl.settingsManager.appSettings.logSavePath
                 onAcceptedForLoad: (file) => {
                     controller.flashFirmwareUrl(file)
@@ -117,15 +117,15 @@ SetupPage {
 
                         var availableDevices = controller.availableBoardsName()
                         if (availableDevices.length > 1) {
-                            statusTextArea.append(highlightPrefix + qsTr("Multiple devices detected! Remove all detected devices to perform the firmware upgrade."))
-                            statusTextArea.append(qsTr("Detected [%1]: ").arg(availableDevices.length) + availableDevices.join(", "))
+                            statusTextArea.append(highlightPrefix + qsTr("Vários dispositivos detectados! Remova todos os dispositivos detectados para realizar a atualização do firmware."))
+                            statusTextArea.append(qsTr("Detectado [%1]: ").arg(availableDevices.length) + availableDevices.join(", "))
                         }
                         if (QGroundControl.multiVehicleManager.activeVehicle) {
                             QGroundControl.multiVehicleManager.activeVehicle.vehicleLinkManager.autoDisconnect = true
                         }
                     } else {
                         // We end up here when we detect a board plugged in after we've started upgrade
-                        statusTextArea.append(highlightPrefix + qsTr("Found device") + highlightSuffix + ": " + controller.boardType)
+                        statusTextArea.append(highlightPrefix + qsTr("Dispositivo encontrado") + highlightSuffix + ": " + controller.boardType)
                     }
                 }
 
@@ -203,19 +203,19 @@ SetupPage {
                                     } else {
                                         if (controller.apmFirmwareNames.length === 0) {
                                             // Not ready yet, or no firmware available
-                                            mainWindow.showMessageDialog(firmwareSelectDialog.title, qsTr("Either firmware list is still downloading, or no firmware is available for current selection."))
+                                            mainWindow.showMessageDialog(firmwareSelectDialog.title, qsTr("A lista de firmware ainda está sendo baixada ou nenhum firmware está disponível para a seleção atual."))
                                             firmwareSelectDialog.preventClose = true
                                             return
                                         }
                                         if (ardupilotFirmwareSelectionCombo.currentIndex == -1) {
-                                            mainWindow.showMessageDialog(firmwareSelectDialog.title, qsTr("You must choose a board type."))
+                                            mainWindow.showMessageDialog(firmwareSelectDialog.title, qsTr("Você deve escolher um tipo de placa."))
                                             firmwareSelectDialog.preventClose = true
                                             return
                                         }
 
                                         var firmwareUrl = controller.apmFirmwareUrls[ardupilotFirmwareSelectionCombo.currentIndex]
                                         if (firmwareUrl == "") {
-                                            mainWindow.showMessageDialog(firmwareSelectDialog.title, qsTr("No firmware was found for the current selection."))
+                                            mainWindow.showMessageDialog(firmwareSelectDialog.title, qsTr("Nenhum firmware foi encontrado para a seleção atual."))
                                             firmwareSelectDialog.preventClose = true
                                             return
                                         }
@@ -234,7 +234,7 @@ SetupPage {
                     }
 
                     function reject() {
-                        statusTextArea.append(highlightPrefix + qsTr("Upgrade cancelled") + highlightSuffix)
+                        statusTextArea.append(highlightPrefix + qsTr("Atualização cancelada") + highlightSuffix)
                         statusTextArea.append("------------------------------------------")
                         controller.cancel()
                         close()
@@ -243,25 +243,25 @@ SetupPage {
                     ListModel {
                         id: firmwareBuildTypeList
 
-                        ListElement {
-                            text:           qsTr("Standard Version (stable)")
+                        /* ListElement {
+                            text:           qsTr("Versão Padrão (estável)")
                             firmwareType:   FirmwareUpgradeController.StableFirmware
-                        }
-                        ListElement {
-                            text:           qsTr("Beta Testing (beta)")
+                        } */
+                        /* ListElement {
+                            text:           qsTr("Teste beta (beta)")
                             firmwareType:   FirmwareUpgradeController.BetaFirmware
-                        }
-                        ListElement {
-                            text:           qsTr("Developer Build (master)")
+                        } */
+                        /* ListElement {
+                            text:           qsTr("Versão do desenvolvedor (mestre)")
                             firmwareType:   FirmwareUpgradeController.DeveloperFirmware
-                        }
+                        } */
                         ListElement {
-                            text:           qsTr("Custom firmware file...")
+                            text:           qsTr("Arquivo de firmware personalizado...")
                             firmwareType:   FirmwareUpgradeController.CustomFirmware
                         }
                     }
 
-                    ListModel {
+                    /* ListModel {
                         id: px4FlowFirmwareList
 
                         ListElement {
@@ -272,17 +272,17 @@ SetupPage {
                             text:           qsTr("ArduPilot")
                             stackType:   FirmwareUpgradeController.PX4FlowAPM
                         }
-                    }
+                    } */
 
                     ListModel {
                         id: px4FlowTypeList
 
                         ListElement {
-                            text:           qsTr("Standard Version (stable)")
+                            text:           qsTr("Versão Padrão (estável)")
                             firmwareType:   FirmwareUpgradeController.StableFirmware
                         }
                         ListElement {
-                            text:           qsTr("Custom firmware file...")
+                            text:           qsTr("Arquivo de firmware personalizado...")
                             firmwareType:   FirmwareUpgradeController.CustomFirmware
                         }
                     }
@@ -291,11 +291,11 @@ SetupPage {
                         id: singleFirmwareModeTypeList
 
                         ListElement {
-                            text:           qsTr("Standard Version")
+                            text:           qsTr("Versão padrão")
                             firmwareType:   FirmwareUpgradeController.StableFirmware
                         }
                         ListElement {
-                            text:           qsTr("Custom firmware file...")
+                            text:           qsTr("Arquivo de firmware personalizado...")
                             firmwareType:   FirmwareUpgradeController.CustomFirmware
                         }
                     }
@@ -309,9 +309,9 @@ SetupPage {
                             wrapMode:           Text.WordWrap
                             text:               (_singleFirmwareMode || !QGroundControl.apmFirmwareSupported) ? _singleFirmwareLabel : (px4Flow ? _px4FlowLabel : _pixhawkLabel)
 
-                            readonly property string _px4FlowLabel:          qsTr("Detected PX4 Flow board. The firmware you use on the PX4 Flow must match the AutoPilot firmware type you are using on the vehicle:")
-                            readonly property string _pixhawkLabel:          qsTr("Detected Pixhawk board. You can select from the following flight stacks:")
-                            readonly property string _singleFirmwareLabel:   qsTr("Press Ok to upgrade your vehicle.")
+                            readonly property string _px4FlowLabel:          qsTr("Placa de fluxo PX4 detectada. O firmware que você usa no PX4 Flow deve corresponder ao tipo de firmware do AutoPilot que você está usando no veículo:")
+                            readonly property string _pixhawkLabel:          qsTr("Placa Pixhawk detectada. Você pode selecionar entre as seguintes pilhas de voo:")
+                            readonly property string _singleFirmwareLabel:   qsTr("Pressione OK para atualizar seu veículo.")
                         }
 
                         Column {
@@ -344,6 +344,7 @@ SetupPage {
                                 text:           qsTr("ArduPilot")
                                 font.bold:      !_defaultFirmwareIsPX4
                                 checked:        !_defaultFirmwareIsPX4
+                                visible:        false
 
                                 onClicked: {
                                     _defaultFirmwareFact.rawValue = _defaultFimwareTypeAPM
@@ -354,7 +355,7 @@ SetupPage {
 
                         FactComboBox {
                             Layout.fillWidth:   true
-                            visible:            !px4Flow && apmFlightStack.checked
+                            visible:            false //!px4Flow && apmFlightStack.checked
                             fact:               _firmwareUpgradeSettings.apmChibiOS
                             indexModel:         false
                         }
@@ -362,7 +363,7 @@ SetupPage {
                         FactComboBox {
                             id:                 apmVehicleTypeCombo
                             Layout.fillWidth:   true
-                            visible:            !px4Flow && apmFlightStack.checked
+                            visible:            false //!px4Flow && apmFlightStack.checked
                             fact:               _firmwareUpgradeSettings.apmVehicleType
                             indexModel:         false
                         }
@@ -378,14 +379,14 @@ SetupPage {
                         QGCLabel {
                             Layout.fillWidth:   true
                             wrapMode:           Text.WordWrap
-                            text:               qsTr("Downloading list of available firmwares...")
+                            text:               qsTr("Baixando lista de firmwares disponíveis...")
                             visible:            controller.downloadingFirmwareList
                         }
 
                         QGCLabel {
                             Layout.fillWidth:   true
                             wrapMode:           Text.WordWrap
-                            text:               qsTr("No Firmware Available")
+                            text:               qsTr("Nenhum firmware disponível")
                             visible:            !controller.downloadingFirmwareList && (QGroundControl.apmFirmwareSupported && controller.apmFirmwareNames.length === 0)
                         }
 
@@ -400,7 +401,7 @@ SetupPage {
 
                         QGCCheckBox {
                             id:         _advanced
-                            text:       qsTr("Advanced settings")
+                            text:       qsTr("Configurações Avançadas")
                             checked:    px4Flow ? true : false
                             visible:    !px4Flow
 
@@ -415,9 +416,9 @@ SetupPage {
                             Layout.fillWidth:   true
                             wrapMode:           Text.WordWrap
                             visible:            showFirmwareTypeSelection
-                            text:               _singleFirmwareMode ?  qsTr("Select the standard version or one from the file system (previously downloaded):") :
-                                                                      (px4Flow ? qsTr("Select which version of the firmware you would like to install:") :
-                                                                                 qsTr("Select which version of the above flight stack you would like to install:"))
+                            text:               _singleFirmwareMode ?  qsTr("Selecione a versão padrão ou uma do sistema de arquivos (baixada anteriormente):") :
+                                                                      (px4Flow ? qsTr("Selecione qual versão do firmware você deseja instalar:") :
+                                                                                 qsTr("Selecione qual versão da pilha de voo acima você gostaria de instalar:"))
                         }
 
                         QGCComboBox {
@@ -431,18 +432,18 @@ SetupPage {
                                 controller.selectedFirmwareBuildType = model.get(index).firmwareType
                                 if (model.get(index).firmwareType === FirmwareUpgradeController.BetaFirmware) {
                                     firmwareWarningMessageVisible = true
-                                    firmwareVersionWarningLabel.text = qsTr("WARNING: BETA FIRMWARE. ") +
-                                            qsTr("This firmware version is ONLY intended for beta testers. ") +
-                                            qsTr("Although it has received FLIGHT TESTING, it represents actively changed code. ") +
-                                            qsTr("Do NOT use for normal operation.")
+                                    firmwareVersionWarningLabel.text = qsTr("AVISO: FIRMWARE BETA. ") +
+                                            qsTr("Esta versão de firmware destina-se APENAS a testadores beta. ") +
+                                            qsTr("Embora tenha recebido FLIGHT TESTING, representa código alterado ativamente. ") +
+                                            qsTr("NÃO use para operação normal.")
                                 } else if (model.get(index).firmwareType === FirmwareUpgradeController.DeveloperFirmware) {
                                     firmwareWarningMessageVisible = true
-                                    firmwareVersionWarningLabel.text = qsTr("WARNING: CONTINUOUS BUILD FIRMWARE. ") +
-                                            qsTr("This firmware has NOT BEEN FLIGHT TESTED. ") +
-                                            qsTr("It is only intended for DEVELOPERS. ") +
-                                            qsTr("Run bench tests without props first. ") +
-                                            qsTr("Do NOT fly this without additional safety precautions. ") +
-                                            qsTr("Follow the forums actively when using it.")
+                                    firmwareVersionWarningLabel.text = qsTr("AVISO: FIRMWARE DE CONSTRUÇÃO CONTÍNUA.") +
+                                            qsTr("Este firmware NÃO FOI TESTADO EM VÔO. ") +
+                                            qsTr("Destina-se apenas a DESENVOLVEDORES. ") +
+                                            qsTr("Execute testes de bancada sem acessórios primeiro. ") +
+                                            qsTr("NÃO voe sem precauções de segurança adicionais. ") +
+                                            qsTr("Siga os fóruns ativamente ao usá-lo.")
                                 } else {
                                     firmwareWarningMessageVisible = false
                                 }
@@ -472,6 +473,17 @@ SetupPage {
                 visible:    firmwarePage.advanced
                 onClicked:  globals.activeVehicle.flashBootloader()
             }
+            QGCButton {
+                text: "Baixar Firmware mais recente"
+                onClicked: {
+                        /* if (!QGroundControl.multiVehicleManager.activeVehicle || QGroundControl.multiVehicleManager.activeVehicle.isOfflineEditingVehicle) {
+                            mainWindow.showMessageDialog(qsTr("Atualizar Firmware"), qsTr("Você deve estar conectado a um veículo. Conecte com seu veículo via USB"))
+                        } else {
+                            openFirmwareSelectDialog()
+                        } */
+                        Qt.openUrlExternally("https://firebasestorage.googleapis.com/v0/b/firmwaredown-e366c.appspot.com/o/arducopter.apj?alt=media&token=078b9083-5d0e-4f7a-a84f-d64d7c865baf")
+                    }
+            }
 
             TextArea {
                 id:                 statusTextArea
@@ -486,6 +498,10 @@ SetupPage {
                 background: Rectangle {
                     color: qgcPal.windowShade
                 }
+            }
+            
+            function openFirmwareSelectDialog() {
+                firmwareSelectDialogComponent.createObject(mainWindow).open()
             }
         } // ColumnLayout
     } // Component

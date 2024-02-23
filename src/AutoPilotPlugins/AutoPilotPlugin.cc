@@ -71,7 +71,7 @@ void AutoPilotPlugin::parametersReadyPreChecks(void)
     }
 
     if (!_setupComplete) {
-        qgcApp()->showAppMessage(tr("One or more vehicle components require setup prior to flight."));
+        qgcApp()->showAppMessage(tr("Um ou mais componentes do veículo requerem configuração antes do voo."));
 
         // Take the user to Vehicle Summary
         qgcApp()->showSetupView();
