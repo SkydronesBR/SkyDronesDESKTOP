@@ -111,7 +111,7 @@ contains (CONFIG, QGC_DISABLE_CUSTOM_BUILD) {
 
 WindowsBuild {
     # Sets up application properties
-    QMAKE_TARGET_COMPANY        = "$${QGC_ORG_NAME}"
+    QMAKE_TARGET_COMPANY        = "SkyDrones Tecnologia Aviônica S/A"
     QMAKE_TARGET_DESCRIPTION    = "$${QGC_APP_DESCRIPTION}"
     QMAKE_TARGET_COPYRIGHT      = "$${QGC_APP_COPYRIGHT}"
     QMAKE_TARGET_PRODUCT        = "$${QGC_APP_NAME}"
