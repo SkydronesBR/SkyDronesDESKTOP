@@ -22,7 +22,7 @@ defaults:
 env:
   SOURCE_DIR:   ${{ github.workspace }}
   QT_VERSION:   6.6.1
-  ARTIFACT:     QGroundControl-installer.exe
+  ARTIFACT:     SkyDrones-Installer.exe
   BUILD_TYPE:   ${{ fromJSON('["DailyBuild", "StableBuild"]')[ github.ref_type == 'tag' || contains(github.ref, 'Stable_' ) ] }}
 
 jobs:
@@ -97,7 +97,7 @@ jobs:
       - name: Save installer artifact
         uses: actions/upload-artifact@master
         with:
-          name: ${{ env.ARTIFACT }}
+          name: SkyDrones-Installer.exe
           path: ${{ runner.temp }}\shadow_build_dir\staging\${{ env.ARTIFACT }}
 
       - name: Save PDB artifact
