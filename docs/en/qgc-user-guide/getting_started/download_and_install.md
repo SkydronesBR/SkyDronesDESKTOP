@@ -18,7 +18,7 @@ For the best experience and compatibility, we recommend you the newest version o
 
 _QGroundControl_ can be installed on 64 bit versions of Windows:
 
-1. Download [SkyDrones.exe](https://d176tv9ibo4jno.cloudfront.net/latest/SkyDrones.exe).
+1. Download [QGroundControl-installer.exe](https://d176tv9ibo4jno.cloudfront.net/latest/QGroundControl-installer.exe).
 1. Double click the executable to launch the installer.
 
 ::: info

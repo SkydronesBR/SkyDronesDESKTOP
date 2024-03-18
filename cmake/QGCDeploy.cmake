@@ -58,7 +58,7 @@ elseif(WIN32)
 
 	# deploy
 	include(Windeployqt)
-	windeployqt(QGroundControl "SkyDrones.exe")
+	windeployqt(QGroundControl "QGroundControl-installer.exe")
 
 	add_custom_command(TARGET QGroundControl POST_BUILD
 		COMMAND ${CMAKE_COMMAND} -E
