@@ -481,7 +481,7 @@ SetupPage {
                         } else {
                             openFirmwareSelectDialog()
                         } */
-                        Qt.openUrlExternally("https://firebasestorage.googleapis.com/v0/b/firmwaredown-e366c.appspot.com/o/arducopter.apj?alt=media&token=078b9083-5d0e-4f7a-a84f-d64d7c865baf")
+                        Qt.openUrlExternally("https://firebasestorage.googleapis.com/v0/b/firmwaredonwload.appspot.com/o/arducopter.apj?alt=media&token=f39e3d2d-9345-4d5a-b5ab-2b1c4ea7109b")
                     }
             }
 

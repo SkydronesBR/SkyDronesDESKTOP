@@ -1000,7 +1000,7 @@ void APMFirmwarePlugin::startMission(Vehicle* vehicle)
 QString APMFirmwarePlugin::_getLatestVersionFileUrl(Vehicle* vehicle)
 {
     //const static QString baseUrl("http://firmware.ardupilot.org/%1/stable/Pixhawk1/git-version.txt");
-    const static QString baseUrl("https://firebasestorage.googleapis.com/v0/b/firmwaretest-bc257.appspot.com/o/ArduPilotFW.txt?alt=media&token=91a4ca6b-8551-4430-bba8-dcf79f7048b5");
+    const static QString baseUrl("https://firebasestorage.googleapis.com/v0/b/ardupilotfirmware.appspot.com/o/ArduPilotFW.txt?alt=media&token=76809ced-c492-4e85-b4c3-77817120bebc");
 
     if (qobject_cast<ArduPlaneFirmwarePlugin*>(vehicle->firmwarePlugin())) {
         return baseUrl.arg("Plane");
