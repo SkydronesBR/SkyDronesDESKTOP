@@ -9,7 +9,7 @@ Use at your own risk!
 
 These can be downloaded from the links below (install as described in [Download and Install](../getting_started/download_and_install.md)):
 
-- [Windows](https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl-installer.exe)
+- [Windows](https://d176tv9ibo4jno.cloudfront.net/builds/master/Skydrones.exe)
 - [OS X](https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.dmg)
 
   ::: info
