@@ -118,6 +118,7 @@ WindowsBuild {
     QMAKE_TARGET_DESCRIPTION    = "$${QGC_APP_DESCRIPTION}"
     QMAKE_TARGET_COPYRIGHT      = "$${QGC_APP_COPYRIGHT}"
     QMAKE_TARGET_PRODUCT        = "$${QGC_APP_NAME}"
+    QMAKE_TARGET_VERSION        = "$${QGC_APP_VERSION}"
 }
 
 #-------------------------------------------------------------------------------------
