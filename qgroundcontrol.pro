@@ -68,6 +68,8 @@ QGC_ORG_DOMAIN      = "SkyDrones Tecnologia Avionica S/A"
 QGC_APP_DESCRIPTION = "Aplicativo de controle terrestre fornecido pela equipe de desenvolvimento SkyDrones Tecnologia Avionica S/A"
 QGC_APP_COPYRIGHT   = "Copyright(C) 2024 SkyDrones Tecnologia Aviônica S/A."
 QGC_APP_VERSION     = "1.0.0" 
+VERSION             = $$QGC_APP_VERSION
+
 
 WindowsBuild {
     QGC_INSTALLER_SCRIPT        = "$$SOURCE_DIR\\deploy\\windows\\nullsoft_installer.nsi"
