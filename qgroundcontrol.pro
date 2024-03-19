@@ -29,7 +29,7 @@ message(Qt version $$[QT_VERSION])
 
 include(QGCCommon.pri)
 
-TARGET   = SkyDrones
+TARGET   = QGroundControl
 TEMPLATE = app
 QGCROOT  = $$PWD
 
