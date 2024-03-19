@@ -29,7 +29,7 @@ message(Qt version $$[QT_VERSION])
 
 include(QGCCommon.pri)
 
-TARGET   = QGroundControl
+TARGET   = SkyDrones
 TEMPLATE = app
 QGCROOT  = $$PWD
 
@@ -67,7 +67,7 @@ QGC_ORG_NAME        = "SkyDrones Tecnologia Avionica S/A"
 QGC_ORG_DOMAIN      = "SkyDrones Tecnologia Avionica S/A"
 QGC_APP_DESCRIPTION = "Aplicativo de controle terrestre fornecido pela equipe de desenvolvimento SkyDrones Tecnologia Avionica S/A"
 QGC_APP_COPYRIGHT   = "Copyright(C) 2024 SkyDrones Tecnologia Aviônica S/A."
-QGC_APP_VERSION     = "1.0.0" 
+QGC_APP_VERSION     = "1.0" 
 VERSION             = $$QGC_APP_VERSION
 
 
@@ -345,7 +345,7 @@ CustomBuild {
         RESOURCES += $$PWD/resources/InstrumentValueIcons/InstrumentValueIcons.qrc
     }
 } else {
-    DEFINES += QGC_APPLICATION_NAME=\"\\\"SkyDrones\\\"\"
+    DEFINES += QGC_APPLICATION_NAME=\"\\\"QGroundControl\\\"\"
     DEFINES += QGC_ORG_NAME=\"\\\"QGroundControl.org\\\"\"
     DEFINES += QGC_ORG_DOMAIN=\"\\\"org.qgroundcontrol\\\"\"
     RESOURCES += \
