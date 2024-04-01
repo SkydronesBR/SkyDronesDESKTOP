@@ -689,8 +689,9 @@ void FirmwareUpgradeController::_downloadArduPilotManifest(void)
     QGCFileDownload* downloader = new QGCFileDownload(this);
     connect(downloader, &QGCFileDownload::downloadComplete, this, &FirmwareUpgradeController::_ardupilotManifestDownloadComplete);
     downloader->download(QStringLiteral("https://firmware.ardupilot.org/manifest.json.gz"));
-    //downloader->download(QStringLiteral("https://firebasestorage.googleapis.com/v0/b/manifestjson-32491.appspot.com/o/manifest.json.gz?alt=media&token=3227574c-e505-4633-b311-d3475991f9cb"));
+    //downloader->download(QStringLiteral("https://skydrones.com.br/Firmware/Copter/ArduPilotFW.txt"));
 }
+
 
 void FirmwareUpgradeController::_ardupilotManifestDownloadComplete(QString remoteFile, QString localFile, QString errorMsg)
 {
