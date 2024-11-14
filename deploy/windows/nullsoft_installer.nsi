@@ -55,7 +55,8 @@ SetCompressor /SOLID /FINAL lzma
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
-!insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "PortugueseBR"
+
 
 Section
   DetailPrint "Checking for 32 bit uninstaller"  

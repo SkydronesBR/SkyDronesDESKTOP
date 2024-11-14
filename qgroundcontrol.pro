@@ -66,7 +66,7 @@ QGC_APP_NAME        = "SkyDrones"
 QGC_ORG_NAME        = "SkyDrones Tecnologia Avionica S/A"
 QGC_ORG_DOMAIN      = "SkyDrones Tecnologia Avionica S/A"
 QGC_APP_DESCRIPTION = "Aplicativo de controle terrestre fornecido pela equipe de desenvolvimento SkyDrones Tecnologia Avionica S/A"
-QGC_APP_COPYRIGHT   = "Copyright(C) 2024 SkyDrones Tecnologia Aviônica S/A."
+QGC_APP_COPYRIGHT   = "Copyright(C) 2024 SkyDrones Tecnologia Avionica S/A."
 QGC_APP_VERSION     = "1.0" 
 VERSION             = $$QGC_APP_VERSION
 
@@ -114,7 +114,7 @@ contains (CONFIG, QGC_DISABLE_CUSTOM_BUILD) {
 
 WindowsBuild {
     # Sets up application properties
-    QMAKE_TARGET_COMPANY        = "SkyDrones Tecnologia Aviônica S/A"
+    QMAKE_TARGET_COMPANY        = "SkyDrones Tecnologia Avionica S/A"
     QMAKE_TARGET_DESCRIPTION    = "$${QGC_APP_DESCRIPTION}"
     QMAKE_TARGET_COPYRIGHT      = "$${QGC_APP_COPYRIGHT}"
     QMAKE_TARGET_PRODUCT        = "$${QGC_APP_NAME}"
